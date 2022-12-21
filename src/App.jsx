@@ -14,7 +14,7 @@ function App() {
       <Navbar narrow={narrow} setnarrow={setnarrow} />
       <div className={narrow ? "main narrow":"main"}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/newExpManager" element={<Home />} />
           <Route path="/addexpense" element={<Addexp />} />
           <Route path="/datanalysis" element={<Contact />} />
         </Routes>
