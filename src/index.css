@@ -1,3 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --navheight: 90px;
+  --sidebarwide: 220px;
+  --sidebarnarrow: 90px;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +17,58 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #f0f0f0;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.nav {
+  height: var(--navheight);
+  left: var(--sidebarwide);
+  width: calc(100% - var(--sidebarwide));
+}
+
+.nav.narrow {
+  height: var(--navheight);
+  left: var(--sidebarnarrow);
+  width: calc(100% - var(--sidebarnarrow));
+}
+
+.sidebar {
+  width: var(--sidebarwide);
+}
+
+.sidebar.narrow {
+  width: var(--sidebarnarrow);
+}
+.sidebar.narrow .company{
+  transform: scale(3.5) translateX(-4px);
+}
+
+.main {
+  position: absolute;
+  height: calc(100vh - var(--navheight));
+  width: calc(100% - var(--sidebarwide));
+  left: var(--sidebarwide);
+  top: var(--navheight);
+  /* border: 3px solid rgb(244, 9, 48); */
+  transition: 0.2s;
+}
+.main.narrow {
+  width: calc(100% - var(--sidebarnarrow));
+  left: var(--sidebarnarrow);
+}
+.sidebar .link .li .logo{
+  width: var(--sidebarnarrow);
+}
+.sidebar .link .li .name{
+  left: var(--sidebarnarrow);
+  width: calc(var(--sidebarwide) - var(--sidebarnarrow));
 }

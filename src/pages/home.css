@@ -1,0 +1,59 @@
+.home{
+    max-width: 100%;
+    height: 100%;
+    /* border: 1px solid red; */
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* display: grid;
+    grid-template-columns: repeat(auto-fill, 312px); */
+    /* grid-gap: 2rem; */
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 2em;
+}
+.home .card{
+    width: 280px;
+    height: 120px;
+    border: 1px solid red;
+    display: flex;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.home .card .data{
+    position: relative;
+    width: 60%;
+    /* border: 1px solid red; */
+    height: 100%;
+}
+.home .card .data .amt{
+    position: relative;
+    width: 100%;
+    /* border: 1px solid red; */
+    height: 50%;
+    font-size: 1.3em;
+    font-weight: 700;
+    padding-left: 10px;
+    line-height:60px;
+}
+.home .card .data .day{
+    position: relative;
+    width: 100%;
+    /* border: 1px solid red; */
+    height: 50%;
+    padding-left: 10px;
+}
+.home .card .icon{
+width: 40%;
+height: 100%;
+text-align: center;
+line-height: 110px;
+/* border: 1px solid rgb(12, 61, 238); */
+position: relative;
+}
+.home .card .icon i{
+    font-size: 3em;
+    color: rgb(83, 80, 80);
+}
