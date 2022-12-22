@@ -212,7 +212,9 @@ const Addexp = () => {
             <div>
               <span>Amount</span>
               <span>
-                <input name="amount"   type="text" value={inp.amount} onChange={handler} />
+                <input name="amount" 
+onKeyPress={(event) => { if (!/[0-9]/.test(event.key)) { event.preventDefault(); } }}
+type="text" value={inp.amount} onChange={handler} />
               </span>
             </div>
             <div>
