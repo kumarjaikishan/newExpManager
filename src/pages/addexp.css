@@ -1,0 +1,185 @@
+.exp{
+    /* border: 1px solid red; */
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 0 2rem;
+}
+.exp .add{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.exp .add i{
+    display: inline-block;
+    /* border: 1px solid red; */
+    width: 50px;
+    height: 50px;
+    font-size: 2.6em;
+    text-align: center;
+    line-height: 50px;
+    background: #0984e3;
+    border-radius: 11px;
+    color: white;
+}
+.exp .head{
+    border-top-left-radius: 11px;
+    border-top-right-radius: 11px;
+    position: relative;
+    /* border: 1px solid red; */
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-image: linear-gradient(179.4deg, rgba(33, 150, 243, 1) 1.8%, rgba(22, 255, 245, 0.60) 97.1%);
+}
+.exp .head span{
+ /* border: 1px solid red; */
+ color :rgb(39, 34, 34);
+ display: inline-block;
+ padding: 5px;
+ font-weight: 700;
+}
+.exp .head span:nth-child(2) select,
+.exp .head span:nth-child(3) input{
+    width: 110px;
+    outline: none;
+    border: none;
+    height: 30px;
+    border-radius: 7px;
+    text-align: center;
+}
+.exp .head span:nth-child(3) input{
+    width: 210px;
+}
+.exp .table{
+ width: 100%;
+ position: relative;
+ /* border: 1px solid red; */
+}
+.exp .table table{
+    width: 100%;
+    border-collapse: collapse;
+    
+}
+.exp .table table th,
+.exp .table table td{
+    border: 1px solid grey;
+    text-align: center;
+}
+.exp .table table td{
+    font-size: 0.9em;
+}
+.exp .foot{
+    margin-top: 10px;
+    border-radius: 5px;
+    width: 100%;
+    position: relative;
+    /* border: 1px solid red; */
+    height: 40px;
+    padding: 0px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #dbe1e6;
+    box-shadow: 0 0 5px #fff, 5px 5px 10px #a7aaaf, -5px -5px 10px #fff;
+}
+.exp .modal{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 0, 0, 0.3);
+    /* border: 1px solid red; */
+    backdrop-filter: blur(5px);
+}
+.exp .modal .box{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 730px;
+    height: 500px;
+    border-radius: 20px;
+    transform: translate(-50%,-50%);
+    background: #f0f0f0;
+    /* border: 1px solid red; */
+}
+.exp .box h1{
+    width: 100%;
+    background: skyblue;
+    text-align: center;
+    padding: 2px;
+}
+.exp .box div{
+    width: 100%;
+    /* border: 1px solid red; */
+    margin: 20px 0px;
+    padding: 10px 5px;
+}
+.exp .box div span{
+    display: inline-block;
+    /* border: 1px solid green; */
+    padding: 4px;
+}
+.exp .box div span:nth-child(1){
+   width: 30%;
+   text-align: end;
+   padding:0px 30px;
+   font-size: 1.1em;
+   font-weight: 700;
+   color: rgb(76, 71, 71);
+}
+.exp .box div span:nth-child(2){
+   width: 70%;
+}
+.exp .box div span:nth-child(2) input,
+.exp .box div span:nth-child(2) select
+{
+   width: 75%;
+   /* height: 100%; */
+   font-weight: 500;
+   font-size: 1.03em;
+   border: none;
+   outline: none;
+   text-align: center;
+   padding: 12px 10px;
+   border-radius: 5px;
+   background: #dbe1e6;
+   box-shadow: 0 0 5px #fff,
+     5px 5px 10px #a7aaaf,
+    
+     -5px -5px 10px #fff;
+}
+.exp .box div:last-child{
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+}
+.exp .box div:last-child button{
+   border: none;
+   cursor: pointer;
+   outline: none;
+   padding: 5px 12px;
+   color: white;
+   font-size: 1.2em;
+   font-weight: 600;
+   border-radius: 5px;
+   background: #36a0f1;
+   transition: 0.2s;
+  
+}
+.exp .box div:last-child button:hover{
+    transform: scale(1.1);
+    background: #0984e3;
+}

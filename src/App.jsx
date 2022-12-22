@@ -4,7 +4,7 @@ import Navbar from './components/navbar/navbar';
 import Sidebar from './components/sidebar/sidebar';
 import Home from './pages/home';
 import Addexp from './pages/addexp';
-import Contact from './pages/contact';
+import Datanalysis from './pages/dataanalysis';
 import { useState } from 'react';
 
 function App() {
@@ -14,9 +14,9 @@ function App() {
       <Navbar narrow={narrow} setnarrow={setnarrow} />
       <div className={narrow ? "main narrow":"main"}>
         <Routes>
-          <Route path="/newExpManager" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/addexpense" element={<Addexp />} />
-          <Route path="/datanalysis" element={<Contact />} />
+          <Route path="/datanalysis" element={<Datanalysis />} />
         </Routes>
       </div>
       <Sidebar narrow={narrow} />

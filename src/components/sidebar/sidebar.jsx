@@ -28,7 +28,7 @@ const Sidebar = ({ narrow }) => {
                 <div className="link">
                  {linke.map((val,ind)=>{
                     return(
-                        <NavLink title={val.name} exact className={(navData) => (navData.isActive ? 'active' : '')} style={{ textDecoration: 'none' }} to={val.link} > <span className="li"><span className="logo"><i class={val.logo} aria-hidden="true"></i></span><span className="name">{val.name}</span></span></NavLink>
+                        <NavLink key={ind} title={val.name} exact className={(navData) => (navData.isActive ? 'active' : '')} style={{ textDecoration: 'none' }} to={val.link} > <span className="li"><span className="logo"><i class={val.logo} aria-hidden="true"></i></span><span className="name">{val.name}</span></span></NavLink>
                     )
                  })}
                 </div>

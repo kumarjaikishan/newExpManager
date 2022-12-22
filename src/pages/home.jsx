@@ -1,6 +1,5 @@
 import React from 'react'
 import './home.css';
-import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 
 const Home = () => {
   const card = [{
@@ -26,7 +25,7 @@ const Home = () => {
   }, {
     amt: 52000,
     day: "Total",
-    icon: <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+    icon: <i class="fa fa-university" aria-hidden="true"></i>
   }]
   return (
     <>
@@ -34,7 +33,7 @@ const Home = () => {
 
         {card.map((val, ind) => {
           return (
-            <div className="card">
+            <div className="card" key={ind}>
               <div className="data">
                 <div className="amt">{val.amt}</div>
                 <div className="day">{val.day}</div>
