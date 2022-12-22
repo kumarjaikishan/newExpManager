@@ -6,14 +6,16 @@ const Addexp = () => {
   const date = new Date;
   const [isupdate, setisupdate] = useState(false);
   const today = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getUTCDate();
-  console.log(today);
+
   const init = {
     ledger: "general",
     date: today,
     amount: "",
     narration: ""
   }
+
   const [inp, setinp] = useState(init);
+  
   const [expdata, setexpdata] = useState([]);
   useEffect(() => {
     fetching();
