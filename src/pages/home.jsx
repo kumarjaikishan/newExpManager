@@ -2,6 +2,8 @@ import React from 'react'
 import './home.css';
 
 const Home = () => {
+ 
+
   const card = [{
     amt: 500,
     day: "Today",
@@ -13,7 +15,7 @@ const Home = () => {
   }, {
     amt: 2500,
     day: "Last Week",
-    icon:<i class="fa fa-shopping-bag" aria-hidden="true"></i>
+    icon: <i class="fa fa-shopping-bag" aria-hidden="true"></i>
   }, {
     amt: 3500,
     day: "Last MOnth",

@@ -19,17 +19,23 @@
     margin-top: 10px;
     margin-bottom: 5px;
 }
+
 .exp .add i{
     display: inline-block;
     /* border: 1px solid red; */
     width: 50px;
     height: 50px;
+    cursor: pointer;
     font-size: 2.6em;
+    transition: 0.1s;
     text-align: center;
     line-height: 50px;
     background: #0984e3;
     border-radius: 11px;
     color: white;
+}
+.exp .add i:hover{
+    transform: scale(1.03);
 }
 .exp .head{
     border-top-left-radius: 11px;
@@ -74,11 +80,47 @@
 }
 .exp .table table th,
 .exp .table table td{
-    border: 1px solid grey;
+    border: 1px solid rgb(190, 185, 185);
     text-align: center;
+}
+.exp .table table thead th,
+.exp .table table #foot th{
+    height: 30px;
+}
+.exp .table table th:nth-child(1),
+.exp .table table th:nth-child(6),
+.exp .table table th:nth-child(7),
+.exp .table table th:nth-child(8),
+.exp .table table th:nth-child(9){
+    width: 50px;
 }
 .exp .table table td{
     font-size: 0.9em;
+    height: 25px;
+    line-height: 25px;
+}
+.fa-eye,
+.fa-pencil,
+.fa-trash-o{
+    font-size: 1.3em;
+    transition: 0.1s;
+    width: 100%;
+}
+
+.exp .fa-eye{
+    color: #95afc0;
+}
+.exp .fa-pencil{
+    color: #22a6b3;
+}
+.exp .fa-trash-o{
+    color: #eb4d4b;
+}
+.exp .fa-pencil:hover,
+.exp .fa-eye:hover,
+.exp .fa-trash-o:hover
+{
+    transform: scale(1.2);
 }
 .exp .foot{
     margin-top: 10px;
