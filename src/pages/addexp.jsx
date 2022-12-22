@@ -4,10 +4,11 @@ import './addexp.css';
 
 const Addexp = () => {
   const date = new Date;
+  const [isupdate, setisupdate] = useState(false);
   const today = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getUTCDate();
   console.log(today);
   const init = {
-    ledger: "",
+    ledger: "general",
     date: today,
     amount: "",
     narration: ""
@@ -18,6 +19,8 @@ const Addexp = () => {
     fetching();
   }, [])
 
+
+  // for LOading data
   const fetching = async () => {
     const result = await fetch('/addexpense', {
       method: "GET",
@@ -29,6 +32,8 @@ const Addexp = () => {
     setexpdata(datae.data)
     console.log(datae.data);
   }
+  // for LOading data ends here
+
 
   const [modal, setmodal] = useState(false);
 
@@ -37,8 +42,16 @@ const Addexp = () => {
     const value = e.target.value;
     setinp({ ...inp, [name]: value })
   }
+
+
+  // for creating/inserting data
   const sub = async () => {
     const { ledger, date, amount, narration } = inp;
+
+    if(!ledger || !date || !amount || !narration){
+         return alert("kindly fill all data");
+    }
+
     const result = await fetch('/addexpense', {
       method: "POST",
       headers: {
@@ -54,6 +67,9 @@ const Addexp = () => {
     setinp(init);
     console.log(data.msg);
   }
+    // for creating/inserting data ends here
+
+//  fecthing data for edit
   const edit = async (val) => {
     const result = await fetch('/data', {
       method: "POST",
@@ -61,29 +77,54 @@ const Addexp = () => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-       id:val
+        id: val
       })
     })
     const datae = await result.json();
     console.log(datae.data[0]);
     setinp(datae.data[0]);
+    setisupdate(true);
     setmodal(true);
   }
+//  fecthing data for edit ends here
 
-  const delet =async (val) => {
+// for updating data fetched above 
+  const updatee = async (_id) => {
+    const { ledger, date, amount, narration } = inp;
+    const result = await fetch('/addexpense', {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        _id, ledger, date, amount, narration
+      })
+    })
+    const data = await result.json();
+    console.log(data);
+    fetching();
+    setinp(init);
+    setisupdate(false);
+    setmodal(false);
+  }
+// for updating data fetched above ends here
+
+// for deleteing data
+  const delet = async (val) => {
     const result = await fetch('/addexpense', {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-       id:val
+        id: val
       })
     })
     const data = await result.json();
     console.log(data);
     fetching();
   }
+// for deleteing data ends here
 
   return (
     <>
@@ -126,7 +167,7 @@ const Addexp = () => {
                     <td>{val.date}</td>
                     <td><i class="fa fa-eye" aria-hidden="true"></i></td>
                     <td><i onClick={() => edit(val._id)} class="fa fa-pencil" aria-hidden="true"></i></td>
-                    <td><i onClick={() => delet (val._id)} class="fa fa-trash-o" aria-hidden="true"></i></td>
+                    <td><i onClick={() => delet(val._id)} class="fa fa-trash-o" aria-hidden="true"></i></td>
                     <td><input type="checkbox" name="" id="" /></td>
                   </tr>
                 )
@@ -169,7 +210,7 @@ const Addexp = () => {
             <div>
               <span>Amount</span>
               <span>
-                <input name="amount" type="text" value={inp.amount} onChange={handler} />
+                <input name="amount"   type="text" value={inp.amount} onChange={handler} />
               </span>
             </div>
             <div>
@@ -179,8 +220,12 @@ const Addexp = () => {
               </span>
             </div>
             <div>
-              <button onClick={sub}>Submit</button>
-              <button onClick={() => setmodal(false)}>Cancel</button>
+              {isupdate ? <button onClick={() => updatee(inp._id)}>Update</button> : <button onClick={sub}>Submit</button>}
+              <button onClick={() => {
+                setmodal(false);
+                setisupdate(false);
+                setinp(init);
+              }}>Cancel</button>
             </div>
           </div>
         </div>

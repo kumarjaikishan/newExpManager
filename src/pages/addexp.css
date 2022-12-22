@@ -225,3 +225,6 @@
     transform: scale(1.1);
     background: #0984e3;
 }
+.exp tr td:nth-child(2){
+    text-transform: capitalize;
+}
