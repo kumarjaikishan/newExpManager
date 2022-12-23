@@ -17,14 +17,14 @@ const Addexp = () => {
 
   const [inp, setinp] = useState(init);
   const [expdata, setexpdata] = useState([]);
-  const [currentpage,setcurrentpage]=useState(1);
-  const [postperpage,setpostperpage]=useState(3);
+  const [currentpage, setcurrentpage] = useState(1);
+  const [postperpage, setpostperpage] = useState(3);
 
 
   useEffect(() => {
     fetching();
   }, [])
-  
+
   // for LOading data
   const fetching = async () => {
     const result = await fetch('/addexpense', {
@@ -35,7 +35,7 @@ const Addexp = () => {
     })
     const datae = await result.json();
     setexpdata(datae.data)
-    console.log(datae.data);
+    // console.log(datae.data);
   }
   // for LOading data ends here
 
@@ -53,8 +53,8 @@ const Addexp = () => {
   const sub = async () => {
     const { ledger, date, amount, narration } = inp;
 
-    if(!ledger || !date || !amount || !narration){
-         return alert("kindly fill all data");
+    if (!ledger || !date || !amount || !narration) {
+      return alert("kindly fill all data");
     }
 
     const result = await fetch('/addexpense', {
@@ -70,11 +70,11 @@ const Addexp = () => {
     fetching();
     setmodal(false);
     setinp(init);
-    console.log(data.msg);
+    // console.log(data.msg);
   }
-    // for creating/inserting data ends here
+  // for creating/inserting data ends here
 
-//  fecthing data for edit
+  //  fecthing data for edit
   const edit = async (val) => {
     const result = await fetch('/data', {
       method: "POST",
@@ -86,14 +86,14 @@ const Addexp = () => {
       })
     })
     const datae = await result.json();
-    console.log(datae.data[0]);
+    // console.log(datae.data[0]);
     setinp(datae.data[0]);
     setisupdate(true);
     setmodal(true);
   }
-//  fecthing data for edit ends here
+  //  fecthing data for edit ends here
 
-// for updating data fetched above 
+  // for updating data fetched above 
   const updatee = async (_id) => {
     const { ledger, date, amount, narration } = inp;
     const result = await fetch('/addexpense', {
@@ -106,15 +106,15 @@ const Addexp = () => {
       })
     })
     const data = await result.json();
-    console.log(data);
+    // console.log(data);
     fetching();
     setinp(init);
     setisupdate(false);
     setmodal(false);
   }
-// for updating data fetched above ends here
+  // for updating data fetched above ends here
 
-// for deleteing data
+  // for deleteing data
   const delet = async (val) => {
     const result = await fetch('/addexpense', {
       method: "DELETE",
@@ -126,23 +126,24 @@ const Addexp = () => {
       })
     })
     const data = await result.json();
-    console.log(data);
+    // console.log(data);
     fetching();
   }
-// for deleteing data ends here
+  // for deleteing data ends here
 
-const requirede = (e) => {
-  setpostperpage(e.target.value);
-  setcurrentpage(1);
-}
+  const requirede = (e) => {
+    setpostperpage(e.target.value);
+    setcurrentpage(1);
+  }
 
-const changepageno=(hi)=>{
-  setcurrentpage(hi);
-}
+  const changepageno = (hi) => {
+    setcurrentpage(hi);
+  }
 
-   const lastpostindex = currentpage * postperpage;
-   const firstpostindex = lastpostindex - postperpage; 
-   const currentpost= expdata.slice(firstpostindex,lastpostindex);
+  const lastpostindex = currentpage * postperpage;
+  const firstpostindex = lastpostindex - postperpage;
+  
+  const currentpost = expdata.slice(firstpostindex, lastpostindex);
   return (
     <>
       <div className="exp">
@@ -155,6 +156,7 @@ const changepageno=(hi)=>{
               <option value="3">3</option>
               <option value="5">5</option>
               <option value="8">8</option>
+              <option value="100">100</option>
             </select>
           </span>
           <span><input type="text" placeholder='Type to search...' /></span>
@@ -177,7 +179,7 @@ const changepageno=(hi)=>{
               {currentpost.map((val, ind) => {
                 return (
                   <tr key={ind}>
-                    <td>{ind + 1}</td>
+                    <td>{firstpostindex + ind + 1}</td>
                     <td>{val.ledger}</td>
                     <td>{val.amount}</td>
                     <td>{val.narration}</td>
@@ -201,9 +203,9 @@ const changepageno=(hi)=>{
           </table>
         </div>
         <div className="foot">
-          <span>showing result from {firstpostindex+1} to {lastpostindex} of Total {expdata.length}</span>
+          <span>showing result from {firstpostindex + 1} to {lastpostindex} of Total {expdata.length}</span>
           <span>Pages :
-             <Pagination currentpage={currentpage} changepageno={changepageno} totalpost={expdata.length} postperpage={postperpage} />
+            <Pagination currentpage={currentpage} changepageno={changepageno} totalpost={expdata.length} postperpage={postperpage} />
           </span>
         </div>
         <div className="modal" style={{ display: modal ? "block" : "none" }}>
@@ -215,8 +217,9 @@ const changepageno=(hi)=>{
                 <select name="ledger" id="" onChange={handler} value={inp.ledger} >
                   <option value="general">General</option>
                   <option value="ration">Ration</option>
-                  <option value="home">Home</option>
+                  <option value="homee">Home</option>
                   <option value="petrol">Petrol</option>
+                  <option value="other">Other</option>
                 </select>
               </span>
             </div>
@@ -229,9 +232,9 @@ const changepageno=(hi)=>{
             <div>
               <span>Amount</span>
               <span>
-                <input name="amount" 
-onKeyPress={(event) => { if (!/[0-9]/.test(event.key)) { event.preventDefault(); } }}
-type="text" value={inp.amount} onChange={handler} />
+                <input name="amount"
+                  onKeyPress={(event) => { if (!/[0-9]/.test(event.key)) { event.preventDefault(); } }}
+                  type="text" value={inp.amount} onChange={handler} />
               </span>
             </div>
             <div>
