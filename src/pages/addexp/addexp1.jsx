@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import './addexp.css';
+import Pagination from './pagination';
 
 const Addexp = () => {
   const date = new Date;
@@ -15,8 +16,11 @@ const Addexp = () => {
   }
 
   const [inp, setinp] = useState(init);
-  
   const [expdata, setexpdata] = useState([]);
+  const [currentpage,setcurrentpage]=useState(1);
+  const [postperpage,setpostperpage]=useState(3);
+
+
   useEffect(() => {
     fetching();
   }, [])
@@ -128,6 +132,18 @@ const Addexp = () => {
   }
 // for deleteing data ends here
 
+const requirede = (e) => {
+  setpostperpage(e.target.value);
+  setcurrentpage(1);
+}
+
+const changepageno=(hi)=>{
+  setcurrentpage(hi);
+}
+
+   const lastpostindex = currentpage * postperpage;
+   const firstpostindex = lastpostindex - postperpage; 
+   const currentpost= expdata.slice(firstpostindex,lastpostindex);
   return (
     <>
       <div className="exp">
@@ -135,11 +151,11 @@ const Addexp = () => {
         <div className="head">
           <span>Expense Voucher List</span>
           <span>
-            Record :  <select name="" id="">
-              <option value="">5</option>
-              <option value="">10</option>
-              <option value="">20</option>
-              <option value="">50</option>
+            Record :  <select name="" id="" value={postperpage} onChange={requirede}>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="5">5</option>
+              <option value="8">8</option>
             </select>
           </span>
           <span><input type="text" placeholder='Type to search...' /></span>
@@ -159,7 +175,7 @@ const Addexp = () => {
             </thead>
             <tbody id="tablecontent">
 
-              {expdata.map((val, ind) => {
+              {currentpost.map((val, ind) => {
                 return (
                   <tr key={ind}>
                     <td>{ind + 1}</td>
@@ -187,7 +203,9 @@ const Addexp = () => {
         </div>
         <div className="foot">
           <span>showing result from</span>
-          <span>pages from</span>
+          <span>Pages :
+             <Pagination changepageno={changepageno} totalpost={expdata.length} postperpage={postperpage} />
+          </span>
         </div>
         <div className="modal" style={{ display: modal ? "block" : "none" }}>
           <div className="box">
