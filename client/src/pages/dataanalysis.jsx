@@ -31,6 +31,7 @@ const Datanalysis = () => {
     const res = await result.json();
     console.log(res.data)
     let arr = [];
+    totalsum=0;
     for (let i = 0; i < res.data.length; i++) {
       arr.push(res.data[i].ledger)
       totalsum= totalsum + res.data[i].amount;

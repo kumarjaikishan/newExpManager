@@ -2,7 +2,7 @@
   "name": "expmanager",
   "version": "0.1.0",
   "private": false,
-  "proxy":"http://localhost:5000/",
+  "proxy": "http://localhost:5000/",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -15,6 +15,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.5.0",
     "react-scripts": "5.0.1",
+    "sweetalert": "^2.1.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

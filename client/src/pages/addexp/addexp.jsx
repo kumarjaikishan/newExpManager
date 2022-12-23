@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import './addexp.css';
+import swal from 'sweetalert'
 import Pagination from './pagination';
 
 const Addexp = () => {
@@ -19,7 +20,7 @@ const Addexp = () => {
   const [expdata, setexpdata] = useState([]);
   const [currentpage, setcurrentpage] = useState(1);
   const [postperpage, setpostperpage] = useState(3);
-
+  const [totsum, settotsum] = useState(0);
 
   useEffect(() => {
     fetching();
@@ -54,7 +55,12 @@ const Addexp = () => {
     const { ledger, date, amount, narration } = inp;
 
     if (!ledger || !date || !amount || !narration) {
-      return alert("kindly fill all data");
+      // return alert("kindly fill all data");
+      return swal({
+        title: "Wait!",
+        text: "Kindly fill all Fields!",
+        icon: "warning",
+      });
     }
 
     const result = await fetch('/addexpense', {
@@ -106,6 +112,13 @@ const Addexp = () => {
       })
     })
     const data = await result.json();
+    if (data) {
+      swal({
+        title: "Wait!",
+        text: "Data updated Successfully",
+        icon: "success",
+      });
+    }
     // console.log(data);
     fetching();
     setinp(init);
@@ -116,18 +129,36 @@ const Addexp = () => {
 
   // for deleteing data
   const delet = async (val) => {
-    const result = await fetch('/addexpense', {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        id: val
-      })
+
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this Data!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
     })
-    const data = await result.json();
-    // console.log(data);
-    fetching();
+      .then(async (willDelete) => {
+        if (willDelete) {
+          const result = await fetch('/addexpense', {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              id: val
+            })
+          })
+          const data = await result.json();
+          // console.log(data);
+          fetching();
+
+          swal("Data has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("Your data is safe!");
+        }
+      });
   }
   // for deleteing data ends here
 
@@ -142,8 +173,9 @@ const Addexp = () => {
 
   const lastpostindex = currentpage * postperpage;
   const firstpostindex = lastpostindex - postperpage;
-  
+
   const currentpost = expdata.slice(firstpostindex, lastpostindex);
+  let sum = 0;
   return (
     <>
       <div className="exp">
@@ -195,7 +227,15 @@ const Addexp = () => {
             <tr id="foot">
               <th colSpan="1" ></th>
               <th colSpan="1" >Total</th>
-              <th colSpan="1" id="totalhere">2500</th>
+              <th colSpan="1" id="totalhere">
+                {
+                  currentpost.map((val, ind) => {
+                    sum = sum + val.amount;
+                    return;
+                  })
+                }
+                {sum}
+              </th>
               <th colSpan="5" ></th>
               <th colSpan="1" id="alldelete" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></th>
 
