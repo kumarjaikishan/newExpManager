@@ -3,7 +3,7 @@ import './navbar.css';
 import img from '../../img/img.jpg'
 import MenuIcon from '@mui/icons-material/Menu';
 
-const Navbar = ({narrow,setnarrow}) => {
+const Navbar = ({narrow,setnarrow,heade}) => {
   const fun=()=>{
     if(narrow){
       setnarrow(false)
@@ -16,7 +16,7 @@ const Navbar = ({narrow,setnarrow}) => {
    <div className={narrow ? "nav narrow":"nav"}>
     <div className="cont">
       <span onClick={fun}><MenuIcon/></span>
-      <span>Dashboard </span>
+      <span>{heade} </span>
     </div>
     <div className="info">
       <div className="photo"><img src={img} alt="" /></div>

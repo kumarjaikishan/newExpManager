@@ -94,6 +94,13 @@
 .exp .table table th:nth-child(9){
     width: 50px;
 }
+.exp .table table th:nth-child(3),
+.exp .table table th:nth-child(5){
+    width: 90px;
+}
+.exp .table table th:nth-child(2){
+    width: 140px;
+}
 .exp .table table td{
     font-size: 0.9em;
     height: 25px;

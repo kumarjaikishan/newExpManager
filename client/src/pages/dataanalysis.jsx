@@ -6,6 +6,7 @@ import './dataanalysis.css';
 const Datanalysis = () => {
   const [ledger, setledger] = useState([]);
   const [uniq, setuniq] = useState([]);
+  const [show,setshow]=useState(false);
   let totalsum =0;
   const card = [{
     amt: "8521",
@@ -73,13 +74,14 @@ const Datanalysis = () => {
       classe[0].innerText= Math.ceil((two*100)/totalsum)+"%" ;
     }
      document.getElementById("total").innerText=totalsum;
+     setshow(true);
     // console.log("total sum" + totalsum)
   }
 
 
   return (
     <>
-      <div className="datanalysis">
+      <div className="datanalysis" style={{visibility:show ? "visible":"hidden"}}>
         {uniq.map((val, ind) => {
           return (
             <div className="card" key={ind}>
