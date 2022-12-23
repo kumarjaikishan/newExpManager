@@ -86,6 +86,7 @@
 .exp .table table thead th,
 .exp .table table #foot th{
     height: 30px;
+    color: #0984e3;
 }
 .exp .table table th:nth-child(1),
 .exp .table table th:nth-child(6),
@@ -189,6 +190,7 @@
     background: skyblue;
     text-align: center;
     padding: 2px;
+    color: #6c5ce7;
 }
 .exp .box div{
     width: 100%;

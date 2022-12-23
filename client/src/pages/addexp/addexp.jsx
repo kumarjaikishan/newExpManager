@@ -19,7 +19,7 @@ const Addexp = () => {
   const [inp, setinp] = useState(init);
   const [expdata, setexpdata] = useState([]);
   const [currentpage, setcurrentpage] = useState(1);
-  const [postperpage, setpostperpage] = useState(3);
+  const [postperpage, setpostperpage] = useState(5);
   const [totsum, settotsum] = useState(0);
 
   useEffect(() => {
@@ -179,7 +179,7 @@ const Addexp = () => {
   return (
     <>
       <div className="exp">
-        <div className="add"> <i class="fa fa-plus" onClick={() => setmodal(true)} aria-hidden="true" id='addexp'></i> </div>
+        <div className="add"> <i title='Add Expense' class="fa fa-plus" onClick={() => setmodal(true)} aria-hidden="true" id='addexp'></i> </div>
         <div className="head">
           <span>Expense Voucher List</span>
           <span>
@@ -201,7 +201,7 @@ const Addexp = () => {
               <th>Amount</th>
               <th>Narration</th>
               <th>Date</th>
-              <th>See</th>
+              <th>View</th>
               <th>Edit</th>
               <th>Delete</th>
               <th><input type="checkbox" id="allcheck" /></th>
@@ -216,9 +216,9 @@ const Addexp = () => {
                     <td>{val.amount}</td>
                     <td>{val.narration}</td>
                     <td>{val.date}</td>
-                    <td><i class="fa fa-eye" aria-hidden="true"></i></td>
-                    <td><i onClick={() => edit(val._id)} class="fa fa-pencil" aria-hidden="true"></i></td>
-                    <td><i onClick={() => delet(val._id)} class="fa fa-trash-o" aria-hidden="true"></i></td>
+                    <td title='view'><i class="fa fa-eye" aria-hidden="true"></i></td>
+                    <td title='edit'><i onClick={() => edit(val._id)} class="fa fa-pencil" aria-hidden="true"></i></td>
+                    <td title='delete' ><i onClick={() => delet(val._id)} class="fa fa-trash-o" aria-hidden="true"></i></td>
                     <td><input type="checkbox" name="" id="" /></td>
                   </tr>
                 )
@@ -252,7 +252,7 @@ const Addexp = () => {
           <div className="box">
             <h1>Add Voucher</h1>
             <div className='v'>
-              <span>Ledger</span>
+              <span>Ledger :</span>
               <span>
                 <select name="ledger" id="" onChange={handler} value={inp.ledger} >
                   <option value="general">General</option>
@@ -264,13 +264,13 @@ const Addexp = () => {
               </span>
             </div>
             <div>
-              <span>Date</span>
+              <span>Date :</span>
               <span>
                 <input name="date" type="date" value={inp.date} onChange={handler} />
               </span>
             </div>
             <div>
-              <span>Amount</span>
+              <span>Amount :</span>
               <span>
                 <input name="amount"
                   onKeyPress={(event) => { if (!/[0-9]/.test(event.key)) { event.preventDefault(); } }}
@@ -278,7 +278,7 @@ const Addexp = () => {
               </span>
             </div>
             <div>
-              <span>Narration</span>
+              <span>Narration :</span>
               <span>
                 <input name="narration" value={inp.narration} type="text" onChange={handler} />
               </span>

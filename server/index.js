@@ -50,7 +50,7 @@ app.post('/ledger', async (req, res) => {
     const ledger = req.body.ledger;
     // console.log(ledger)
     const result = await model.find({ledger});
-    console.log(result)
+    // console.log(result)
     if (result) {
         res.json({
             msg: "data found",
@@ -93,7 +93,7 @@ app.patch('/addexpense', async (req, res) => {
 })
 app.post('/data', async (req, res) => {
     const _id = req.body.id;
-    console.log(_id)
+    // console.log(_id)
     const result = await model.find({ _id });
     if (result) {
         res.json({

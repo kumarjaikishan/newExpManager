@@ -38,7 +38,7 @@
 }
 .sidebar .link .active .li{
     background: #f0f0f0; 
-    color: rgb(6, 125, 252);
+    color:#2980b9;
     margin-left: 10px;
     border-top-left-radius: 40px;
     border-bottom-left-radius: 40px; 

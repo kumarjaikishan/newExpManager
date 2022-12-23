@@ -23,12 +23,12 @@ const Sidebar = ({ narrow,setheade }) => {
             <div className={narrow ? "sidebar narrow" : "sidebar"}>
                 <div className="clogo">
                    
-                    <NavLink exact className={(navData) => (navData.isActive ? 'active' : '')} style={{ textDecoration: 'none' }} to='/' > <span className="li"><span className="logo"> <GrassIcon className='company'/></span><span className="name">Accusoft</span></span></NavLink>
+                    <NavLink exact className={(navData) => (navData.isActive ? 'active' : '')} style={{ textDecoration: 'none' }} to='/' > <span className="li" ><span className="logo"> <GrassIcon className='company'/></span><span className="name">Accusoft</span></span></NavLink>
                 </div>
                 <div className="link">
                  {linke.map((val,ind)=>{
                     return(
-                        <NavLink key={ind} title={val.name}  exact className={(navData) => (navData.isActive ? 'active' : '')} style={{ textDecoration: 'none' }} to={val.link} > <span className="li"><span className="logo"><i class={val.logo} aria-hidden="true"></i></span><span className="name">{val.name}</span></span></NavLink>
+                        <NavLink key={ind} title={val.name}  exact className={(navData) => (navData.isActive ? 'active' : '')} style={{ textDecoration: 'none' }} to={val.link} > <span className="li" onClick={()=>setheade(val.name)}><span className="logo"><i class={val.logo} aria-hidden="true"></i></span><span className="name">{val.name}</span></span></NavLink>
                     )
                  })}
                 </div>
