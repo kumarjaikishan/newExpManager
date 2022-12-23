@@ -58,6 +58,8 @@ code {
   width: calc(100% - var(--sidebarwide));
   left: var(--sidebarwide);
   top: var(--navheight);
+  overflow-x: hidden;
+  overflow-y: auto;
   /* border: 3px solid rgb(244, 9, 48); */
   transition: 0.2s;
 }
