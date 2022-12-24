@@ -48,7 +48,8 @@ code {
 .sidebar.narrow {
   width: var(--sidebarnarrow);
 }
-.sidebar.narrow .company{
+
+.sidebar.narrow .company {
   transform: scale(3.5) translateX(-4px);
 }
 
@@ -63,14 +64,30 @@ code {
   /* border: 3px solid rgb(244, 9, 48); */
   transition: 0.2s;
 }
+
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* border: 1px solid red; */
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .main.narrow {
   width: calc(100% - var(--sidebarnarrow));
   left: var(--sidebarnarrow);
 }
-.sidebar .link .li .logo{
+
+.sidebar .link .li .logo {
   width: var(--sidebarnarrow);
 }
-.sidebar .link .li .name{
+
+.sidebar .link .li .name {
   left: var(--sidebarnarrow);
   width: calc(var(--sidebarwide) - var(--sidebarnarrow));
 }

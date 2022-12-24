@@ -1,7 +1,11 @@
 import React from 'react'
+import { useEffect } from 'react';
 import './home.css';
 
-const Home = () => {
+const Home = ({setloader}) => {
+ useEffect(() => {
+  setloader(true);
+ }, [])
  
 
   const card = [{
@@ -28,7 +32,11 @@ const Home = () => {
     amt: 52000,
     day: "Total",
     icon: <i class="fa fa-university" aria-hidden="true"></i>
-  }]
+  },{
+    amt: 2500,
+    day: "Last Week",
+    icon: <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+  },]
   return (
     <>
       <div className="home">
@@ -44,7 +52,7 @@ const Home = () => {
             </div>
           )
         })}
-
+       {setloader(false)}
 
       </div>
     </>

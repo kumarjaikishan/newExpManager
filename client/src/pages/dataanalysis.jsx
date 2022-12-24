@@ -3,10 +3,9 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import './dataanalysis.css';
 
-const Datanalysis = () => {
+const Datanalysis = ({setloader}) => {
     const [ledger, setledger] = useState([]);
     const [uniq, setuniq] = useState([]);
-    const [show, setshow] = useState(false);
     let totalsum = 0;
     const card = [{
         amt: "8521",
@@ -20,6 +19,7 @@ const Datanalysis = () => {
     }]
     useEffect(() => {
         load();
+         setloader(true);
     }, [])
 
     const load = async () => {
@@ -84,13 +84,13 @@ const Datanalysis = () => {
         document.querySelector('.tothun').style.background = `conic-gradient(#fc5c65 ${100 * 3.6}deg,
                 #7f8fa6  10.8deg)`
         document.getElementById("total").innerText = totalsum;
-        setshow(true);
+        setloader(false);
     }
 
 
     return (
         <>
-            <div className="datanalysis" style={{ visibility: show ? "visible" : "hidden" }}>
+            <div className="datanalysis" >
                 {uniq.map((val, ind) => {
                     return (
                         <div className="card" key={ind} id={val}>

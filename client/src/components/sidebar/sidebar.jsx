@@ -16,6 +16,10 @@ const Sidebar = ({ narrow,setheade }) => {
         name:"Data Alaysis",
         link:'/datanalysis',
         logo:"fa fa-anchor"
+    },{
+        name:"Login",
+        link:'/login',
+        logo:"fa fa-user"
     }
 ]
     return (

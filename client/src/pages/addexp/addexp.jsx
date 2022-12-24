@@ -4,7 +4,7 @@ import './addexp.css';
 import swal from 'sweetalert'
 import Pagination from './pagination';
 
-const Addexp = () => {
+const Addexp = ({setloader}) => {
   const date = new Date;
   const [isupdate, setisupdate] = useState(false);
   const today = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getUTCDate();
@@ -24,6 +24,7 @@ const Addexp = () => {
 
   useEffect(() => {
     fetching();
+    setloader(true)
   }, [])
 
   // for LOading data
@@ -36,6 +37,7 @@ const Addexp = () => {
     })
     const datae = await result.json();
     setexpdata(datae.data)
+    setloader(false);
     // console.log(datae.data);
   }
   // for LOading data ends here
@@ -171,7 +173,7 @@ const Addexp = () => {
     setcurrentpage(hi);
   }
 
-  const lastpostindex = currentpage * postperpage;
+  let lastpostindex = currentpage * postperpage;
   const firstpostindex = lastpostindex - postperpage;
 
   const currentpost = expdata.slice(firstpostindex, lastpostindex);
@@ -243,7 +245,7 @@ const Addexp = () => {
           </table>
         </div>
         <div className="foot">
-          <span>showing result from {firstpostindex + 1} to {lastpostindex} of Total {expdata.length}</span>
+          <span>showing result from {firstpostindex + 1} to {lastpostindex >=expdata.length ? lastpostindex=expdata.length: lastpostindex} of  {expdata.length} Results</span>
           <span>Pages :
             <Pagination currentpage={currentpage} changepageno={changepageno} totalpost={expdata.length} postperpage={postperpage} />
           </span>
