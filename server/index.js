@@ -148,16 +148,17 @@ app.post('/login', async (req, res) => {
 })
 //    for login user data from database end here
 
+
 //    for signup user data into database
 app.post('/signup', async (req, res) => {
-    const { name, email, phone, password, date } = req.body;
+    const { name, email, phone, password, date, ledger } = req.body;
     // console.log(email + " " + password)
-    if (!name || !email || !phone || !password || !date) {
+    if (!name || !email || !phone || !password || !date || !ledger) {
         res.json({
             msg: "all fields are required"
         })
     } else {
-        const query = new user({ name, email, phone, password, date });
+        const query = new user({ name, email, phone, password, date,ledger });
         const result = await query.save();
         if (result) {
             res.status(201).json({

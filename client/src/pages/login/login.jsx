@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Signin from './signin';
 import Signup from './signup';
-const Login = ({setlogin}) => {
+const Login = ({setlogin,setleddetail}) => {
     const [log, setlog] = useState(true);
     const fun = (val) => {
         setlog(val);
@@ -24,7 +24,7 @@ const Login = ({setlogin}) => {
                         <span className={log ? null : "active"} onClick={() => fun(false)}>Register</span>
                     </div>
                     <div className="both" style={{ transform: log ? "translateX(0%)" : "translateX(-50%)" }}>
-                        <Signin setlogin={setlogin}/>
+                        <Signin setleddetail={setleddetail} setlogin={setlogin}/>
                         <Signup setlog={setlog}/>
                     </div>
                 </div>

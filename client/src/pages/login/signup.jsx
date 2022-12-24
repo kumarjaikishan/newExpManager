@@ -13,7 +13,8 @@ const Signup = ({setlog}) => {
     email: "",
     phone: "",
     password: "",
-    cpassword: ""
+    cpassword: "",
+    ledger:["General","Other","Petrol"]
    }
     const [signinp, setsigninp] = useState(init);
     const signhandle = (e) => {
@@ -27,7 +28,7 @@ const Signup = ({setlog}) => {
     const submit = async () => {
         const today = new Date;
         const date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getUTCDate();
-        const {name, email,phone, password } = signinp;
+        const {name, email,phone, password,ledger } = signinp;
       
         const res = await fetch('/signup', {
             method: "POST",
@@ -35,7 +36,7 @@ const Signup = ({setlog}) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                name, email,phone, password,date
+                name, email,phone, password,date,ledger
             })
         })
         const datae = await res.json();

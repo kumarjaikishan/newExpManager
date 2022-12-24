@@ -11,6 +11,7 @@ import Login from './pages/login/login';
 import Logout from './pages/logout';
 
 function App() {
+  const [leddetail,setleddetail]=useState([]);
   const [login,setlogin]= useState(false);
   const [loader,setloader]=useState(true);
   const [narrow,setnarrow]=useState(false);
@@ -21,14 +22,14 @@ function App() {
       <div className={narrow ? "main narrow":"main"}>
         <Routes>
           <Route path="/" element={<Home setloader={setloader} />} />
-          <Route path="/addexpense" element={<Addexp setloader={setloader} />} />
+          <Route path="/addexpense" element={<Addexp leddetail={leddetail} setloader={setloader} />} />
           <Route path="/datanalysis" element={<Datanalysis setloader={setloader} />} />
-          <Route path="/login" element={<Login setlogin={setlogin} setloader={setloader} />} />
+          <Route path="/login" element={<Login setleddetail={setleddetail} setlogin={setlogin} setloader={setloader} />} />
           <Route path="/logout" element={<Logout setlogin={setlogin} />} />
         </Routes>
        <div style={{display: loader ? "flex":"none"}} className="loader"><img src={loadere} alt="" /></div>
       </div>
-      <Sidebar login={login} narrow={narrow} setheade={setheade} />
+      <Sidebar login={login}  narrow={narrow} setheade={setheade} />
     </div>
   );
 }

@@ -5,7 +5,7 @@ import swal from 'sweetalert'
 import Pagination from './pagination';
 import Modalbox from './modalbox';
 
-const Addexp = ({setloader}) => {
+const Addexp = ({setloader,leddetail}) => {
   const date = new Date;
   const [isupdate, setisupdate] = useState(false);
   const today = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getUTCDate();
@@ -223,7 +223,7 @@ const Addexp = ({setloader}) => {
             <Pagination currentpage={currentpage} changepageno={changepageno} totalpost={expdata.length} postperpage={postperpage} />
           </span>
         </div>
-        <Modalbox fetching={fetching} init={init} setinp={setinp} setisupdate={setisupdate} setmodal={setmodal} sub={sub} modal={modal} handler={handler} inp={inp} isupdate={isupdate} />
+        <Modalbox leddetail={leddetail} fetching={fetching} init={init} setinp={setinp} setisupdate={setisupdate} setmodal={setmodal} sub={sub} modal={modal} handler={handler} inp={inp} isupdate={isupdate} />
       </div>
 
     </>

@@ -6,7 +6,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
-const Signin = ({setlogin}) => {
+const Signin = ({setlogin,setleddetail}) => {
     let navigate = useNavigate();
     const init ={
         email: "",
@@ -39,6 +39,7 @@ const Signin = ({setlogin}) => {
         const mail = datae.data[0].email;
         alert(datae.msg);
         setlogin(true);
+        setleddetail(datae.data[0].ledger)
         localStorage.setItem("name", username);
         localStorage.setItem("email", mail);
         navigate('/');

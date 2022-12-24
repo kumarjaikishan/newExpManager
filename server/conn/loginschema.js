@@ -22,7 +22,7 @@ const log = new mongo.Schema({
         required:true
     },
     ledger:{
-        type:String
+        type:Array
     }
 })
 const user = new mongo.model("user",log);

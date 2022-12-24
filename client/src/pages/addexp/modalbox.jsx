@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import swal from 'sweetalert'
 
-const Modalbox = ({ modal, fetching, init, handler, inp, isupdate, sub, setmodal, setisupdate, setinp }) => {
-
-    // for updating data fetched above 
+const Modalbox = ({leddetail, modal, fetching, init, handler, inp, isupdate, sub, setmodal, setisupdate, setinp }) => {
+   
+    const lededit = async () => {
+        alert("ok")
+    }
+    const [ledarr,setledarr]= useState([]);
+     // for updating data fetched above 
     const updatee = async (_id) => {
         const { ledger, date, amount, narration } = inp;
         const result = await fetch('/addexpense', {
@@ -35,7 +39,7 @@ const Modalbox = ({ modal, fetching, init, handler, inp, isupdate, sub, setmodal
         <div className="modal" style={{ display: modal ? "block" : "none" }}>
             <div className="box">
                 <h1>Add Voucher</h1>
-                <div className="ledgeredit"><i class="fa fa-pencil" aria-hidden="true"></i></div>
+                <div className="ledgeredit"><i onClick={() => lededit()} class="fa fa-pencil" aria-hidden="true"></i></div>
                 <div className='v'>
                     <span>Ledger :</span>
                     <span>
@@ -45,6 +49,9 @@ const Modalbox = ({ modal, fetching, init, handler, inp, isupdate, sub, setmodal
                             <option value="homee">Home</option>
                             <option value="petrol">Petrol</option>
                             <option value="other">Other</option>
+                            {leddetail.map((val,ind)=>{
+                                return <option key={ind} value={val}>{val}</option>
+                            })}
                         </select>
                     </span>
                 </div>
