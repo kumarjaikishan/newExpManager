@@ -3,7 +3,7 @@ import './sidebar.css';
 import { NavLink } from 'react-router-dom';
 import GrassIcon from '@mui/icons-material/Grass';
 
-const Sidebar = ({ narrow,setheade }) => {
+const Sidebar = ({ narrow,setheade,login }) => {
     const linke = [{
         name:"Dashboard",
         link:'/',
@@ -20,13 +20,16 @@ const Sidebar = ({ narrow,setheade }) => {
         name:"Login",
         link:'/login',
         logo:"fa fa-user"
+    } ,{
+        name:"Logout",
+        link:'/logout',
+        logo:"fa fa-sign-out"
     }
 ]
     return (
         <>
             <div className={narrow ? "sidebar narrow" : "sidebar"}>
                 <div className="clogo">
-                   
                     <NavLink exact className={(navData) => (navData.isActive ? 'active' : '')} style={{ textDecoration: 'none' }} to='/' > <span className="li" ><span className="logo"> <GrassIcon className='company'/></span><span className="name">Accusoft</span></span></NavLink>
                 </div>
                 <div className="link">

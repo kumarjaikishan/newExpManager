@@ -3,7 +3,8 @@ import './navbar.css';
 import img from '../../img/img.jpg'
 import MenuIcon from '@mui/icons-material/Menu';
 
-const Navbar = ({narrow,setnarrow,heade}) => {
+const Navbar = ({login,narrow,setnarrow,heade}) => {
+  const username = localStorage.getItem("name");
   const fun=()=>{
     if(narrow){
       setnarrow(false)
@@ -21,8 +22,8 @@ const Navbar = ({narrow,setnarrow,heade}) => {
     <div className="info">
       <div className="photo"><img src={img} alt="" /></div>
       <div className="userinfo">
-        <span>kishan</span>
-        <span>user</span>
+        <span>{username ? username:"Admin"}</span>
+        <span>{login ?"Logged In":"User" }</span>
       </div>
     </div>
    </div>

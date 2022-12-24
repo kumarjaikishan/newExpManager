@@ -61,6 +61,7 @@
 .nav .info .userinfo span{
     display: inline-block;
     width: 100%;
+    text-transform: capitalize;
     font-weight: 500;
     color: rgb(53, 50, 50);
     padding-left: 5px;
