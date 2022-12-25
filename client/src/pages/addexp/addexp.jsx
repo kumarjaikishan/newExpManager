@@ -4,24 +4,26 @@ import './addexp.css';
 import swal from 'sweetalert'
 import Pagination from './pagination';
 import Modalbox from './modalbox';
+import Ledpage from './ledpage';
 
-const Addexp = ({setloader,leddetail}) => {
+const Addexp = ({setloader,leddetail,setleddetail}) => {
   const date = new Date;
+  
   const [isupdate, setisupdate] = useState(false);
   const today = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getUTCDate();
 
   const init = {
+    userid:"",
     ledger: "general",
     date: today,
     amount: "",
     narration: ""
   }
-
+  const [isledupdate,setisledupdate]= useState(false);
   const [inp, setinp] = useState(init);
   const [expdata, setexpdata] = useState([]);
   const [currentpage, setcurrentpage] = useState(1);
   const [postperpage, setpostperpage] = useState(5);
-  const [totsum, settotsum] = useState(0);
 
   useEffect(() => {
     fetching();
@@ -30,16 +32,20 @@ const Addexp = ({setloader,leddetail}) => {
 
   // for LOading data
   const fetching = async () => {
-    const result = await fetch('/addexpense', {
-      method: "GET",
+    const userid = localStorage.getItem("id");
+    const result = await fetch('/explist', {
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
-      }
+      },
+      body: JSON.stringify({
+        userid
+      })
     })
     const datae = await result.json();
     setexpdata(datae.data)
     setloader(false);
-    // console.log(datae.data);
+    console.log(datae.data);
   }
   // for LOading data ends here
 
@@ -52,12 +58,12 @@ const Addexp = ({setloader,leddetail}) => {
     setinp({ ...inp, [name]: value })
   }
 
-
+ 
   // for creating/inserting data
   const sub = async () => {
     const { ledger, date, amount, narration } = inp;
-
-    if (!ledger || !date || !amount || !narration) {
+    const userid = localStorage.getItem("id");
+    if (!userid || !ledger || !date || !amount || !narration) {
       // return alert("kindly fill all data");
       return swal({
         title: "Wait!",
@@ -72,7 +78,7 @@ const Addexp = ({setloader,leddetail}) => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        ledger, date, amount, narration
+        userid, ledger, date, amount, narration
       })
     })
     const data = await result.json();
@@ -223,7 +229,8 @@ const Addexp = ({setloader,leddetail}) => {
             <Pagination currentpage={currentpage} changepageno={changepageno} totalpost={expdata.length} postperpage={postperpage} />
           </span>
         </div>
-        <Modalbox leddetail={leddetail} fetching={fetching} init={init} setinp={setinp} setisupdate={setisupdate} setmodal={setmodal} sub={sub} modal={modal} handler={handler} inp={inp} isupdate={isupdate} />
+        <Modalbox setisledupdate={setisledupdate} leddetail={leddetail} fetching={fetching} init={init} setinp={setinp} setisupdate={setisupdate} setmodal={setmodal} sub={sub} modal={modal} handler={handler} inp={inp} isupdate={isupdate} />
+        <Ledpage setmodal={setmodal} setisledupdate={setisledupdate} isledupdate={isledupdate} setleddetail={setleddetail} leddetail={leddetail} />
       </div>
 
     </>

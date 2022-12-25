@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import './dataanalysis.css';
 
-const Datanalysis = ({setloader}) => {
+const Datanalysis = ({ setloader }) => {
     const [ledger, setledger] = useState([]);
     const [uniq, setuniq] = useState([]);
     let totalsum = 0;
@@ -19,15 +19,19 @@ const Datanalysis = ({setloader}) => {
     }]
     useEffect(() => {
         load();
-         setloader(true);
+        setloader(true);
     }, [])
 
     const load = async () => {
-        const result = await fetch('/addexpense', {
-            method: "GET",
+        const userid = localStorage.getItem("id");
+        const result = await fetch('/explist', {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
-            }
+            },
+            body: JSON.stringify({
+                userid
+            })
         })
         const res = await result.json();
         // console.log(res.data)
@@ -80,7 +84,7 @@ const Datanalysis = ({setloader}) => {
             circle.style.background = `conic-gradient(#fc5c65 ${percalculate * 3.6}deg,
                     #7f8fa6  10.8deg)`
         }
-        
+
         document.querySelector('.tothun').style.background = `conic-gradient(#fc5c65 ${100 * 3.6}deg,
                 #7f8fa6  10.8deg)`
         document.getElementById("total").innerText = totalsum;

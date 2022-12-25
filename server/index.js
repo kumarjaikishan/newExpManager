@@ -14,13 +14,13 @@ app.get('/', (req, res) => {
 
 //    for adding expense data into database
 app.post('/addexpense', async (req, res) => {
-    const { ledger, date, amount, narration } = req.body;
-    if (!ledger || !date || !amount || !narration) {
+    const {userid, ledger, date, amount, narration } = req.body;
+    if (!userid || !ledger || !date || !amount || !narration) {
         res.json({
             msg: "all fields are required"
         })
     } else {
-        const query = new model({ ledger, date, amount, narration });
+        const query = new model({ userid, ledger, date, amount, narration });
         const result = await query.save();
         if (result) {
             res.json({
@@ -37,8 +37,9 @@ app.post('/addexpense', async (req, res) => {
 //    for adding expense data into database ends here
 
 //    for fetching all expense data from database
-app.get('/addexpense', async (req, res) => {
-    const result = await model.find();
+app.post('/explist', async (req, res) => {
+    const userid=req.body.userid;
+    const result = await model.find({userid});
     if (result) {
         res.json({
             msg: "data found",
@@ -143,6 +144,24 @@ app.post('/login', async (req, res) => {
     } else {
         res.status(500).json({
             msg: "NO USER FOUND",
+        })
+    }
+})
+//    for login user data from database end here
+
+//    for login user data from database
+app.post('/leg', async (req, res) => {
+    const { _id, leddetail } = req.body;
+    // console.log(_id + " " + leddetail)
+    const result = await user.findByIdAndUpdate({ _id }, { ledger: leddetail});
+    if (result) {
+        res.json({
+            msg: "ledger updated",
+            data: result
+        })
+    } else {
+        res.json({
+            msg: "something went wrong in db"
         })
     }
 })

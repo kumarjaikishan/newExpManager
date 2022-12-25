@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import swal from 'sweetalert'
+import './modalbox.css';
 
-const Modalbox = ({leddetail, modal, fetching, init, handler, inp, isupdate, sub, setmodal, setisupdate, setinp }) => {
+const Modalbox = ({setisledupdate,leddetail, modal, fetching, init, handler, inp, isupdate, sub, setmodal, setisupdate, setinp }) => {
    
-    const lededit = async () => {
-        alert("ok")
-    }
     const [ledarr,setledarr]= useState([]);
      // for updating data fetched above 
     const updatee = async (_id) => {
@@ -34,21 +32,19 @@ const Modalbox = ({leddetail, modal, fetching, init, handler, inp, isupdate, sub
         setmodal(false);
     }
     // for updating data fetched above ends here
-
+   const jkh=()=>{
+    setisledupdate(true);
+    setmodal(false)
+   }
     return (
         <div className="modal" style={{ display: modal ? "block" : "none" }}>
             <div className="box">
                 <h1>Add Voucher</h1>
-                <div className="ledgeredit"><i onClick={() => lededit()} class="fa fa-pencil" aria-hidden="true"></i></div>
+                <div className="ledgeredit"><i onClick={jkh} class="fa fa-pencil" aria-hidden="true"></i></div>
                 <div className='v'>
                     <span>Ledger :</span>
                     <span>
                         <select name="ledger" id="" onChange={handler} value={inp.ledger} >
-                            <option value="general">General</option>
-                            <option value="ration">Ration</option>
-                            <option value="homee">Home</option>
-                            <option value="petrol">Petrol</option>
-                            <option value="other">Other</option>
                             {leddetail.map((val,ind)=>{
                                 return <option key={ind} value={val}>{val}</option>
                             })}

@@ -37,11 +37,13 @@ const Signin = ({setlogin,setleddetail}) => {
         console.log(datae.data[0].name);
         const username = datae.data[0].name;
         const mail = datae.data[0].email;
+        const id = datae.data[0]._id;
         alert(datae.msg);
         setlogin(true);
         setleddetail(datae.data[0].ledger)
         localStorage.setItem("name", username);
         localStorage.setItem("email", mail);
+        localStorage.setItem("id", id);
         navigate('/');
     }
 

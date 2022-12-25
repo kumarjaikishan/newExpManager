@@ -1,6 +1,9 @@
 const mongo = require('mongoose');
 
 const expe = new mongo.Schema({
+    userid:{
+        type:String
+    },
     ledger:{
         type:String,
         required:true

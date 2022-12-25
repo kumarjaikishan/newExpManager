@@ -22,12 +22,12 @@ function App() {
       <div className={narrow ? "main narrow":"main"}>
         <Routes>
           <Route path="/" element={<Home setloader={setloader} />} />
-          <Route path="/addexpense" element={<Addexp leddetail={leddetail} setloader={setloader} />} />
+          <Route path="/addexpense" element={<Addexp setleddetail={setleddetail} leddetail={leddetail} setloader={setloader} />} />
           <Route path="/datanalysis" element={<Datanalysis setloader={setloader} />} />
           <Route path="/login" element={<Login setleddetail={setleddetail} setlogin={setlogin} setloader={setloader} />} />
-          <Route path="/logout" element={<Logout setlogin={setlogin} />} />
+          <Route path="/logout" element={<Logout setleddetail={setleddetail} setlogin={setlogin} />} />
         </Routes>
-       <div style={{display: loader ? "flex":"none"}} className="loader"><img src={loadere} alt="" /></div>
+       {/* <div style={{display: loader ? "flex":"none"}} className="loader"><img src={loadere} alt="" /></div> */}
       </div>
       <Sidebar login={login}  narrow={narrow} setheade={setheade} />
     </div>
