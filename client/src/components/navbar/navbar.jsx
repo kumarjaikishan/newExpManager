@@ -23,7 +23,7 @@ const Navbar = ({login,narrow,setnarrow,heade}) => {
       <div className="photo"><img src={img} alt="" /></div>
       <div className="userinfo">
         <span>{username ? username:"Admin"}</span>
-        <span>{login ?"Logged In":"User" }</span>
+        <span>{login ?"Logged In":"Log Out" }</span>
       </div>
     </div>
    </div>

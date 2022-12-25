@@ -51,12 +51,14 @@ const Datanalysis = ({ setloader }) => {
     }
 
     const query = async (val) => {
+        const userid = localStorage.getItem("id");
         const result = await fetch('/ledger', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
+                userid,
                 ledger: val
             })
         })

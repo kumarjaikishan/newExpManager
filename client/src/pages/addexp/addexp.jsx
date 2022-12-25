@@ -45,7 +45,7 @@ const Addexp = ({setloader,leddetail,setleddetail}) => {
     const datae = await result.json();
     setexpdata(datae.data)
     setloader(false);
-    console.log(datae.data);
+    // console.log(datae.data);
   }
   // for LOading data ends here
 

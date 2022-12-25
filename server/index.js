@@ -56,9 +56,9 @@ app.post('/explist', async (req, res) => {
 
 //    for fetching ledger  data from database
 app.post('/ledger', async (req, res) => {
-    const ledger = req.body.ledger;
-    // console.log(ledger)
-    const result = await model.find({ ledger });
+    const {userid,ledger} = req.body;
+    // console.log(userid,ledger)
+    const result = await model.find({userid, ledger });
     // console.log(result)
     if (result) {
         res.json({
@@ -135,7 +135,7 @@ app.post('/login', async (req, res) => {
     const { email, password } = req.body;
     // console.log(email + " " + password)
     const result = await user.find({ email, password });
-    console.log(result.length);
+    // console.log(result.length);
     if (result.length) {
         res.status(200).json({
             msg: "Login Successfully",
