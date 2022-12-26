@@ -2,10 +2,21 @@ import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import './dataanalysis.css';
+import { useNavigate } from "react-router-dom";
 
-const Datanalysis = ({ setloader }) => {
+const Datanalysis = ({ setloader,login }) => {
+    let navigate = useNavigate();
+    useEffect(() => {
+        if(!login){
+            navigate('/login');
+            return;
+          }
+        load();
+        setloader(true);
+    }, [])
     const [ledger, setledger] = useState([]);
     const [uniq, setuniq] = useState([]);
+    const [totalsu,settotalsu]=useState(0);
     let totalsum = 0;
     const card = [{
         amt: "8521",
@@ -17,10 +28,7 @@ const Datanalysis = ({ setloader }) => {
         ledger: "Petrol",
         percentage: 16
     }]
-    useEffect(() => {
-        load();
-        setloader(true);
-    }, [])
+   
 
     const load = async () => {
         const userid = localStorage.getItem("id");

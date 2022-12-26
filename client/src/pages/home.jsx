@@ -1,9 +1,15 @@
 import React from 'react'
 import { useEffect } from 'react';
 import './home.css';
+import { useNavigate } from "react-router-dom";
 
-const Home = ({setloader}) => {
+const Home = ({setloader,login}) => {
+  let navigate = useNavigate();
  useEffect(() => {
+  if(!login){
+    navigate('/login');
+    return;
+  }
   setloader(true);
  }, [])
  

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './ledpage.css';
 import { useEffect } from 'react';
 
-const Ledpage = ({setmodal, leddetail, setleddetail,isledupdate,setisledupdate }) => {
+const Ledpage = ({ setmodal, leddetail, setleddetail, isledupdate, setisledupdate }) => {
   const [isupda, setinsupdat] = useState(false)
   const [ledinp, setledinp] = useState({
     ind: "",
@@ -14,17 +14,22 @@ const Ledpage = ({setmodal, leddetail, setleddetail,isledupdate,setisledupdate }
 
   const upde = async () => {
     const _id = localStorage.getItem("id");
-    const res = await fetch('/leg', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        leddetail, _id
+    if(!_id){
+      console.log("User id not found");
+    }else{
+      const res = await fetch('/leg', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          leddetail, _id
+        })
       })
-    })
-    const result = await res.json();
-    console.log(result)
+      const result = await res.json();
+      console.log(result)
+    }
+   
   }
 
 
@@ -53,35 +58,35 @@ const Ledpage = ({setmodal, leddetail, setleddetail,isledupdate,setisledupdate }
 
 
   const deletee = (val) => {
-    //  with splice method
-    // leddetail.splice(val, 1);
-    //  with splice method end here
-    // setisledupdate(false)
-
     setleddetail((oldvale) => {
-      return oldvale.filter((arr, inde)=>{
-          return val !== inde;
+      return oldvale.filter((arr, inde) => {
+        return val !== inde;
       })
-   })
+    })
 
   }
 
 
   const updat = () => {
     //  with splice method
-    leddetail.splice(ledinp.ind, 1, ledinp.val);
+    // leddetail.splice(ledinp.ind, 1, ledinp.val);
     //  with splice method end here
 
-    // leddetail.map((his,inde)=>
-    //   inde===ledinp.ind ? ledinp.val : his
-    // );
+    setleddetail(leddetail.map((vale, inde) => {
+      if (inde == ledinp.ind) {
+        return ledinp.val;
+      }
+      return vale;
+    }))
+
     setledinp({
       ind: "",
       val: ""
     })
     setinsupdat(false)
   }
-  const back = ()=>{
+
+  const back = () => {
     setmodal(true)
     setisledupdate(false)
   }

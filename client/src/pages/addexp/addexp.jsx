@@ -5,8 +5,18 @@ import swal from 'sweetalert'
 import Pagination from './pagination';
 import Modalbox from './modalbox';
 import Ledpage from './ledpage';
+import { useNavigate } from "react-router-dom";
 
-const Addexp = ({setloader,leddetail,setleddetail}) => {
+const Addexp = ({login,setloader,leddetail,setleddetail}) => {
+  let navigate = useNavigate();
+  useEffect(() => {
+    if(!login){
+      navigate('/login');
+      return;
+    }
+    fetching();
+    setloader(true)
+  }, [])
   const date = new Date;
   
   const [isupdate, setisupdate] = useState(false);
@@ -25,27 +35,29 @@ const Addexp = ({setloader,leddetail,setleddetail}) => {
   const [currentpage, setcurrentpage] = useState(1);
   const [postperpage, setpostperpage] = useState(5);
 
-  useEffect(() => {
-    fetching();
-    setloader(true)
-  }, [])
+ 
 
   // for LOading data
   const fetching = async () => {
     const userid = localStorage.getItem("id");
-    const result = await fetch('/explist', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        userid
+    if(!userid){
+      console.log("user id not found");
+    }else{
+      const result = await fetch('/explist', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          userid
+        })
       })
-    })
-    const datae = await result.json();
-    setexpdata(datae.data)
-    setloader(false);
-    // console.log(datae.data);
+      const datae = await result.json();
+      setexpdata(datae.data)
+      setloader(false);
+      // console.log(datae.data);
+    }
+   
   }
   // for LOading data ends here
 
@@ -70,22 +82,22 @@ const Addexp = ({setloader,leddetail,setleddetail}) => {
         text: "Kindly fill all Fields!",
         icon: "warning",
       });
-    }
-
-    const result = await fetch('/addexpense', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        userid, ledger, date, amount, narration
+    }else{
+      const result = await fetch('/addexpense', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          userid, ledger, date, amount, narration
+        })
       })
-    })
-    const data = await result.json();
-    fetching();
-    setmodal(false);
-    setinp(init);
-    // console.log(data.msg);
+      const data = await result.json();
+      fetching();
+      setmodal(false);
+      setinp(init);
+      // console.log(data.msg);
+    }
   }
   // for creating/inserting data ends here
 
