@@ -129,6 +129,102 @@ app.post('/data', async (req, res) => {
 })
 //    for fetching exp data from database ends here
 
+//    for fetching exp data from database
+app.post('/homeload', async (req, res) => {
+    const { userid } = req.body;
+    const a = new Date();
+    // const today = a.toDateString();
+    // const today = 2022/12/27;
+    const today = (a.getMonth() + 1) + "/" + a.getDate() + "/" + a.getFullYear();
+    const yesterday = (a.getMonth() + 1) + "/" + (a.getDate() - 1) + "/" + a.getFullYear();
+    const lastweek = (a.getMonth() + 1) + "/" + (a.getDate() - 7) + "/" + a.getFullYear();
+    const lastmonth = (a.getMonth()) + "/" + a.getDate() + "/" + a.getFullYear();
+    const lastyear = (a.getMonth() + 1) + "/" + a.getDate() + "/" + (a.getFullYear() - 1);
+
+    // today calcumation
+    const todaytotal = await model.find({
+        userid, date: today
+    });
+
+    const todaytotalsum = todaytotal.reduce((accu, val, ind) => {
+        return accu = accu + val.amount
+    }, 0);
+    // today calcumation
+
+    //   yesterdat calcumation
+    const yeaterdaytotal = await model.find({
+        userid, date: {
+            $gte: yesterday,
+            $lte: today
+        }
+    });
+
+    const yesterdaytotalsum = yeaterdaytotal.reduce((accu, val, ind) => {
+        return accu = accu + val.amount
+    }, 0);
+    //   yesterdat calcumation
+
+    // lastweek calculation
+    const lastweektotal = await model.find({
+        userid, date: {
+            $gte: lastweek,
+            $lte: today
+        }
+    });
+    const lastweektotalsum = lastweektotal.reduce((accu, val, ind) => {
+        return accu = accu + val.amount
+    }, 0);
+    // lastweek calculation
+
+    // lastmonth calculation
+    const monthtotal = await model.find({
+        userid, date: {
+            $gte: lastmonth,
+            $lte: today
+        }
+    });
+    const monthtotalsum = monthtotal.reduce((accu, val, ind) => {
+        return accu = accu + val.amount
+    }, 0);
+     // lastmonth calculation
+
+    // lastyear calculation
+    const yeartotal = await model.find({
+        userid, date: {
+            $gte: lastyear,
+            $lte: today
+        }
+    });
+    const yeartotalsum = yeartotal.reduce((accu, val, ind) => {
+        return accu = accu + val.amount
+    }, 0);
+     // lastyear calculation
+
+    // total calculation
+    const totale = await model.find({  userid  });
+    const totalsum = totale.reduce((accu, val, ind) => {
+        return accu = accu + val.amount
+    }, 0);
+     // total calculation
+
+    // console.log(totaled)
+   
+   
+        res.json({
+            msg: "data found",
+            data: [{
+                Today:todaytotalsum,
+                Yesterday:yesterdaytotalsum,
+                LastWeek:lastweektotalsum,
+                LastMonth:monthtotalsum,
+                lastyear:yeartotalsum,
+                total:totalsum
+            }]
+        })
+   
+})
+//    for fetching exp data from database ends here
+
 
 //    for update expense legere data into database
 app.post('/updateexpledger', async (req, res) => {
@@ -136,7 +232,7 @@ app.post('/updateexpledger', async (req, res) => {
     const userid = req.body.userid;
     const oldledger = req.body.oldledger;
     const newledger = req.body.newledger;
-    console.log(userid + " "+action + "  " + oldledger + " " + newledger);
+    console.log(userid + " " + action + "  " + oldledger + " " + newledger);
     if (action == "update") {
         const result = await model.updateMany({ userid, ledger: oldledger }, { ledger: newledger })
         // console.log(result);
@@ -151,7 +247,7 @@ app.post('/updateexpledger', async (req, res) => {
             })
         }
     }
-    if(action=="delete"){
+    if (action == "delete") {
         try {
             const result = await model.deleteMany({ userid, ledger: oldledger })
             // console.log(result);
@@ -168,7 +264,7 @@ app.post('/updateexpledger', async (req, res) => {
         } catch (error) {
             res.send(error);
         }
-       
+
     }
 
 })

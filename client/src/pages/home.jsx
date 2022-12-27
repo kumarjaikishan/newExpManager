@@ -1,49 +1,61 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react';
 import './home.css';
 import { useNavigate } from "react-router-dom";
 
-const Home = ({setloader,login,setheade}) => {
+const Home = ({ setloader, login, setheade }) => {
+  const [arr,setarr]=useState([]);
   let navigate = useNavigate();
- useEffect(() => {
-  if(!login){
-    navigate('/login');
-    return;
-  }
-  setheade("Dashboard");
-  setloader(true);
- }, [])
- 
+  useEffect(() => {
+    if (!login) {
+      navigate('/login');
+      return;
+    }
+    load();
+    setheade("Dashboard");
+    setloader(true);
+  }, [])
 
+  const load = async () => {
+    const userid = localStorage.getItem("id");
+    const result = await fetch('/homeload', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        userid
+      })
+    })
+    const res = await result.json();
+    console.log(res.data[0])
+    setarr(res.data[0]);
+  }
   const card = [{
-    amt: 500,
+    amt: arr.Today,
     day: "Today",
     icon: <i class="fa fa-inr" aria-hidden="true"></i>
   }, {
-    amt: 1500,
+    amt:  arr.Yesterday,
     day: "Yesterday",
     icon: <i class="fa fa-bolt" aria-hidden="true"></i>
   }, {
-    amt: 2500,
+    amt:  arr.LastWeek,
     day: "Last Week",
     icon: <i class="fa fa-shopping-bag" aria-hidden="true"></i>
   }, {
-    amt: 3500,
-    day: "Last MOnth",
+    amt:  arr.LastMonth,
+    day: "Last Month",
     icon: <i class="fa fa-google-wallet" aria-hidden="true"></i>
   }, {
-    amt: 7600,
+    amt:  arr.lastyear,
     day: "Last Year",
     icon: <i class="fa fa-balance-scale" aria-hidden="true"></i>
   }, {
-    amt: 52000,
+    amt:  arr.total,
     day: "Total",
     icon: <i class="fa fa-university" aria-hidden="true"></i>
-  },{
-    amt: 2500,
-    day: "Last Week",
-    icon: <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-  },]
+  }]
   return (
     <>
       <div className="home">
@@ -59,7 +71,7 @@ const Home = ({setloader,login,setheade}) => {
             </div>
           )
         })}
-       {setloader(false)}
+        {setloader(false)}
 
       </div>
     </>

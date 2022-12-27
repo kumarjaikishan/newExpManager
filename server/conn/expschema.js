@@ -9,7 +9,7 @@ const expe = new mongo.Schema({
         required:true
     },
     date:{
-        type:String,
+        type:Date,
         required:true
     },
     amount:{
