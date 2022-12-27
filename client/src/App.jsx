@@ -28,7 +28,7 @@ function App() {
           <Route path="/login" element={<Login setleddetail={setleddetail} setlogin={setlogin} setloader={setloader} />} />
           <Route path="/logout" element={<Logout setleddetail={setleddetail} setlogin={setlogin} />} />
         </Routes>
-       <div style={{display: loader ? "flex":"none"}} className="loader"><img src={loadere} alt="" /></div>
+       {/* <div style={{display: loader ? "flex":"none"}} className="loader"><img src={loadere} alt="" /></div> */}
       </div>
       <Sidebar login={login}  narrow={narrow} setheade={setheade} />
     </div>

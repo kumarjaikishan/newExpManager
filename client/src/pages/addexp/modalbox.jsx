@@ -19,11 +19,12 @@ const Modalbox = ({notify,setisledupdate,leddetail, modal, fetching, init, handl
         })
         const data = await result.json();
         if (data) {
-            swal({
-                title: "Wait!",
-                text: "Data updated Successfully",
-                icon: "success",
-            });
+            // swal({
+            //     title: "Wait!",
+            //     text: "Data updated Successfully",
+            //     icon: "success",
+            // });
+            notify("Data updated Successfully",2500)
         }
         // console.log(data);
         fetching();
