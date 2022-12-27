@@ -6,11 +6,16 @@ import IconButton from '@mui/material/IconButton';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Signin from './signin';
 import Signup from './signup';
-const Login = ({setlogin,setleddetail}) => {
+import { useEffect } from 'react';
+const Login = ({setlogin,setleddetail,setloader}) => {
     const [log, setlog] = useState(true);
     const fun = (val) => {
         setlog(val);
     }
+    useEffect(() => {
+        setloader(false);
+    }, [])
+    
 
     return (
         <>

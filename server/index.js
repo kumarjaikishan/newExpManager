@@ -39,7 +39,8 @@ app.post('/addexpense', async (req, res) => {
 //    for fetching all expense data from database
 app.post('/explist', async (req, res) => {
     const userid = req.body.userid;
-    const result = await model.find({ userid });
+    try {
+        const result = await model.find({ userid }).sort({date:-1});
     if (result) {
         res.json({
             msg: "data found",
@@ -50,6 +51,13 @@ app.post('/explist', async (req, res) => {
             msg: "something went wrong in db"
         })
     }
+    } catch (error) {
+        res.json({
+            msg: "wrong",
+            data: error
+        })
+    }
+    
 })
 //    for fetching all expense data from database ends here
 

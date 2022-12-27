@@ -30,6 +30,7 @@ const Home = ({ setloader, login, setheade }) => {
     const res = await result.json();
     console.log(res.data[0])
     setarr(res.data[0]);
+    setloader(false);
   }
   const card = [{
     amt: arr.Today,
@@ -71,7 +72,7 @@ const Home = ({ setloader, login, setheade }) => {
             </div>
           )
         })}
-        {setloader(false)}
+        
 
       </div>
     </>

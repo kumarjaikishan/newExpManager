@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
   let navigate = useNavigate();
   useEffect(() => {
@@ -210,13 +211,15 @@ const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
             <tbody id="tablecontent">
 
               {currentpost.map((val, ind) => {
+                let daten = new Date(val.date);
+                let fde = daten.getUTCDate()+ "/"+ (daten.getUTCMonth()+1)+ "/"+ daten.getFullYear();
                 return (
                   <tr key={ind}>
                     <td>{firstpostindex + ind + 1}</td>
                     <td>{val.ledger}</td>
                     <td>{val.amount}</td>
                     <td>{val.narration}</td>
-                    <td>{val.date}</td>
+                    <td>{fde}</td>
                     <td title='view'><i class="fa fa-eye" aria-hidden="true"></i></td>
                     <td title='edit'><i onClick={() => edit(val._id)} class="fa fa-pencil" aria-hidden="true"></i></td>
                     <td title='delete' ><i onClick={() => delet(val._id)} class="fa fa-trash-o" aria-hidden="true"></i></td>
