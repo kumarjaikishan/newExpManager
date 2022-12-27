@@ -7,18 +7,17 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Signin from './signin';
 import Signup from './signup';
 import { useEffect } from 'react';
+
 const Login = ({setlogin,setleddetail,setloader}) => {
     const [log, setlog] = useState(true);
     const fun = (val) => {
         setlog(val);
     }
-    useEffect(() => {
-        setloader(false);
-    }, [])
-    
-
+ 
+   
     return (
         <>
+          
             <div className="login">
                 <div className="box">
                     <div className="logo">
