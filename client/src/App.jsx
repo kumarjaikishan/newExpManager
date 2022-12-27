@@ -12,6 +12,7 @@ import Logout from './pages/logout';
 
 function App() {
   const [leddetail,setleddetail]=useState([]);
+
   const [login,setlogin]= useState(false);
   const [loader,setloader]=useState(true);
   const [narrow,setnarrow]=useState(false);
@@ -21,13 +22,13 @@ function App() {
       <Navbar login={login} narrow={narrow} heade={heade} setnarrow={setnarrow} />
       <div className={narrow ? "main narrow":"main"}>
         <Routes>
-          <Route path="/" element={<Home setloader={setloader} />} />
-          <Route path="/addexpense" element={<Addexp  setleddetail={setleddetail} leddetail={leddetail} setloader={setloader} />} />
-          <Route path="/datanalysis" element={<Datanalysis  setloader={setloader} />} />
+          <Route path="/" element={<Home login={login} setheade={setheade} setloader={setloader} />} />
+          <Route path="/addexpense" element={<Addexp login={login}  setleddetail={setleddetail} leddetail={leddetail} setloader={setloader} />} />
+          <Route path="/datanalysis" element={<Datanalysis login={login}  setloader={setloader} />} />
           <Route path="/login" element={<Login setleddetail={setleddetail} setlogin={setlogin} setloader={setloader} />} />
           <Route path="/logout" element={<Logout setleddetail={setleddetail} setlogin={setlogin} />} />
         </Routes>
-       {/* <div style={{display: loader ? "flex":"none"}} className="loader"><img src={loadere} alt="" /></div> */}
+       <div style={{display: loader ? "flex":"none"}} className="loader"><img src={loadere} alt="" /></div>
       </div>
       <Sidebar login={login}  narrow={narrow} setheade={setheade} />
     </div>

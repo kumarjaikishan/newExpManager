@@ -3,13 +3,14 @@ import { useEffect } from 'react';
 import './home.css';
 import { useNavigate } from "react-router-dom";
 
-const Home = ({setloader,login}) => {
+const Home = ({setloader,login,setheade}) => {
   let navigate = useNavigate();
  useEffect(() => {
   if(!login){
     navigate('/login');
     return;
   }
+  setheade("Dashboard");
   setloader(true);
  }, [])
  

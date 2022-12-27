@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import swal from 'sweetalert'
 import './modalbox.css';
 
-const Modalbox = ({setisledupdate,leddetail, modal, fetching, init, handler, inp, isupdate, sub, setmodal, setisupdate, setinp }) => {
+const Modalbox = ({notify,setisledupdate,leddetail, modal, fetching, init, handler, inp, isupdate, sub, setmodal, setisupdate, setinp }) => {
    
     const [ledarr,setledarr]= useState([]);
      // for updating data fetched above 
@@ -62,7 +62,7 @@ const Modalbox = ({setisledupdate,leddetail, modal, fetching, init, handler, inp
                     <span>
                         <input name="amount"
                             onKeyPress={(event) => { if (!/[0-9]/.test(event.key)) { event.preventDefault(); } }}
-                            type="text" value={inp.amount} onChange={handler} />
+                            type="tel" value={inp.amount} onChange={handler} />
                     </span>
 
                 </div>

@@ -16,14 +16,6 @@ const Sidebar = ({ narrow,setheade,login }) => {
         name:"Data Alaysis",
         link:'/datanalysis',
         logo:"fa fa-anchor"
-    },{
-        name:"Login",
-        link:'/login',
-        logo:"fa fa-user"
-    } ,{
-        name:"Logout",
-        link:'/logout',
-        logo:"fa fa-sign-out"
     }
 ]
     return (
@@ -38,6 +30,8 @@ const Sidebar = ({ narrow,setheade,login }) => {
                         <NavLink key={ind} title={val.name}  exact className={(navData) => (navData.isActive ? 'active' : '')} style={{ textDecoration: 'none' }} to={val.link} > <span className="li" onClick={()=>setheade(val.name)}><span className="logo"><i class={val.logo} aria-hidden="true"></i></span><span className="name">{val.name}</span></span></NavLink>
                     )
                  })}
+                 {login? <NavLink    exact className={(navData) => (navData.isActive ? 'active' : '')} style={{ textDecoration: 'none' }} to="/logout" > <span className="li" onClick={()=>setheade("Log out")}><span className="logo"><i class="fa fa-sign-out" aria-hidden="true"></i></span><span className="name">Logout</span></span></NavLink> : <NavLink   exact className={(navData) => (navData.isActive ? 'active' : '')} style={{ textDecoration: 'none' }} to="/login" > <span className="li" onClick={()=>setheade("Login")}><span className="logo"><i class="fa fa-user" aria-hidden="true"></i></span><span className="name">Login</span></span></NavLink>} 
+                  
                 </div>
               
             </div>

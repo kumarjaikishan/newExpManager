@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 
 //    for adding expense data into database
 app.post('/addexpense', async (req, res) => {
-    const {userid, ledger, date, amount, narration } = req.body;
+    const { userid, ledger, date, amount, narration } = req.body;
     if (!userid || !ledger || !date || !amount || !narration) {
         res.json({
             msg: "all fields are required"
@@ -38,8 +38,8 @@ app.post('/addexpense', async (req, res) => {
 
 //    for fetching all expense data from database
 app.post('/explist', async (req, res) => {
-    const userid=req.body.userid;
-    const result = await model.find({userid});
+    const userid = req.body.userid;
+    const result = await model.find({ userid });
     if (result) {
         res.json({
             msg: "data found",
@@ -56,9 +56,9 @@ app.post('/explist', async (req, res) => {
 
 //    for fetching ledger  data from database
 app.post('/ledger', async (req, res) => {
-    const {userid,ledger} = req.body;
+    const { userid, ledger } = req.body;
     // console.log(userid,ledger)
-    const result = await model.find({userid, ledger });
+    const result = await model.find({ userid, ledger });
     // console.log(result)
     if (result) {
         res.json({
@@ -130,6 +130,51 @@ app.post('/data', async (req, res) => {
 //    for fetching exp data from database ends here
 
 
+//    for update expense legere data into database
+app.post('/updateexpledger', async (req, res) => {
+    const action = req.body.action;
+    const userid = req.body.userid;
+    const oldledger = req.body.oldledger;
+    const newledger = req.body.newledger;
+    console.log(userid + " "+action + "  " + oldledger + " " + newledger);
+    if (action == "update") {
+        const result = await model.updateMany({ userid, ledger: oldledger }, { ledger: newledger })
+        // console.log(result);
+        if (result) {
+            res.json({
+                msg: "ledger Updated",
+                data: result
+            })
+        } else {
+            res.json({
+                msg: "something went wrong"
+            })
+        }
+    }
+    if(action=="delete"){
+        try {
+            const result = await model.deleteMany({ userid, ledger: oldledger })
+            // console.log(result);
+            if (result) {
+                res.json({
+                    msg: "ledger Updated",
+                    data: result
+                })
+            } else {
+                res.json({
+                    msg: "something went wrong"
+                })
+            }
+        } catch (error) {
+            res.send(error);
+        }
+       
+    }
+
+})
+//    for update expense legere data into database ends here
+
+
 //    for login user data from database
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
@@ -153,7 +198,7 @@ app.post('/login', async (req, res) => {
 app.post('/leg', async (req, res) => {
     const { _id, leddetail } = req.body;
     // console.log(_id + " " + leddetail)
-    const result = await user.findByIdAndUpdate({ _id }, { ledger: leddetail});
+    const result = await user.findByIdAndUpdate({ _id }, { ledger: leddetail });
     if (result) {
         res.json({
             msg: "ledger updated",
@@ -176,12 +221,13 @@ app.post('/signup', async (req, res) => {
         res.json({
             msg: "all fields are required"
         })
-    } else {
-        const query = new user({ name, email, phone, password, date,ledger });
+    }
+    try {
+        const query = new user({ name, email, phone, password, date, ledger });
         const result = await query.save();
         if (result) {
             res.status(201).json({
-                msg: "data inserted successfully",
+                msg: "SignUp successfully",
                 data: result
             })
         } else {
@@ -189,7 +235,11 @@ app.post('/signup', async (req, res) => {
                 msg: "something went wrong in db"
             })
         }
+    } catch (error) {
+        res.send(error);
     }
+
+
 })
 //    for signup user data into database ends here
 

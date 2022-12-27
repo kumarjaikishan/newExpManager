@@ -14,9 +14,8 @@ const Datanalysis = ({ setloader,login }) => {
         load();
         setloader(true);
     }, [])
-    const [ledger, setledger] = useState([]);
+    const [fetchdata,setfetchdata]=useState([]);
     const [uniq, setuniq] = useState([]);
-    const [totalsu,settotalsu]=useState(0);
     let totalsum = 0;
     const card = [{
         amt: "8521",
@@ -42,6 +41,7 @@ const Datanalysis = ({ setloader,login }) => {
             })
         })
         const res = await result.json();
+        setfetchdata(res.data);
         // console.log(res.data)
         let arr = [];
         totalsum = 0;
@@ -97,7 +97,6 @@ const Datanalysis = ({ setloader,login }) => {
 
         document.querySelector('.tothun').style.background = `conic-gradient(#fc5c65 ${100 * 3.6}deg,
                 #7f8fa6  10.8deg)`
-        document.getElementById("total").innerText = totalsum;
         setloader(false);
     }
 
@@ -122,7 +121,11 @@ const Datanalysis = ({ setloader,login }) => {
                 })}
                 <div className="card">
                     <div className="data">
-                        <div className="amt" id='total'>00</div>
+                        <div className="amt" id='total'>
+                            {fetchdata.reduce((accu,val,ind)=>{
+                           return accu = accu + val.amount;
+                        },0)}
+                        </div>
                         <div className="day" >Total</div>
                     </div>
                     <div className="icon">

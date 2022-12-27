@@ -4,18 +4,19 @@ import InputAdornment from '@mui/material/InputAdornment';
 import EmailIcon from '@mui/icons-material/Email';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import swal from 'sweetalert'
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
-const Signup = ({setlog}) => {
-   const init ={
-    name: "",
-    email: "",
-    phone: "",
-    password: "",
-    cpassword: "",
-    ledger:["General"]
-   }
+const Signup = ({ setlog }) => {
+    const init = {
+        name: "",
+        email: "",
+        phone: "",
+        password: "",
+        cpassword: "",
+        ledger: ["General"]
+    }
     const [signinp, setsigninp] = useState(init);
     const signhandle = (e) => {
         const name = e.target.name;
@@ -28,23 +29,30 @@ const Signup = ({setlog}) => {
     const submit = async () => {
         const today = new Date;
         const date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getUTCDate();
-        const {name, email,phone, password,ledger } = signinp;
-      
+        const { name, email, phone, password, ledger } = signinp;
+        if (!name || !email || !phone || !password || !ledger) {
+            swal("All Fields Are Required", {
+                icon: "warning",
+            });
+            return;
+        }
         const res = await fetch('/signup', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                name, email,phone, password,date,ledger
+                name, email, phone, password, date, ledger
             })
         })
         const datae = await res.json();
         console.log(datae);
-        if(datae.data){
+        if (datae.data) {
             setsigninp(init);
-          alert("Signup Successfully");
-          setlog(true);
+            swal("SignUp successfull", {
+                icon: "Success",
+            });
+            setlog(true);
         }
     }
 
@@ -122,7 +130,7 @@ const Signup = ({setlog}) => {
                         </InputAdornment>,
                     }}
                 />
-                <button onClick={()=> submit()}>Signup</button>
+                <button onClick={() => submit()}>Signup</button>
             </div>
         </>
     )

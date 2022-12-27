@@ -6,43 +6,50 @@ import Pagination from './pagination';
 import Modalbox from './modalbox';
 import Ledpage from './ledpage';
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const Addexp = ({login,setloader,leddetail,setleddetail}) => {
+const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
   let navigate = useNavigate();
   useEffect(() => {
-    if(!login){
+    if (!login) {
       navigate('/login');
       return;
     }
     fetching();
     setloader(true)
   }, [])
+  const notify = (msg,dur) => {
+    toast.success(msg,{
+      autoClose: dur,
+    });
+  }
   const date = new Date;
-  
+
   const [isupdate, setisupdate] = useState(false);
   const today = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getUTCDate();
 
   const init = {
-    userid:"",
+    userid: "",
     ledger: "general",
     date: today,
     amount: "",
     narration: ""
   }
-  const [isledupdate,setisledupdate]= useState(false);
+  const [isledupdate, setisledupdate] = useState(false);
   const [inp, setinp] = useState(init);
   const [expdata, setexpdata] = useState([]);
   const [currentpage, setcurrentpage] = useState(1);
   const [postperpage, setpostperpage] = useState(5);
 
- 
+
 
   // for LOading data
   const fetching = async () => {
     const userid = localStorage.getItem("id");
-    if(!userid){
+    if (!userid) {
       console.log("user id not found");
-    }else{
+    } else {
       const result = await fetch('/explist', {
         method: "POST",
         headers: {
@@ -55,9 +62,10 @@ const Addexp = ({login,setloader,leddetail,setleddetail}) => {
       const datae = await result.json();
       setexpdata(datae.data)
       setloader(false);
-      // console.log(datae.data);
+      // setleddetail(datae.data[0].ledger)
+      console.log(datae.data);
     }
-   
+
   }
   // for LOading data ends here
 
@@ -70,7 +78,7 @@ const Addexp = ({login,setloader,leddetail,setleddetail}) => {
     setinp({ ...inp, [name]: value })
   }
 
- 
+
   // for creating/inserting data
   const sub = async () => {
     const { ledger, date, amount, narration } = inp;
@@ -82,7 +90,7 @@ const Addexp = ({login,setloader,leddetail,setleddetail}) => {
         text: "Kindly fill all Fields!",
         icon: "warning",
       });
-    }else{
+    } else {
       const result = await fetch('/addexpense', {
         method: "POST",
         headers: {
@@ -94,6 +102,7 @@ const Addexp = ({login,setloader,leddetail,setleddetail}) => {
       })
       const data = await result.json();
       fetching();
+      notify("Expense Added",3000);
       setmodal(false);
       setinp(init);
       // console.log(data.msg);
@@ -145,9 +154,7 @@ const Addexp = ({login,setloader,leddetail,setleddetail}) => {
           // console.log(data);
           fetching();
 
-          swal("Data has been deleted!", {
-            icon: "success",
-          });
+          notify("Deleted Successfully",2000);
         } else {
           swal("Your data is safe!");
         }
@@ -171,6 +178,7 @@ const Addexp = ({login,setloader,leddetail,setleddetail}) => {
   let sum = 0;
   return (
     <>
+      <ToastContainer />
       <div className="exp">
         <div className="add"> <i title='Add Expense' class="fa fa-plus" onClick={() => setmodal(true)} aria-hidden="true" id='addexp'></i> </div>
         <div className="head">
@@ -222,12 +230,11 @@ const Addexp = ({login,setloader,leddetail,setleddetail}) => {
               <th colSpan="1" >Total</th>
               <th colSpan="1" id="totalhere">
                 {
-                  currentpost.map((val, ind) => {
-                    sum = sum + val.amount;
-                    return;
-                  })
+                  currentpost.reduce((accu, val, ind) => {
+                    return accu = accu + val.amount;
+                  }, 0)
                 }
-                {sum}
+
               </th>
               <th colSpan="5" ></th>
               <th colSpan="1" id="alldelete" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></th>
@@ -236,13 +243,13 @@ const Addexp = ({login,setloader,leddetail,setleddetail}) => {
           </table>
         </div>
         <div className="foot">
-          <span>showing result from {firstpostindex + 1} to {lastpostindex >=expdata.length ? lastpostindex=expdata.length: lastpostindex} of  {expdata.length} Results</span>
+          <span>showing result from {firstpostindex + 1} to {lastpostindex >= expdata.length ? lastpostindex = expdata.length : lastpostindex} of  {expdata.length} Results</span>
           <span>Pages :
             <Pagination currentpage={currentpage} changepageno={changepageno} totalpost={expdata.length} postperpage={postperpage} />
           </span>
         </div>
         <Modalbox setisledupdate={setisledupdate} leddetail={leddetail} fetching={fetching} init={init} setinp={setinp} setisupdate={setisupdate} setmodal={setmodal} sub={sub} modal={modal} handler={handler} inp={inp} isupdate={isupdate} />
-        <Ledpage setmodal={setmodal} setisledupdate={setisledupdate} isledupdate={isledupdate} setleddetail={setleddetail} leddetail={leddetail} />
+        <Ledpage setmodal={setmodal} setisledupdate={setisledupdate} fetching={fetching} isledupdate={isledupdate} setleddetail={setleddetail} leddetail={leddetail} />
       </div>
 
     </>
