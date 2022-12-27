@@ -35,27 +35,27 @@ const Home = ({ setloader, login, setheade }) => {
   const card = [{
     amt: arr.Today,
     day: "Today",
-    icon: <i class="fa fa-inr" aria-hidden="true"></i>
+    icon: <i className="fa fa-inr" aria-hidden="true"></i>
   }, {
     amt:  arr.Yesterday,
     day: "Yesterday",
-    icon: <i class="fa fa-bolt" aria-hidden="true"></i>
+    icon: <i className="fa fa-bolt" aria-hidden="true"></i>
   }, {
     amt:  arr.LastWeek,
     day: "Last Week",
-    icon: <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+    icon: <i className="fa fa-shopping-bag" aria-hidden="true"></i>
   }, {
     amt:  arr.LastMonth,
     day: "Last Month",
-    icon: <i class="fa fa-google-wallet" aria-hidden="true"></i>
+    icon: <i className="fa fa-google-wallet" aria-hidden="true"></i>
   }, {
     amt:  arr.lastyear,
     day: "Last Year",
-    icon: <i class="fa fa-balance-scale" aria-hidden="true"></i>
+    icon: <i className="fa fa-balance-scale" aria-hidden="true"></i>
   }, {
     amt:  arr.total,
     day: "Total",
-    icon: <i class="fa fa-university" aria-hidden="true"></i>
+    icon: <i className="fa fa-university" aria-hidden="true"></i>
   }]
   return (
     <>

@@ -233,6 +233,16 @@ app.post('/homeload', async (req, res) => {
 })
 //    for fetching exp data from database ends here
 
+// testing here
+app.post('/test', async (req, res) => {
+    const userid = req.body.userid;
+    const totale = await model.find({  userid  });
+    res.json({
+        msg:"hi",
+        data:totale
+    })
+})
+// testing hrre end here
 
 //    for update expense legere data into database
 app.post('/updateexpledger', async (req, res) => {
@@ -246,7 +256,7 @@ app.post('/updateexpledger', async (req, res) => {
         // console.log(result);
         if (result) {
             res.json({
-                msg: "ledger Updated",
+                msg: "ledger Updated in expense",
                 data: result
             })
         } else {
@@ -305,7 +315,7 @@ app.post('/leg', async (req, res) => {
     const result = await user.findByIdAndUpdate({ _id }, { ledger: leddetail });
     if (result) {
         res.json({
-            msg: "ledger updated",
+            msg: "ledger sync",
             data: result
         })
     } else {

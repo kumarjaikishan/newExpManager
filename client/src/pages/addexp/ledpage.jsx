@@ -10,14 +10,12 @@ const Ledpage = ({ fetching,setmodal, leddetail, setleddetail, isledupdate, seti
     val: ""
   })
   useEffect(() => {
-    upde();
-  }, [leddetail])
+   
+  }, [])
 
   const upde = async () => {
     const _id = localStorage.getItem("id");
-    if (!_id) {
-      console.log("User id not found");
-    } else {
+    if (_id && leddetail) {
       const res = await fetch('/leg', {
         method: "POST",
         headers: {
@@ -29,7 +27,7 @@ const Ledpage = ({ fetching,setmodal, leddetail, setleddetail, isledupdate, seti
       })
       const result = await res.json();
       console.log(result)
-    }
+    } 
   }
 
 
@@ -46,6 +44,7 @@ const Ledpage = ({ fetching,setmodal, leddetail, setleddetail, isledupdate, seti
       ind: "",
       val: ""
     })
+    upde();
   }
   const edite = (ind, val) => {
     setledinp({
@@ -69,6 +68,7 @@ const Ledpage = ({ fetching,setmodal, leddetail, setleddetail, isledupdate, seti
     swal("Ledger has been deleted", {
       icon: "success",
     });
+    upde();
   }
 
 
@@ -89,6 +89,7 @@ const Ledpage = ({ fetching,setmodal, leddetail, setleddetail, isledupdate, seti
       icon: "success",
     });
     setinsupdat(false)
+    upde();
   }
 
   const updateexpledger = async (oldledger , act,newledger) => {
@@ -140,8 +141,8 @@ return (
               return (
                 <tr key={ind}>
                   <td>{val}</td>
-                  <td><i class="fa fa-pencil" onClick={() => edite(ind, val)} aria-hidden="true" ></i></td>
-                  <td><i class="fa fa-trash" onClick={() => deletee(ind)} aria-hidden="true" value={ind} ></i></td>
+                  <td><i className="fa fa-pencil" onClick={() => edite(ind, val)} aria-hidden="true" ></i></td>
+                  <td><i className="fa fa-trash" onClick={() => deletee(ind)} aria-hidden="true" value={ind} ></i></td>
                 </tr>
               )
             })}

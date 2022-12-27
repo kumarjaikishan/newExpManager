@@ -41,7 +41,7 @@ const Modalbox = ({notify,setisledupdate,leddetail, modal, fetching, init, handl
         <div className="modal" style={{ display: modal ? "block" : "none" }}>
             <div className="box">
                 <h1>Add Voucher</h1>
-                <div className="ledgeredit"><i onClick={jkh} class="fa fa-pencil" aria-hidden="true"></i></div>
+                <div className="ledgeredit"><i onClick={jkh} className="fa fa-pencil" aria-hidden="true"></i></div>
                 <div className='v'>
                     <span>Ledger :</span>
                     <span>

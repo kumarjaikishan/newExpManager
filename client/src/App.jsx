@@ -4,6 +4,7 @@ import Navbar from './components/navbar/navbar';
 import loadere from '../src/img/loader.png'
 import Sidebar from './components/sidebar/sidebar';
 import Home from './pages/home';
+import Homen from './pages/home1';
 import Addexp from './pages/addexp/addexp';
 import Datanalysis from './pages/dataanalysis';
 import { useState } from 'react';
@@ -25,6 +26,7 @@ function App() {
           <Route path="/" element={<Home login={login} setheade={setheade} setloader={setloader} />} />
           <Route path="/addexpense" element={<Addexp login={login}  setleddetail={setleddetail} leddetail={leddetail} setloader={setloader} />} />
           <Route path="/datanalysis" element={<Datanalysis login={login}  setloader={setloader} />} />
+          <Route path="/dash" element={<Homen login={login}  setloader={setloader} />} />
           <Route path="/login" element={<Login setleddetail={setleddetail} setlogin={setlogin} setloader={setloader} />} />
           <Route path="/logout" element={<Logout setleddetail={setleddetail} setlogin={setlogin} />} />
         </Routes>

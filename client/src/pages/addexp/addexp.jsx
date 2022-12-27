@@ -19,7 +19,8 @@ const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
     }
     fetching();
     setloader(true)
-  }, [])
+  },[])
+ 
   const notify = (msg,dur) => {
     toast.success(msg,{
       autoClose: dur,
@@ -181,7 +182,7 @@ const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
     <>
       <ToastContainer />
       <div className="exp">
-        <div className="add"> <i title='Add Expense' class="fa fa-plus" onClick={() => setmodal(true)} aria-hidden="true" id='addexp'></i> </div>
+        <div className="add"> <i title='Add Expense' className="fa fa-plus" onClick={() => setmodal(true)} aria-hidden="true" id='addexp'></i> </div>
         <div className="head">
           <span>Expense Voucher List</span>
           <span>
@@ -198,6 +199,7 @@ const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
         <div className="table">
           <table cellSpacing="15">
             <thead >
+              <tr>
               <th>S.no</th>
               <th>Ledger Name</th>
               <th>Amount</th>
@@ -207,12 +209,13 @@ const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
               <th>Edit</th>
               <th>Delete</th>
               <th><input type="checkbox" id="allcheck" /></th>
+              </tr>
             </thead>
             <tbody id="tablecontent">
 
               {currentpost.map((val, ind) => {
                 let daten = new Date(val.date);
-                let fde = daten.getUTCDate()+ "/"+ (daten.getUTCMonth()+1)+ "/"+ daten.getFullYear();
+                let fde = daten.getUTCDate()+ " "+ daten.toLocaleString('default', { month: 'short' })+ ", "+ daten.getFullYear().toString().substr(-2);
                 return (
                   <tr key={ind}>
                     <td>{firstpostindex + ind + 1}</td>
@@ -220,14 +223,15 @@ const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
                     <td>{val.amount}</td>
                     <td>{val.narration}</td>
                     <td>{fde}</td>
-                    <td title='view'><i class="fa fa-eye" aria-hidden="true"></i></td>
-                    <td title='edit'><i onClick={() => edit(val._id)} class="fa fa-pencil" aria-hidden="true"></i></td>
-                    <td title='delete' ><i onClick={() => delet(val._id)} class="fa fa-trash-o" aria-hidden="true"></i></td>
+                    <td title='view'><i className="fa fa-eye" aria-hidden="true"></i></td>
+                    <td title='edit'><i onClick={() => edit(val._id)} className="fa fa-pencil" aria-hidden="true"></i></td>
+                    <td title='delete' ><i onClick={() => delet(val._id)} className="fa fa-trash-o" aria-hidden="true"></i></td>
                     <td><input type="checkbox" name="" id="" /></td>
                   </tr>
                 )
               })}
             </tbody>
+            <tfoot>
             <tr id="foot">
               <th colSpan="1" ></th>
               <th colSpan="1" >Total</th>
@@ -240,9 +244,10 @@ const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
 
               </th>
               <th colSpan="5" ></th>
-              <th colSpan="1" id="alldelete" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></th>
+              <th colSpan="1" id="alldelete" title="Delete"><i className="fa fa-trash" aria-hidden="true"></i></th>
 
             </tr>
+            </tfoot>
           </table>
         </div>
         <div className="foot">
