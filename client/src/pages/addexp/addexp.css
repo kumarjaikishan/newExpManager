@@ -68,6 +68,9 @@
 .exp .head span:nth-child(3) input{
     width: 210px;
 }
+.exp .mater td{
+    text-transform: capitalize;
+}
 .exp .table{
  width: 100%;
  position: relative;
@@ -121,8 +124,19 @@
 .exp .fa-pencil{
     color: #22a6b3;
 }
-.exp .fa-trash-o{
+.exp table .fa-trash-o,
+.exp table .fa-trash{
     color: #eb4d4b;
+   
+}
+.exp table .fa-trash{
+    font-size: 1.5em;
+    transform: rotate(20deg);
+    transition: 0.1s;
+}
+.exp table .fa-trash:hover{
+    font-size: 1.6em;
+   color: #13adfa;
 }
 .exp .fa-pencil:hover,
 .exp .fa-eye:hover,

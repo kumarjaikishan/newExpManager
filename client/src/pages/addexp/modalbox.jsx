@@ -19,11 +19,6 @@ const Modalbox = ({notify,setisledupdate,leddetail, modal, fetching, init, handl
         })
         const data = await result.json();
         if (data) {
-            // swal({
-            //     title: "Wait!",
-            //     text: "Data updated Successfully",
-            //     icon: "success",
-            // });
             notify("Data updated Successfully",2500)
         }
         // console.log(data);
@@ -42,12 +37,12 @@ const Modalbox = ({notify,setisledupdate,leddetail, modal, fetching, init, handl
             <div className="box">
                 <h1>Add Voucher</h1>
                 <div className="ledgeredit"><i onClick={jkh} className="fa fa-pencil" aria-hidden="true"></i></div>
-                <div className='v'>
+                <div className='leger'>
                     <span>Ledger :</span>
                     <span>
-                        <select name="ledger" id="" onChange={handler} value={inp.ledger} >
+                        <select className='caps' name="ledger" id="" onChange={handler} value={inp.ledger} >
                             {leddetail.map((val,ind)=>{
-                                return <option key={ind} value={val}>{val}</option>
+                                return <option className='erffeg' key={ind} value={val}>{val}</option>
                             })}
                         </select>
                     </span>

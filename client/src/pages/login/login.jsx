@@ -12,6 +12,7 @@ const Login = ({setlogin,setleddetail,setloader}) => {
     const [log, setlog] = useState(true);
     const fun = (val) => {
         setlog(val);
+        setloader(false)
     }
  
    

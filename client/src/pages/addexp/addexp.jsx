@@ -19,15 +19,23 @@ const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
     }
     fetching();
     setloader(true)
-  },[])
- 
-  const notify = (msg,dur) => {
-    toast.success(msg,{
+  }, [])
+
+  const notification =()=>{
+
+  }
+  const notify = (msg, dur) => {
+    toast.success(msg, {
+      autoClose: dur,
+    });
+  }
+  const warn = (msg, dur) => {
+    toast.warning(msg, {
       autoClose: dur,
     });
   }
   const date = new Date;
-
+  const [serinp,setserinp]= useState("");
   const [isupdate, setisupdate] = useState(false);
   const today = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getUTCDate();
 
@@ -86,12 +94,7 @@ const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
     const { ledger, date, amount, narration } = inp;
     const userid = localStorage.getItem("id");
     if (!userid || !ledger || !date || !amount || !narration) {
-      // return alert("kindly fill all data");
-      return swal({
-        title: "Wait!",
-        text: "Kindly fill all Fields!",
-        icon: "warning",
-      });
+      return warn("Kindly Fill all Fields", 2500)
     } else {
       const result = await fetch('/addexpense', {
         method: "POST",
@@ -104,7 +107,7 @@ const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
       })
       const data = await result.json();
       fetching();
-      notify("Expense Added",3000);
+      notify("Expense Added", 3000);
       setmodal(false);
       setinp(init);
       // console.log(data.msg);
@@ -156,13 +159,60 @@ const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
           // console.log(data);
           fetching();
 
-          notify("Deleted Successfully",2000);
+          notify("Deleted Successfully", 2000);
         } else {
           swal("Your data is safe!");
         }
       });
   }
   // for deleteing data ends here
+
+  // for sending multiple delete request
+  const senddelete = async () => {
+    const item = document.querySelectorAll("#tablecontent input");
+    const arr = [];
+    for (let i = 0; i < item.length; i++) {
+      if (item[i].checked == true) {
+        arr.push(item[i].id)
+      }
+    }
+
+    if (arr.length < 1) {
+      warn("Kindly Select data", 2000);
+    } else {
+      const result = await fetch('/delmany', {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          id: arr
+        })
+      })
+      const data = await result.json();
+      notify("Deleted Successfully", 2000);
+      fetching();
+      console.log(data);
+    }
+  }
+  // for sending multiple delete request ends here
+
+  // for selecting all checkbox
+  const allselect = () => {
+    const it = document.querySelector("#allcheck");
+    const item = document.querySelectorAll("#tablecontent input");
+    if (it.checked == true) {
+      for (let i = 0; i < item.length; i++) {
+        item[i].checked = true
+      }
+    } else {
+      for (let i = 0; i < item.length; i++) {
+        item[i].checked = false;
+      }
+    }
+  }
+
+  // for selecting all checkbox ends here
 
   const requirede = (e) => {
     setpostperpage(e.target.value);
@@ -172,11 +222,16 @@ const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
   const changepageno = (hi) => {
     setcurrentpage(hi);
   }
-
+  const sear=(e)=>{
+    setserinp(e.target.value);
+  }
+ 
   let lastpostindex = currentpage * postperpage;
   const firstpostindex = lastpostindex - postperpage;
 
   const currentpost = expdata.slice(firstpostindex, lastpostindex);
+
+  
   let sum = 0;
   return (
     <>
@@ -194,28 +249,28 @@ const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
               <option value="100">100</option>
             </select>
           </span>
-          <span><input type="text" placeholder='Type to search...' /></span>
+          <span><input type="text" onChange={sear} value={serinp} placeholder='Type to search...' /></span>
         </div>
         <div className="table">
           <table cellSpacing="15">
             <thead >
               <tr>
-              <th>S.no</th>
-              <th>Ledger Name</th>
-              <th>Amount</th>
-              <th>Narration</th>
-              <th>Date</th>
-              <th>View</th>
-              <th>Edit</th>
-              <th>Delete</th>
-              <th><input type="checkbox" id="allcheck" /></th>
+                <th>S.no</th>
+                <th>Ledger Name</th>
+                <th>Amount</th>
+                <th>Narration</th>
+                <th>Date</th>
+                <th>View</th>
+                <th>Edit</th>
+                <th>Delete</th>
+                <th>All  : <input type="checkbox" onClick={allselect} id="allcheck" /></th>
               </tr>
             </thead>
             <tbody id="tablecontent">
 
               {currentpost.map((val, ind) => {
                 let daten = new Date(val.date);
-                let fde = daten.getUTCDate()+ " "+ daten.toLocaleString('default', { month: 'short' })+ ", "+ daten.getFullYear().toString().substr(-2);
+                let fde = daten.getUTCDate() + " " + daten.toLocaleString('default', { month: 'short' }) + ", " + daten.getFullYear().toString().substr(-2);
                 return (
                   <tr key={ind}>
                     <td>{firstpostindex + ind + 1}</td>
@@ -226,27 +281,27 @@ const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
                     <td title='view'><i className="fa fa-eye" aria-hidden="true"></i></td>
                     <td title='edit'><i onClick={() => edit(val._id)} className="fa fa-pencil" aria-hidden="true"></i></td>
                     <td title='delete' ><i onClick={() => delet(val._id)} className="fa fa-trash-o" aria-hidden="true"></i></td>
-                    <td><input type="checkbox" name="" id="" /></td>
+                    <td><input type="checkbox" name="" id={val._id} /></td>
                   </tr>
                 )
               })}
             </tbody>
             <tfoot>
-            <tr id="foot">
-              <th colSpan="1" ></th>
-              <th colSpan="1" >Total</th>
-              <th colSpan="1" id="totalhere">
-                {
-                  currentpost.reduce((accu, val, ind) => {
-                    return accu = accu + val.amount;
-                  }, 0)
-                }
+              <tr id="foot">
+                <th colSpan="1" ></th>
+                <th colSpan="1" >Total</th>
+                <th colSpan="1" id="totalhere">
+                  {
+                    currentpost.reduce((accu, val, ind) => {
+                      return accu = accu + val.amount;
+                    }, 0)
+                  }
 
-              </th>
-              <th colSpan="5" ></th>
-              <th colSpan="1" id="alldelete" title="Delete"><i className="fa fa-trash" aria-hidden="true"></i></th>
+                </th>
+                <th colSpan="5" ></th>
+                <th colSpan="1" id="alldelete" title="Delete"><i onClick={senddelete} className="fa fa-trash" aria-hidden="true"></i></th>
 
-            </tr>
+              </tr>
             </tfoot>
           </table>
         </div>
@@ -256,8 +311,8 @@ const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
             <Pagination currentpage={currentpage} changepageno={changepageno} totalpost={expdata.length} postperpage={postperpage} />
           </span>
         </div>
-        <Modalbox setisledupdate={setisledupdate} leddetail={leddetail} fetching={fetching} init={init} setinp={setinp} setisupdate={setisupdate} setmodal={setmodal} sub={sub} modal={modal} handler={handler} inp={inp} isupdate={isupdate} />
-        <Ledpage setmodal={setmodal} setisledupdate={setisledupdate} fetching={fetching} isledupdate={isledupdate} setleddetail={setleddetail} leddetail={leddetail} />
+        <Modalbox notify={notify} setisledupdate={setisledupdate} leddetail={leddetail} fetching={fetching} init={init} setinp={setinp} setisupdate={setisupdate} setmodal={setmodal} sub={sub} modal={modal} handler={handler} inp={inp} isupdate={isupdate} />
+        <Ledpage warn={warn} notify={notify} setmodal={setmodal} setisledupdate={setisledupdate} fetching={fetching} isledupdate={isledupdate} setleddetail={setleddetail} leddetail={leddetail} />
       </div>
 
     </>

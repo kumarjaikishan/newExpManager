@@ -15,7 +15,7 @@ const Signup = ({ setlog }) => {
         phone: "",
         password: "",
         cpassword: "",
-        ledger: ["General"]
+        ledger: ["general","other"]
     }
     const [signinp, setsigninp] = useState(init);
     const signhandle = (e) => {

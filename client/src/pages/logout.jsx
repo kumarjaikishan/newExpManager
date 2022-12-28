@@ -8,7 +8,7 @@ const Logout = ({setlogin,setleddetail}) => {
       localStorage.clear("name");
       localStorage.clear("email");
       setlogin(false);
-     
+      document.title="AccuSoft";
       setleddetail([]);
       navigate('/login');
       return;

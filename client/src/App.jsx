@@ -4,7 +4,6 @@ import Navbar from './components/navbar/navbar';
 import loadere from '../src/img/loader.png'
 import Sidebar from './components/sidebar/sidebar';
 import Home from './pages/home';
-import Homen from './pages/home1';
 import Addexp from './pages/addexp/addexp';
 import Datanalysis from './pages/dataanalysis';
 import { useState } from 'react';
@@ -15,7 +14,7 @@ function App() {
   const [leddetail,setleddetail]=useState([]);
 
   const [login,setlogin]= useState(false);
-  const [loader,setloader]=useState(true);
+  const [loader,setloader]=useState(false);
   const [narrow,setnarrow]=useState(false);
   const [heade,setheade]=useState("Dashboard")
   return (
@@ -26,11 +25,10 @@ function App() {
           <Route path="/" element={<Home login={login} setheade={setheade} setloader={setloader} />} />
           <Route path="/addexpense" element={<Addexp login={login}  setleddetail={setleddetail} leddetail={leddetail} setloader={setloader} />} />
           <Route path="/datanalysis" element={<Datanalysis login={login}  setloader={setloader} />} />
-          <Route path="/dash" element={<Homen login={login}  setloader={setloader} />} />
           <Route path="/login" element={<Login setleddetail={setleddetail} setlogin={setlogin} setloader={setloader} />} />
           <Route path="/logout" element={<Logout setleddetail={setleddetail} setlogin={setlogin} />} />
         </Routes>
-       {/* <div style={{display: loader ? "flex":"none"}} className="loader"><img src={loadere} alt="" /></div> */}
+       <div style={{display: loader ? "flex":"none"}} className="loader"><img src={loadere} alt="" /></div>
       </div>
       <Sidebar login={login}  narrow={narrow} setheade={setheade} />
     </div>

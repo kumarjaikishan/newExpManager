@@ -40,24 +40,24 @@ app.post('/addexpense', async (req, res) => {
 app.post('/explist', async (req, res) => {
     const userid = req.body.userid;
     try {
-        const result = await model.find({ userid }).sort({date:-1});
-    if (result) {
-        res.json({
-            msg: "data found",
-            data: result
-        })
-    } else {
-        res.json({
-            msg: "something went wrong in db"
-        })
-    }
+        const result = await model.find({ userid }).sort({ date: -1 });
+        if (result) {
+            res.json({
+                msg: "data found",
+                data: result
+            })
+        } else {
+            res.json({
+                msg: "something went wrong in db"
+            })
+        }
     } catch (error) {
         res.json({
             msg: "wrong",
             data: error
         })
     }
-    
+
 })
 //    for fetching all expense data from database ends here
 
@@ -99,6 +99,30 @@ app.delete('/addexpense', async (req, res) => {
     }
 })
 //    for deleting exp data from database ends here
+
+//    for deletingMany exp data from database
+app.delete('/delmany', async (req, res) => {
+    const id = req.body.id;
+    if (!id) {
+        res.json({
+            msg: "Send some id",
+        })
+    }
+    const result = await model.deleteMany({
+        _id: { $in: id }
+    });
+    if (result) {
+        res.json({
+            msg: "data deleted",
+            data: result
+        })
+    } else {
+        res.json({
+            msg: "something went wrong in db"
+        })
+    }
+})
+//    for deletingMany exp data from database ends here
 
 
 //    for updateing exp data into database
@@ -143,11 +167,11 @@ app.post('/homeload', async (req, res) => {
     const a = new Date();
     // const today = a.toDateString();
     // const today = 2022/12/27;
-    const today = (a.getMonth() + 1) + "/" + a.getDate() + "/" + a.getFullYear();
-    const yesterday = (a.getMonth() + 1) + "/" + (a.getDate() - 1) + "/" + a.getFullYear();
-    const lastweek = (a.getMonth() + 1) + "/" + (a.getDate() - 7) + "/" + a.getFullYear();
-    const lastmonth = (a.getMonth()) + "/" + a.getDate() + "/" + a.getFullYear();
-    const lastyear = (a.getMonth() + 1) + "/" + a.getDate() + "/" + (a.getFullYear() - 1);
+    const today = (a.getFullYear() + "-" + (a.getMonth() + 1) + "-" + a.getDate());
+    const yesterday = (a.getFullYear() + "-" + (a.getMonth() + 1) + "-" + (a.getDate() - 1));
+    const lastweek = (a.getFullYear() + "-" + (a.getMonth() + 1) + "-" + (a.getDate() - 7));
+    const lastmonth = (a.getFullYear() + "-" + a.getMonth() + "-" + a.getDate());
+    const lastyear = ((a.getFullYear() - 1) + "-" + (a.getMonth() + 1) + "-" + a.getDate());
 
     // today calcumation
     const todaytotal = await model.find({
@@ -194,7 +218,7 @@ app.post('/homeload', async (req, res) => {
     const monthtotalsum = monthtotal.reduce((accu, val, ind) => {
         return accu = accu + val.amount
     }, 0);
-     // lastmonth calculation
+    // lastmonth calculation
 
     // lastyear calculation
     const yeartotal = await model.find({
@@ -206,43 +230,33 @@ app.post('/homeload', async (req, res) => {
     const yeartotalsum = yeartotal.reduce((accu, val, ind) => {
         return accu = accu + val.amount
     }, 0);
-     // lastyear calculation
+    // lastyear calculation
 
     // total calculation
-    const totale = await model.find({  userid  });
+    const totale = await model.find({ userid });
     const totalsum = totale.reduce((accu, val, ind) => {
         return accu = accu + val.amount
     }, 0);
-     // total calculation
+    // total calculation
 
     // console.log(totaled)
-   
-   
-        res.json({
-            msg: "data found",
-            data: [{
-                Today:todaytotalsum,
-                Yesterday:yesterdaytotalsum,
-                LastWeek:lastweektotalsum,
-                LastMonth:monthtotalsum,
-                lastyear:yeartotalsum,
-                total:totalsum
-            }]
-        })
-   
+
+
+    res.json({
+        msg: "data found",
+        data: [{
+            Today: todaytotalsum,
+            Yesterday: yesterdaytotalsum,
+            LastWeek: lastweektotalsum,
+            LastMonth: monthtotalsum,
+            lastyear: yeartotalsum,
+            total: totalsum
+        }]
+    })
+
 })
 //    for fetching exp data from database ends here
 
-// testing here
-app.post('/test', async (req, res) => {
-    const userid = req.body.userid;
-    const totale = await model.find({  userid  });
-    res.json({
-        msg:"hi",
-        data:totale
-    })
-})
-// testing hrre end here
 
 //    for update expense legere data into database
 app.post('/updateexpledger', async (req, res) => {
@@ -311,18 +325,23 @@ app.post('/login', async (req, res) => {
 //    for login user data from database
 app.post('/leg', async (req, res) => {
     const { _id, leddetail } = req.body;
-    // console.log(_id + " " + leddetail)
-    const result = await user.findByIdAndUpdate({ _id }, { ledger: leddetail });
-    if (result) {
+    //    console.log(leddetail.length)
+    if(leddetail.length < 1){
         res.json({
-            msg: "ledger sync",
-            data: result
-        })
-    } else {
-        res.json({
-            msg: "something went wrong in db"
+            msg: "ledger can't be empty",
         })
     }
+        const result = await user.findByIdAndUpdate({ _id }, { ledger: leddetail });
+        if (result) {
+            res.json({
+                msg: "ledger sync",
+                data: result
+            })
+        } else {
+            res.json({
+                msg: "something went wrong in db"
+            })
+        }
 })
 //    for login user data from database end here
 

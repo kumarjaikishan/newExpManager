@@ -13,7 +13,7 @@ const Signin = ({ setlogin, setleddetail, }) => {
         email: "",
         password: ""
     }
- 
+
     const [signinp, setsigninp] = useState(init);
     const signhandle = (e) => {
         const name = e.target.name;
@@ -22,6 +22,7 @@ const Signin = ({ setlogin, setleddetail, }) => {
             ...signinp, [name]: value
         })
     }
+
     const submit = async () => {
         const { email, password } = signinp;
 
@@ -44,19 +45,19 @@ const Signin = ({ setlogin, setleddetail, }) => {
         console.log(datae);
         // console.log(datae.data[0].ledger);
         const username = datae.data[0].name;
+        document.title = "AccuSoft - "+ datae.data[0].name;
         const mail = datae.data[0].email;
         const id = datae.data[0]._id;
-        if(datae.msg){
+        if (datae.msg) {
             swal("Login Successful", {
                 icon: "success",
-              });
+            });
         }
         setlogin(true);
         setleddetail(datae.data[0].ledger)
         localStorage.setItem("name", username);
         localStorage.setItem("email", mail);
         localStorage.setItem("id", id);
-       
         navigate('/');
     }
 

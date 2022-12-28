@@ -1,21 +1,24 @@
 import React, { useState } from 'react'
 import './ledpage.css';
-import swal from 'sweetalert'
 import { useEffect } from 'react';
 
-const Ledpage = ({ fetching,setmodal, leddetail, setleddetail, isledupdate, setisledupdate }) => {
+const Ledpage = ({warn,notify, fetching, setmodal, leddetail, setleddetail, isledupdate, setisledupdate }) => {
   const [isupda, setinsupdat] = useState(false)
   const [ledinp, setledinp] = useState({
     ind: "",
     val: ""
   })
   useEffect(() => {
-   
-  }, [])
+    upde();
+  }, [leddetail])
 
   const upde = async () => {
     const _id = localStorage.getItem("id");
-    if (_id && leddetail) {
+    // console.log(leddetail)
+    if (leddetail.length < 1) {
+      return warn("Ledger Can't be blank",2000)
+      
+    } else {
       const res = await fetch('/leg', {
         method: "POST",
         headers: {
@@ -27,13 +30,14 @@ const Ledpage = ({ fetching,setmodal, leddetail, setleddetail, isledupdate, seti
       })
       const result = await res.json();
       console.log(result)
-    } 
+    }
+
   }
 
 
   const handle = (e) => {
     setledinp({
-      ...ledinp, val: e.target.value
+      ...ledinp, val: e.target.value.toLowerCase()
     })
   }
   const add = () => {
@@ -44,7 +48,6 @@ const Ledpage = ({ fetching,setmodal, leddetail, setleddetail, isledupdate, seti
       ind: "",
       val: ""
     })
-    upde();
   }
   const edite = (ind, val) => {
     setledinp({
@@ -58,24 +61,30 @@ const Ledpage = ({ fetching,setmodal, leddetail, setleddetail, isledupdate, seti
   const deletee = (val) => {
     setleddetail((oldvale) => {
       return oldvale.filter((arr, inde) => {
-        if(val !== inde){
+        // if (val !== inde) {
+        //   return arr;
+        // } else {
+        //   updateexpledger(arr, "delete", "just");
+        // }
+        if (leddetail.length == 1) {
+          warn("Ledger Can't be blank",2000);
           return arr;
-        }else{
-          updateexpledger(arr,"delete","just");
+        } else {
+          if (val !== inde) {
+            return arr;
+          } else {
+            notify("Ledger has been deleted",2700)
+          }
         }
       })
     })
-    swal("Ledger has been deleted", {
-      icon: "success",
-    });
-    upde();
   }
 
 
   const updat = () => {
     setleddetail(leddetail.map((vale, inde) => {
       if (inde == ledinp.ind) {
-        updateexpledger(vale,"update",ledinp.val);
+        updateexpledger(vale, "update", ledinp.val);
         return ledinp.val;
       }
       return vale;
@@ -85,14 +94,11 @@ const Ledpage = ({ fetching,setmodal, leddetail, setleddetail, isledupdate, seti
       ind: "",
       val: ""
     })
-    swal("Ledger has been Updated", {
-      icon: "success",
-    });
+    notify("Ledger has been Updated",2500)
     setinsupdat(false)
-    upde();
   }
 
-  const updateexpledger = async (oldledger , act,newledger) => {
+  const updateexpledger = async (oldledger, act, newledger) => {
     const userid = localStorage.getItem("id");
     const res = await fetch('/updateexpledger', {
       method: "POST",
@@ -112,47 +118,47 @@ const Ledpage = ({ fetching,setmodal, leddetail, setleddetail, isledupdate, seti
   }
 
 
-const back = () => {
-  setmodal(true)
-  setisledupdate(false)
-}
+  const back = () => {
+    setmodal(true)
+    setisledupdate(false)
+  }
 
-return (
-  <div className="ledpage" style={{ display: isledupdate ? "block" : "none" }}>
-    <div className="box">
-      <h2>Hi jai kishan</h2>  <span onClick={back}>Back</span>
-      <div className="cont">
-        
-        <input type="text" value={ledinp.val} onChange={handle} />
-{isupda ? <button onClick={updat}>Update</button> : <button onClick={add}>Add</button>}
-       
-      </div>
-      <div className="mater">
-        <table>
-          <thead>
-            <tr>
-              <th>Ledger</th>
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {leddetail.map((val, ind) => {
-              return (
-                <tr key={ind}>
-                  <td>{val}</td>
-                  <td><i className="fa fa-pencil" onClick={() => edite(ind, val)} aria-hidden="true" ></i></td>
-                  <td><i className="fa fa-trash" onClick={() => deletee(ind)} aria-hidden="true" value={ind} ></i></td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
+  return (
+    <div className="ledpage" style={{ display: isledupdate ? "block" : "none" }}>
+      <div className="box">
+        <h2>Hi jai kishan</h2>  <span onClick={back}>Back</span>
+        <div className="cont">
 
+          <input type="text" className='caps' value={ledinp.val} onChange={handle} />
+          {isupda ? <button onClick={updat}>Update</button> : <button onClick={add}>Add</button>}
+
+        </div>
+        <div className="mater">
+          <table>
+            <thead>
+              <tr>
+                <th>Ledger</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {leddetail.map((val, ind) => {
+                return (
+                  <tr key={ind}>
+                    <td>{val}</td>
+                    <td><i className="fa fa-pencil" onClick={() => edite(ind, val)} aria-hidden="true" ></i></td>
+                    <td><i className="fa fa-trash" onClick={() => deletee(ind)} aria-hidden="true" value={ind} ></i></td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
     </div>
-  </div>
-)
+  )
 }
 
 export default Ledpage;
