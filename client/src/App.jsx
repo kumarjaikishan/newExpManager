@@ -9,6 +9,7 @@ import Datanalysis from './pages/dataanalysis';
 import { useState } from 'react';
 import Login from './pages/login/login';
 import Logout from './pages/logout';
+import Report from './pages/Report';
 
 function App() {
   const [leddetail,setleddetail]=useState([]);
@@ -22,9 +23,11 @@ function App() {
       <Navbar login={login} narrow={narrow} heade={heade} setnarrow={setnarrow} />
       <div className={narrow ? "main narrow":"main"}>
         <Routes>
+          
           <Route path="/" element={<Home login={login} setheade={setheade} setloader={setloader} />} />
           <Route path="/addexpense" element={<Addexp login={login}  setleddetail={setleddetail} leddetail={leddetail} setloader={setloader} />} />
           <Route path="/datanalysis" element={<Datanalysis login={login}  setloader={setloader} />} />
+          <Route path="/report" element={<Report leddetail={leddetail} login={login}  setloader={setloader} />} />
           <Route path="/login" element={<Login setleddetail={setleddetail} setlogin={setlogin} setloader={setloader} />} />
           <Route path="/logout" element={<Logout setleddetail={setleddetail} setlogin={setlogin} />} />
         </Routes>

@@ -23,6 +23,10 @@ const Sidebar = ({ narrow,setheade,login }) => {
         name:"Data Alaysis",
         link:'/datanalysis',
         logo:"fa fa-anchor"
+    },{
+        name:"Report",
+        link:'/report',
+        logo:"fa fa-cloud-download"
     }
 ] 
 const fr=()=>{

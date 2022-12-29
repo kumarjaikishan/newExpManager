@@ -73,7 +73,7 @@ const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
       setexpdata(datae.data)
       setloader(false);
       // setleddetail(datae.data[0].ledger)
-      console.log(datae.data);
+      // console.log(datae.data);
     }
 
   }

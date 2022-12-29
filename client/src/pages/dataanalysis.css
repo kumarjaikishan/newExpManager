@@ -1,39 +1,30 @@
 .datanalysis{
     max-width: 100%;
-    /* height: 100%; */
-    /* border: 1px solid red; */
     overflow-x: hidden;
     overflow-y: auto;
-    /* display: grid;
-    grid-template-columns: repeat(auto-fill, 312px); */
-    /* grid-gap: 2rem; */
-    display: flex;
-    justify-content: flex-start;
-    gap: 30px;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    padding: 2rem 1rem;
+    padding: 2rem 1rem; 
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2.5rem;
 }
 .datanalysis .card{
-    width: 260px;
+    /* border: 1px solid black; */
     height: 120px;
-    /* border: 1px solid red; */
-    display: flex;
-    color: rgb(75, 67, 67);
-    overflow: hidden;
-    margin-top: 30px;
-    border-radius: 10px;
-    background: #dbe1e6;
-    box-shadow: 0 0 5px #fff,
-      5px 5px 10px #a7aaaf,
-     
-      -5px -5px 10px #fff;
+  display: flex;
+  justify-content: space-between;
+  background: #dbe1e6;
+  box-shadow: 0 0 5px #fff,
+    5px 5px 10px #a7aaaf,
+    -5px -5px 10px #fff;
+  padding:0.9em 0.5em;
+  border-radius: 5px;
 }
 .datanalysis .card .data{
     position: relative;
-    width: 60%;
+    width: 160px;
+    padding: 4px;
     /* border: 1px solid red; */
-    height: 100%;
+    /* height: 100%; */
 }
 .datanalysis .card .data .amt{
     position: relative;
@@ -54,12 +45,12 @@
     padding-left: 10px;
 }
 .datanalysis .card .icon{
-width: 45%;
-height: 100%;
+width: 110px;
+/* height: 100%; */
 text-align: center;
-line-height: 110px;
 /* border: 1px solid rgb(12, 61, 238); */
 position: relative;
+padding: 2rem;
 /* border-radius: 50%; */
 /* background: conic-gradient(rgb(252, 92, 101) 10.8deg, rgb(127, 143, 166) 10.8deg); */
 }
@@ -89,3 +80,19 @@ position: relative;
     align-items: center;
    justify-content: center;
 }
+@media only screen and (max-width:1200px) {
+    .datanalysis {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media only screen and (max-width:960px) {
+    .datanalysis {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media only screen and (max-width:600px) {
+    .datanalysis {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
