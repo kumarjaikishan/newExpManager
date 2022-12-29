@@ -1,32 +1,83 @@
-.datanalysis{
+.datanalysis {
+    max-width: 100%;
+    height: 100%;
+    /* border: 3px solid red; */
+    padding: 5px 10px;
+}
+
+.datanalysis .cont {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    border: 2px solid rgb(9, 180, 242);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.datanalysis .cont span{
+display: flex;
+}
+.datanalysis .cont i{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    /* border: 2px solid rgb(9, 180, 242); */
+    background: rgb(9, 180, 242);
+    color: white;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+.datanalysis .cont input,
+.datanalysis .cont select {
+    border: none;
+    width: 160px;
+    background: none;
+    text-align: center;
+    height: 30px;
+    margin-left: 10px;
+    padding: 0 10px;
+    border-radius: 10px;
+    border: 2px solid rgb(6, 199, 252);
+}
+.datanalysis .cont select{
+    text-transform: capitalize;
+}
+
+.datanalysis .cards {
     max-width: 100%;
     overflow-x: hidden;
     overflow-y: auto;
-    padding: 2rem 1rem; 
+    padding: 1rem;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 2.5rem;
 }
-.datanalysis .card{
+
+.datanalysis .card {
     /* border: 1px solid black; */
     height: 120px;
-  display: flex;
-  justify-content: space-between;
-  background: #dbe1e6;
-  box-shadow: 0 0 5px #fff,
-    5px 5px 10px #a7aaaf,
-    -5px -5px 10px #fff;
-  padding:0.9em 0.5em;
-  border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    background: #dbe1e6;
+    box-shadow: 0 0 5px #fff,
+        5px 5px 10px #a7aaaf,
+        -5px -5px 10px #fff;
+    padding: 0.9em 0.5em;
+    border-radius: 5px;
 }
-.datanalysis .card .data{
+
+.datanalysis .card .data {
     position: relative;
     width: 160px;
     padding: 4px;
     /* border: 1px solid red; */
     /* height: 100%; */
 }
-.datanalysis .card .data .amt{
+
+.datanalysis .card .data .amt {
     position: relative;
     width: 100%;
     /* border: 1px solid red; */
@@ -34,9 +85,10 @@
     font-size: 1.3em;
     font-weight: 700;
     padding-left: 10px;
-    line-height:60px;
+    line-height: 60px;
 }
-.datanalysis .card .data .day{
+
+.datanalysis .card .data .day {
     position: relative;
     width: 100%;
     text-transform: capitalize;
@@ -44,28 +96,31 @@
     height: 50%;
     padding-left: 10px;
 }
-.datanalysis .card .icon{
-width: 110px;
-/* height: 100%; */
-text-align: center;
-/* border: 1px solid rgb(12, 61, 238); */
-position: relative;
-padding: 2rem;
-/* border-radius: 50%; */
-/* background: conic-gradient(rgb(252, 92, 101) 10.8deg, rgb(127, 143, 166) 10.8deg); */
+
+.datanalysis .card .icon {
+    width: 110px;
+    /* height: 100%; */
+    text-align: center;
+    /* border: 1px solid rgb(12, 61, 238); */
+    position: relative;
+    padding: 2rem;
+    /* border-radius: 50%; */
+    /* background: conic-gradient(rgb(252, 92, 101) 10.8deg, rgb(127, 143, 166) 10.8deg); */
 }
-.datanalysis .card .icon .cir{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  transform: translate(-50%,-50%);
-  background: conic-gradient(rgb(252, 92, 101) 2.8deg, rgb(127, 143, 166) 10.8deg);
-  /* border: 1px solid red; */
+
+.datanalysis .card .icon .cir {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(rgb(252, 92, 101) 2.8deg, rgb(127, 143, 166) 10.8deg);
+    /* border: 1px solid red; */
 }
-.datanalysis .card .icon .per{
+
+.datanalysis .card .icon .per {
     position: absolute;
     top: 4px;
     left: 4px;
@@ -74,25 +129,27 @@ padding: 2rem;
     background: #dbe1e6;
     border-radius: 50%;
     bottom: 4px;
-    font-size: 1.7em ;
+    font-size: 1.7em;
     font-weight: 600;
     display: flex;
     align-items: center;
-   justify-content: center;
+    justify-content: center;
 }
+
 @media only screen and (max-width:1200px) {
     .datanalysis {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
 @media only screen and (max-width:960px) {
     .datanalysis {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
 @media only screen and (max-width:600px) {
     .datanalysis {
         grid-template-columns: repeat(1, 1fr);
     }
 }
-

@@ -4,19 +4,14 @@
     /* display: grid;
     grid-template-columns: repeat(auto-fill, 312px); */
     /* grid-gap: 2rem; */
-    display: flex;
-    justify-content: flex-start;
-    gap: 30px;
-    align-items: flex-start;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2.5rem;
     padding: 2em;
-   
 }
 .home .card{
-    width: 260px;
+    /* width: 260px; */
     height: 120px;
-    /* border: 1px solid red; */
-    margin-top: 30px;
     display: flex;
     overflow: hidden;
     border-radius: 10px;
@@ -64,4 +59,20 @@ position: relative;
 .home .card .icon i{
     font-size: 4.2em;
     color: rgb(83, 80, 80);
+}
+@media only screen and (max-width:1200px) {
+    .home {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media only screen and (max-width:960px) {
+    .home {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .home {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }

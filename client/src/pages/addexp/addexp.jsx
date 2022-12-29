@@ -242,7 +242,6 @@ const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
           <span>Expense Voucher List</span>
           <span>
             Record :  <select name="" id="" value={postperpage} onChange={requirede}>
-              <option value="5">5</option>
               <option value="10">10</option>
               <option value="20">20</option>
               <option value="50">50</option>
