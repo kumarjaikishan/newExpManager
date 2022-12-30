@@ -73,6 +73,7 @@ const Ledpage = ({warn,notify, fetching, setmodal, leddetail, setleddetail, isle
           if (val !== inde) {
             return arr;
           } else {
+            updateexpledger(arr, "delete", "just");
             notify("Ledger has been deleted",2700)
           }
         }

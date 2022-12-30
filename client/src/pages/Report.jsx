@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import './report.css';
 import { useNavigate } from "react-router-dom";
 
-const Report = ({ leddetail, login, setloader }) => {
+const Report = ({ leddetail, login, setloader,expenselist }) => {
     let navigate = useNavigate();
     useEffect(() => {
         if (!login) {
@@ -11,6 +11,7 @@ const Report = ({ leddetail, login, setloader }) => {
             return;
         }
         setloader(true)
+        setexplist(expenselist);
         fetching();
     }, [])
     const [explist, setexplist] = useState([]);
@@ -36,24 +37,8 @@ const Report = ({ leddetail, login, setloader }) => {
     }
     // for LOading data
     const fetching = async () => {
-        const userid = localStorage.getItem("id");
-        if (!userid) {
-            console.log("user id not found");
-        } else {
-            const result = await fetch('/explist', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    userid
-                })
-            })
-            const datae = await result.json();
-            setexplist(datae.data)
-            setpious(datae.data)
+            setpious(expenselist)
             setloader(false);
-        }
     }
     // for LOading data ends here
 

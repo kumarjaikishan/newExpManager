@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
+const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expenselist }) => {
   let navigate = useNavigate();
   useEffect(() => {
     if (!login) {
@@ -72,6 +72,7 @@ const Addexp = ({ login, setloader, leddetail, setleddetail }) => {
       const datae = await result.json();
       setexpdata(datae.data)
       setloader(false);
+      setexpenselist(datae.data);
       // setleddetail(datae.data[0].ledger)
       // console.log(datae.data);
     }
