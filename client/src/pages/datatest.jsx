@@ -11,22 +11,39 @@ const Datanalysis = ({ setloader, login, expenselist, leddetail }) => {
             navigate('/login');
             return;
         }
-        setloader(true);
+        // setloader(true);
         fcuk();
     }, [])
+    const [searchcard, setsearchcard] = useState(expenselist);
+    
     const [cardarr, setcardarr] = useState([]);
     const temparr = [];
+
+    const here = ()=>{
+        let month = (parseInt(inp.month)+1);
+        if(month < 10){
+            month = "0"+ month;
+        }
+         const startdate = inp.year+"-"+month+"-01";
+         const enddate =  inp.year+"-"+month+"-31";
+        //  alert(startdate + "  : "+ enddate);
+        setsearchcard( expenselist.map((val,ind)=>{
+            if(val.date >=startdate && val.date <=enddate){
+               console.log(val)
+            }
+        }))
+    }
 
     const fcuk = async () => {
 
         let Totalsum = 0;
-        expenselist.map((rfr, re) => {
+        searchcard.map((rfr, re) => {
             return Totalsum = Totalsum + rfr.amount
         })
 
         leddetail.map((val, ind) => {
             let ledsum = 0;
-            expenselist.map((vale, inde) => {
+            searchcard.map((vale, inde) => {
                 if (val == vale.ledger) {
                     return ledsum = ledsum + vale.amount
                 }
@@ -67,6 +84,7 @@ const Datanalysis = ({ setloader, login, expenselist, leddetail }) => {
             }
         })
     }
+   
 
     return (
         <>
@@ -87,7 +105,7 @@ const Datanalysis = ({ setloader, login, expenselist, leddetail }) => {
                         <select onChange={handle} name="year" value={inp.year} id="">
                             <option value="2022">2022</option>
                         </select>
-                        <i className="fa fa-search" aria-hidden="true"></i>
+                        <i onClick={here} className="fa fa-search" aria-hidden="true"></i>
                     </span>
                 </div>
                 <div className="cards">
