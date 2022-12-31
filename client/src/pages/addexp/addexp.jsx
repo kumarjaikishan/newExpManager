@@ -17,8 +17,7 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
       navigate('/login');
       return;
     }
-    fetching();
-    setloader(true)
+    // setloader(true)
   }, [])
 
   const notification =()=>{
@@ -48,7 +47,7 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
   }
   const [isledupdate, setisledupdate] = useState(false);
   const [inp, setinp] = useState(init);
-  const [expdata, setexpdata] = useState([]);
+  const [expdata, setexpdata] = useState(expenselist);
   const [currentpage, setcurrentpage] = useState(1);
   const [postperpage, setpostperpage] = useState(10);
 
@@ -270,7 +269,12 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
 
               {currentpost.map((val, ind) => {
                 let daten = new Date(val.date);
-                let fde = daten.getUTCDate() + " " + daten.toLocaleString('default', { month: 'short' }) + ", " + daten.getFullYear().toString().substr(-2);
+                let vf= daten.getUTCDate();
+                if(vf<10){
+                  vf = "0"+daten.getUTCDate();
+                }
+                // console.log(vf);
+                let fde = vf + " " + daten.toLocaleString('default', { month: 'short' }) + ", " + daten.getFullYear().toString().substr(-2);
                 return (
                   <tr key={ind}>
                     <td>{firstpostindex + ind + 1}</td>

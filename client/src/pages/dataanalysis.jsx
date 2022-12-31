@@ -95,10 +95,6 @@ const Datanalysis = ({ setloader, login, expenselist, leddetail }) => {
         <>
             <div className="datanalysis" >
                 <div className="cont">
-                    {/* <span>
-                        <input onChange={handle} type="date" name="date" value={inp.date} id="" />
-                        <i className="fa fa-search" aria-hidden="true"></i>
-                    </span> */}
                     <span>
                         Month :  <select onChange={handle} name="month" value={inp.month} id="">
                             {monname.map((val, ind) => {
