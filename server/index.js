@@ -6,11 +6,7 @@ const port = process.env.PORT || 5000;
 
 app.use(express.json());
 require('./conn/conn')
-app.get('/', (req, res) => {
-    res.json({
-        msg: "this is server side"
-    })
-})
+
 
 //    for adding expense data into database
 app.post('/addexpense', async (req, res) => {
@@ -35,6 +31,7 @@ app.post('/addexpense', async (req, res) => {
 
 })
 //    for adding expense data into database ends here
+
 
 //    for fetching all expense data from database
 app.post('/explist', async (req, res) => {
@@ -375,6 +372,22 @@ app.post('/signup', async (req, res) => {
 
 })
 //    for signup user data into database ends here
+
+if(process.env.NODE_ENV=='production'){
+    const path = require('path')
+
+    app.get('/',(req,res)=>{
+        app.use(express.static(path.resolve(__dirname,'client','build')))
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+    })
+}else{
+    const path = require('path')
+
+    app.get('/',(req,res)=>{
+        app.use(express.static(path.resolve(__dirname,'client','build')))
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+    })
+}
 
 
 app.listen(port, () => {
