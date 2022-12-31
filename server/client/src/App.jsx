@@ -5,7 +5,7 @@ import loadere from '../src/img/loader.png'
 import Sidebar from './components/sidebar/sidebar';
 import Home from './pages/home';
 import Addexp from './pages/addexp/addexp';
-import Datanalysis from './pages/datatest';
+import Datanalysis from './pages/dataanalysis';
 import { useState } from 'react';
 import Login from './pages/login/login';
 import Logout from './pages/logout';

@@ -50,7 +50,7 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
   const [inp, setinp] = useState(init);
   const [expdata, setexpdata] = useState([]);
   const [currentpage, setcurrentpage] = useState(1);
-  const [postperpage, setpostperpage] = useState(5);
+  const [postperpage, setpostperpage] = useState(10);
 
 
 
