@@ -9,7 +9,7 @@
 /coverage
 
 # production
-/build
+mongouri.js
 
 # misc
 .DS_Store

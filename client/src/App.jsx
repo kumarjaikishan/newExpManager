@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/navbar/navbar';
 import loadere from '../src/img/loader.png'
 import Sidebar from './components/sidebar/sidebar';
-import Home from './pages/home1';
+import Home from './pages/home';
 import Addexp from './pages/addexp/addexp';
 import Datanalysis from './pages/dataanalysis';
 import { useState } from 'react';
