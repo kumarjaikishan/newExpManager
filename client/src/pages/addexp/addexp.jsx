@@ -36,7 +36,16 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
   const date = new Date;
   const [serinp,setserinp]= useState("");
   const [isupdate, setisupdate] = useState(false);
-  const today = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getUTCDate();
+  let dfbdf= (date.getMonth() + 1);
+    let dfbfvfddf= date.getUTCDate();
+    if(dfbdf < 10){
+        dfbdf = "0"+dfbdf;
+    }
+    if(dfbfvfddf < 10){
+        dfbfvfddf = "0"+dfbfvfddf;
+    }
+    
+    const today = date.getFullYear() + "-" + dfbdf + "-" + dfbfvfddf;
 
   const init = {
     userid: "",

@@ -9,10 +9,11 @@ const Datanalysis = ({ setloader, login, expenselist, leddetail }) => {
 
     const date = new Date;
     const today = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getUTCDate();
+//    console.log(date.getFullYear());
     const [inp, setinp] = useState({
         date: today,
         month: date.getMonth(),
-        year: "2022"
+        year: date.getFullYear()
     })
     const [cardarr, setcardarr] = useState([]);
     const temparr = [];
@@ -26,12 +27,10 @@ const Datanalysis = ({ setloader, login, expenselist, leddetail }) => {
     }, [inp])
 
     const fcuk = async () => {
-        let month = (parseInt(inp.month) + 1);
-        if (month < 10) {
-            month = "0" + month;
-        }
-        const startdate = inp.year + "-" + month + "-01";
-        const enddate = inp.year + "-" + month + "-31";
+        let monthIn2Digit = String(parseInt(inp.month) + 1).padStart(2, '0');
+
+        const startdate = inp.year + "-" + monthIn2Digit + "-01";
+        const enddate = inp.year + "-" + monthIn2Digit + "-31";
         //  alert(startdate + "  : "+ enddate);
         const temp = expenselist.filter((val, ind) => {
             if (val.date >= startdate && val.date <= enddate) {

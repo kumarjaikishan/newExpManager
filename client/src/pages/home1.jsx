@@ -13,23 +13,46 @@ const Home = ({ setloader, login, setheade,expenselist }) => {
     }
     load();
     setheade("Dashboard");
-    setloader(true);
+    // setloader(true);
   }, [])
 
-  const load = async () => {
-    const userid = localStorage.getItem("id");
-    const result = await fetch('/homeload', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        userid
-      })
+
+  const a = new Date();
+  // const today = a.toDateString();
+  // const today = 2022/12/27;
+  const today = (a.getFullYear() + "-" + (a.getMonth() + 1) + "-" + a.getDate());
+  const yesterday = (a.getFullYear() + "-" + (a.getMonth() + 1) + "-" + (a.getDate() - 1));
+  const lastweek = (a.getFullYear() + "-" + (a.getMonth() + 1) + "-" + (a.getDate() - 7));
+  const lastmonth = (a.getFullYear() + "-" + a.getMonth() + "-" + a.getDate());
+  const lastyear = ((a.getFullYear() - 1) + "-" + (a.getMonth() + 1) + "-" + a.getDate());
+
+  const load =  () => {
+    var dateIn2Digit = String(a.getDate()).padStart(2, '0');
+    console.log(dateIn2Digit);
+    // const userid = localStorage.getItem("id");
+    // const result = await fetch('/homeload', {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify({
+    //     userid
+    //   })
+    // })
+    // const res = await result.json();
+    // console.log(res.data[0])
+    // setarr(res.data[0]);
+    let dvdf;
+    let sumarr = [];
+    dvdf= expenselist.map((val,ind)=>{
+        let dvds =0;
+        if(val.date==today){
+            dvds = dvds + val.amount 
+        }
+    //   console.log("reduce dta :" + val.date)
+    //   console.log(dvds)
     })
-    const res = await result.json();
-    console.log(res.data[0])
-    setarr(res.data[0]);
+    // console.log(dvdf);
     setloader(false);
   }
   const card = [{

@@ -18,10 +18,12 @@ const Report = ({ leddetail, login, setloader,expenselist }) => {
     const [issearch, setissearch] = useState(false);
     const [pious, setpious] = useState(explist);
     const date = new Date;
-    const yester = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getUTCDate() - 1);
-    const today = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getUTCDate();
+    var monthIn2Digit = String(date.getMonth() + 1).padStart(2, '0');
+    var dateIn2Digit = String(date.getDate()).padStart(2, '0');
+
+    const today = date.getFullYear() + "-" + monthIn2Digit + "-" + dateIn2Digit;
     const [inp, setinp] = useState({
-        from: yester,
+        from: today,
         to: today,
         ledger: "all"
     });
@@ -90,7 +92,7 @@ const Report = ({ leddetail, login, setloader,expenselist }) => {
                             </select>
                         </span>
                         <span>
-                            <i onClick={search} title='Search' class="fa fa-search" aria-hidden="true"></i>
+                            <i onClick={search} title='Search' className="fa fa-search" aria-hidden="true"></i>
                         </span>
                         {issearch ? <button onClick={hello}>Clear</button> : null}
                     </span>
@@ -114,7 +116,9 @@ const Report = ({ leddetail, login, setloader,expenselist }) => {
                         <tbody>
                             {pious.map((val, ind) => {
                                 let daten = new Date(val.date);
-                                let fde = daten.getUTCDate() + " " + daten.toLocaleString('default', { month: 'short' }) + ", " + daten.getFullYear().toString().substr(-2);
+                               
+                                var dateIn2Digit2 = String(daten.getDate()).padStart(2, '0');
+                                let fde =  dateIn2Digit2 + " " + daten.toLocaleString('default', { month: 'short' }) + ", " + daten.getFullYear().toString().substr(-2);
                                 return (
                                     <tr key={ind}>
                                         <td>{ind + 1}</td>

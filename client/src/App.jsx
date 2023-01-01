@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/navbar/navbar';
 import loadere from '../src/img/loader.png'
 import Sidebar from './components/sidebar/sidebar';
-import Home from './pages/home';
+import Home from './pages/home1';
 import Addexp from './pages/addexp/addexp';
 import Datanalysis from './pages/dataanalysis';
 import { useState } from 'react';
@@ -46,7 +46,7 @@ function App() {
       <div className={narrow ? "main narrow" : "main"}>
         <Routes>
 
-          <Route path="/" element={<Home login={login} setheade={setheade} setloader={setloader} />} />
+          <Route path="/" element={<Home login={login} expenselist={expenselist} setheade={setheade} setloader={setloader} />} />
           <Route path="/addexpense" element={<Addexp setexpenselist={setexpenselist} expenselist={expenselist} login={login} setleddetail={setleddetail} leddetail={leddetail} setloader={setloader} />} />
           <Route path="/datanalysis" element={<Datanalysis leddetail={leddetail} expenselist={expenselist} login={login} setloader={setloader} />} />
           <Route path="/report" element={<Report expenselist={expenselist} leddetail={leddetail} login={login} setloader={setloader} />} />
