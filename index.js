@@ -158,101 +158,6 @@ app.post('/data', async (req, res) => {
 })
 //    for fetching exp data from database ends here
 
-//    for fetching exp data from database
-app.post('/homeload', async (req, res) => {
-    const { userid } = req.body;
-    const a = new Date();
-    // const today = a.toDateString();
-    // const today = 2022/12/27;
-    const today = (a.getFullYear() + "-" + (a.getMonth() + 1) + "-" + a.getDate());
-    const yesterday = (a.getFullYear() + "-" + (a.getMonth() + 1) + "-" + (a.getDate() - 1));
-    const lastweek = (a.getFullYear() + "-" + (a.getMonth() + 1) + "-" + (a.getDate() - 7));
-    const lastmonth = (a.getFullYear() + "-" + a.getMonth() + "-" + a.getDate());
-    const lastyear = ((a.getFullYear() - 1) + "-" + (a.getMonth() + 1) + "-" + a.getDate());
-
-    // today calcumation
-    const todaytotal = await model.find({
-        userid, date: today
-    });
-
-    const todaytotalsum = todaytotal.reduce((accu, val, ind) => {
-        return accu = accu + val.amount
-    }, 0);
-    // today calcumation
-
-    //   yesterdat calcumation
-    const yeaterdaytotal = await model.find({
-        userid, date: {
-            $gte: yesterday,
-            $lte: today
-        }
-    });
-
-    const yesterdaytotalsum = yeaterdaytotal.reduce((accu, val, ind) => {
-        return accu = accu + val.amount
-    }, 0);
-    //   yesterdat calcumation
-
-    // lastweek calculation
-    const lastweektotal = await model.find({
-        userid, date: {
-            $gte: lastweek,
-            $lte: today
-        }
-    });
-    const lastweektotalsum = lastweektotal.reduce((accu, val, ind) => {
-        return accu = accu + val.amount
-    }, 0);
-    // lastweek calculation
-
-    // lastmonth calculation
-    const monthtotal = await model.find({
-        userid, date: {
-            $gte: lastmonth,
-            $lte: today
-        }
-    });
-    const monthtotalsum = monthtotal.reduce((accu, val, ind) => {
-        return accu = accu + val.amount
-    }, 0);
-    // lastmonth calculation
-
-    // lastyear calculation
-    const yeartotal = await model.find({
-        userid, date: {
-            $gte: lastyear,
-            $lte: today
-        }
-    });
-    const yeartotalsum = yeartotal.reduce((accu, val, ind) => {
-        return accu = accu + val.amount
-    }, 0);
-    // lastyear calculation
-
-    // total calculation
-    const totale = await model.find({ userid });
-    const totalsum = totale.reduce((accu, val, ind) => {
-        return accu = accu + val.amount
-    }, 0);
-    // total calculation
-
-    // console.log(totaled)
-
-
-    res.json({
-        msg: "data found",
-        data: [{
-            Today: todaytotalsum,
-            Yesterday: yesterdaytotalsum,
-            LastWeek: lastweektotalsum,
-            LastMonth: monthtotalsum,
-            lastyear: yeartotalsum,
-            total: totalsum
-        }]
-    })
-
-})
-//    for fetching exp data from database ends here
 
 
 //    for update expense legere data into database
@@ -373,21 +278,21 @@ app.post('/signup', async (req, res) => {
 })
 //    for signup user data into database ends here
 
-if(process.env.NODE_ENV=='production'){
+// if(process.env.NODE_ENV=='production'){
+//     const path = require('path')
+
+//     app.get('/',(req,res)=>{
+//         app.use(express.static(path.resolve(__dirname,'client','build')))
+//         res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+//     })
+// }else{
     const path = require('path')
 
     app.get('/',(req,res)=>{
         app.use(express.static(path.resolve(__dirname,'client','build')))
         res.sendFile(path.resolve(__dirname,'client','build','index.html'))
     })
-}else{
-    const path = require('path')
-
-    app.get('/',(req,res)=>{
-        app.use(express.static(path.resolve(__dirname,'client','build')))
-        res.sendFile(path.resolve(__dirname,'client','build','index.html'))
-    })
-}
+// }
 
 
 app.listen(port, () => {
