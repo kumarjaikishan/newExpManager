@@ -37,7 +37,7 @@ function App() {
   }
 
   useEffect(() => {
-    load();
+    // load();
   }, [])
   
   return (
@@ -46,11 +46,11 @@ function App() {
       <div className={narrow ? "main narrow" : "main"}>
         <Routes>
 
-          <Route path="/" element={<Home login={login} expenselist={expenselist} setheade={setheade} setloader={setloader} />} />
+          <Route path="/" element={<Home login={login}  expenselist={expenselist} setheade={setheade} setloader={setloader} />} />
           <Route path="/addexpense" element={<Addexp setexpenselist={setexpenselist} expenselist={expenselist} login={login} setleddetail={setleddetail} leddetail={leddetail} setloader={setloader} />} />
           <Route path="/datanalysis" element={<Datanalysis leddetail={leddetail} expenselist={expenselist} login={login} setloader={setloader} />} />
           <Route path="/report" element={<Report expenselist={expenselist} leddetail={leddetail} login={login} setloader={setloader} />} />
-          <Route path="/login" element={<Login setleddetail={setleddetail} setlogin={setlogin} setloader={setloader} />} />
+          <Route path="/login" element={<Login setexpenselist={setexpenselist} setleddetail={setleddetail} setlogin={setlogin} setloader={setloader} />} />
           <Route path="/logout" element={<Logout setleddetail={setleddetail} setlogin={setlogin} />} />
         </Routes>
         <div style={{ display: loader ? "flex" : "none" }} className="loader"><img src={loadere} alt="" /></div>

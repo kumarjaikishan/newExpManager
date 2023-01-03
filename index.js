@@ -224,14 +224,22 @@ app.post('/updateexpledger', async (req, res) => {
 //    for login user data from database
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
-    // console.log(email + " " + password)
     const result = await user.find({ email, password });
-    // console.log(result.length);
+
     if (result.length) {
-        res.status(200).json({
-            msg: "Login Successfully",
-            data: result
-        })
+        const userid = result[0]._id;
+        const query = await model.find({ userid }).sort({ date: -1 });
+        if (query) {
+            res.json({
+                msg: "data found",
+                data: result,
+                explist: query
+            })
+        }
+        // res.status(200).json({
+        //     msg: "Login Successfully",
+        //     data: result[0]._id
+        // })
     } else {
         res.status(500).json({
             msg: "NO USER FOUND",

@@ -6,14 +6,20 @@ import InputAdornment from '@mui/material/InputAdornment';
 import EmailIcon from '@mui/icons-material/Email';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const Signin = ({ setlogin, setleddetail, }) => {
+const Signin = ({ setlogin, setleddetail,setexpenselist }) => {
     let navigate = useNavigate();
     const init = {
         email: "",
         password: ""
     }
-
+    const notify = (msg, dur) => {
+        toast.success(msg, {
+          autoClose: dur,
+        });
+      }
     const [signinp, setsigninp] = useState(init);
     const signhandle = (e) => {
         const name = e.target.name;
@@ -49,12 +55,11 @@ const Signin = ({ setlogin, setleddetail, }) => {
         const mail = datae.data[0].email;
         const id = datae.data[0]._id;
         if (datae.msg) {
-            swal("Login Successful", {
-                icon: "success",
-            });
+           notify("Login Successfully",1500)
         }
         setlogin(true);
-        setleddetail(datae.data[0].ledger)
+        setleddetail(datae.data[0].ledger);
+        setexpenselist(datae.explist);
         localStorage.setItem("name", username);
         localStorage.setItem("email", mail);
         localStorage.setItem("id", id);
@@ -63,6 +68,7 @@ const Signin = ({ setlogin, setleddetail, }) => {
 
     return (
         <>
+         <ToastContainer />
             <div className="logine">
                 <TextField
                     label="Email*"

@@ -6,16 +6,15 @@ import IconButton from '@mui/material/IconButton';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Signin from './signin';
 import Signup from './signup';
-import { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
-const Login = ({setlogin,setleddetail,setloader}) => {
+const Login = ({setlogin,setleddetail,setloader,setexpenselist}) => {
     const [log, setlog] = useState(true);
     const fun = (val) => {
         setlog(val);
         setloader(false)
     }
  
-   
     return (
         <>
           
@@ -29,7 +28,7 @@ const Login = ({setlogin,setleddetail,setloader}) => {
                         <span className={log ? null : "active"} onClick={() => fun(false)}>Register</span>
                     </div>
                     <div className="both" style={{ transform: log ? "translateX(0%)" : "translateX(-50%)" }}>
-                        <Signin setleddetail={setleddetail} setlogin={setlogin}/>
+                        <Signin setexpenselist={setexpenselist} setleddetail={setleddetail} setlogin={setlogin}/>
                         <Signup setlog={setlog}/>
                     </div>
                 </div>
