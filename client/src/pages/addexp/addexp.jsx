@@ -17,12 +17,11 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
       navigate('/login');
       return;
     }
+    fetching();
     // setloader(true)
   }, [])
 
-  const notification =()=>{
-
-  }
+ 
   const notify = (msg, dur) => {
     toast.success(msg, {
       autoClose: dur,
