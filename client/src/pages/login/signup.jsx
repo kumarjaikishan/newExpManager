@@ -3,12 +3,12 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import EmailIcon from '@mui/icons-material/Email';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
-import swal from 'sweetalert'
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
-const Signup = ({ setlog }) => {
+const Signup = ({notify, setlog,warn }) => {
     const init = {
         name: "",
         email: "",
@@ -18,6 +18,7 @@ const Signup = ({ setlog }) => {
         ledger: ["general","other"]
     }
     const [signinp, setsigninp] = useState(init);
+    const [signuppass, setsignuppass] = useState(true);
     const signhandle = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -29,11 +30,13 @@ const Signup = ({ setlog }) => {
     const submit = async () => {
         const today = new Date;
         const date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getUTCDate();
-        const { name, email, phone, password, ledger } = signinp;
+        const { name, email, phone, password,cpassword, ledger } = signinp;
         if (!name || !email || !phone || !password || !ledger) {
-            swal("All Fields Are Required", {
-                icon: "warning",
-            });
+            warn("All Fields are Required",1800)
+            return;
+        }
+        if (password != cpassword ) {
+            warn("Password does not match",1200)
             return;
         }
         const res = await fetch('/signup', {
@@ -49,9 +52,7 @@ const Signup = ({ setlog }) => {
         console.log(datae);
         if (datae.data) {
             setsigninp(init);
-            swal("SignUp successfull", {
-                icon: "Success",
-            });
+            notify("Signup Successful", 1400)
             setlog(true);
         }
     }
@@ -106,13 +107,14 @@ const Signup = ({ setlog }) => {
                     size="small"
                     onChange={signhandle}
                     name="password"
+                    type={signuppass?"password":null}
                     value={signinp.password}
                     InputProps={{
                         startAdornment: <InputAdornment position="start">
                             <VpnKeyIcon />
                         </InputAdornment>,
-                        endAdornment: <InputAdornment position="end">
-                            <RemoveRedEyeIcon />
+                        endAdornment: <InputAdornment position="end" style={{cursor:"pointer"}} onClick={()=> signuppass ? setsignuppass(false):setsignuppass(true)}>
+                           {signuppass ?<RemoveRedEyeIcon  /> : <VisibilityOffIcon  /> } 
                         </InputAdornment>
                     }}
                 />

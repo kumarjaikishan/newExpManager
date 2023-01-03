@@ -60,7 +60,6 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
   const [postperpage, setpostperpage] = useState(10);
 
 
-
   // for LOading data
   const fetching = async () => {
     const userid = localStorage.getItem("id");

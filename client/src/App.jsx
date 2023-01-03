@@ -18,7 +18,7 @@ function App() {
   const [login, setlogin] = useState(false);
   const [loader, setloader] = useState(false);
   const [narrow, setnarrow] = useState(false);
-  const [heade, setheade] = useState("Dashboard")
+  const [heade, setheade] = useState("LogIn")
  
   const load = async () => {
     const userid = localStorage.getItem("id");

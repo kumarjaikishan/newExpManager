@@ -1,26 +1,22 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import TextField from '@mui/material/TextField';
-import swal from 'sweetalert'
 import InputAdornment from '@mui/material/InputAdornment';
 import EmailIcon from '@mui/icons-material/Email';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
-const Signin = ({ setlogin, setleddetail,setexpenselist }) => {
+const Signin = ({warn, notify,setlogin, setleddetail, setexpenselist }) => {
     let navigate = useNavigate();
     const init = {
         email: "",
         password: ""
     }
-    const notify = (msg, dur) => {
-        toast.success(msg, {
-          autoClose: dur,
-        });
-      }
+  
     const [signinp, setsigninp] = useState(init);
+    const [loginpass, setloginpass] = useState(true);
+   
     const signhandle = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -33,42 +29,48 @@ const Signin = ({ setlogin, setleddetail,setexpenselist }) => {
         const { email, password } = signinp;
 
         if (!email || !password) {
-            swal("All Fields Are Required", {
-                icon: "warning",
-            });
+            warn("All fields are Required",1300)
             return;
         }
-        const res = await fetch('/login', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email, password
+        try {
+            const res = await fetch('/login', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email, password
+                })
             })
-        })
-        const datae = await res.json();
-        console.log(datae);
-        // console.log(datae.data[0].ledger);
-        const username = datae.data[0].name;
-        document.title = "AccuSoft - "+ datae.data[0].name;
-        const mail = datae.data[0].email;
-        const id = datae.data[0]._id;
-        if (datae.msg) {
-           notify("Login Successfully",1500)
+            const datae = await res.json();
+            console.log(datae);
+            // console.log(datae.data[0].ledger);
+            const username = datae.data[0].name;
+            document.title = "AccuSoft - " + datae.data[0].name;
+            const mail = datae.data[0].email;
+            const id = datae.data[0]._id;
+            if (datae.msg=="Login Successfully") {
+                notify(datae.msg, 1500)
+            }
+            if (datae.msg=="NO USER FOUND") {
+                warn(datae.msg, 1200)
+            }
+            setlogin(true);
+            setleddetail(datae.data[0].ledger);
+            setexpenselist(datae.explist);
+            localStorage.setItem("name", username);
+            localStorage.setItem("email", mail);
+            localStorage.setItem("id", id);
+            navigate('/');
+        } catch (error) {
+            warn(error,2000);
         }
-        setlogin(true);
-        setleddetail(datae.data[0].ledger);
-        setexpenselist(datae.explist);
-        localStorage.setItem("name", username);
-        localStorage.setItem("email", mail);
-        localStorage.setItem("id", id);
-        navigate('/');
-    }
+       
 
+    }
     return (
         <>
-         <ToastContainer />
+            
             <div className="logine">
                 <TextField
                     label="Email*"
@@ -88,6 +90,7 @@ const Signin = ({ setlogin, setleddetail,setexpenselist }) => {
                     label="Password*"
                     className='filled'
                     size="small"
+                    type={loginpass ? "password" : null}
                     onChange={signhandle}
                     name="password"
                     value={signinp.password}
@@ -95,8 +98,8 @@ const Signin = ({ setlogin, setleddetail,setexpenselist }) => {
                         startAdornment: <InputAdornment position="start">
                             <VpnKeyIcon />
                         </InputAdornment>,
-                        endAdornment: <InputAdornment position="end">
-                            <RemoveRedEyeIcon />
+                        endAdornment: <InputAdornment position="end" style={{cursor:"pointer"}} onClick={()=> loginpass ? setloginpass(false):setloginpass(true)}>
+                           {loginpass ? <RemoveRedEyeIcon  /> : <VisibilityOffIcon  />} 
                         </InputAdornment>
                     }}
 
