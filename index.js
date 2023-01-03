@@ -7,6 +7,22 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 require('./conn/conn')
 
+// if(process.env.NODE_ENV=='production'){
+//     const path = require('path')
+
+//     app.get('/',(req,res)=>{
+//         app.use(express.static(path.resolve(__dirname,'client','build')))
+//         res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+//     })
+// }else{
+const path = require('path')
+
+app.get('/', (req, res) => {
+    app.use(express.static(path.resolve(__dirname, 'client', 'build')))
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+})
+// }
+
 
 //    for adding expense data into database
 app.post('/addexpense', async (req, res) => {
@@ -228,22 +244,22 @@ app.post('/login', async (req, res) => {
 app.post('/leg', async (req, res) => {
     const { _id, leddetail } = req.body;
     //    console.log(leddetail.length)
-    if(leddetail.length < 1){
+    if (leddetail.length < 1) {
         res.json({
             msg: "ledger can't be empty",
         })
     }
-        const result = await user.findByIdAndUpdate({ _id }, { ledger: leddetail });
-        if (result) {
-            res.json({
-                msg: "ledger sync",
-                data: result
-            })
-        } else {
-            res.json({
-                msg: "something went wrong in db"
-            })
-        }
+    const result = await user.findByIdAndUpdate({ _id }, { ledger: leddetail });
+    if (result) {
+        res.json({
+            msg: "ledger sync",
+            data: result
+        })
+    } else {
+        res.json({
+            msg: "something went wrong in db"
+        })
+    }
 })
 //    for login user data from database end here
 
@@ -278,21 +294,7 @@ app.post('/signup', async (req, res) => {
 })
 //    for signup user data into database ends here
 
-// if(process.env.NODE_ENV=='production'){
-//     const path = require('path')
 
-//     app.get('/',(req,res)=>{
-//         app.use(express.static(path.resolve(__dirname,'client','build')))
-//         res.sendFile(path.resolve(__dirname,'client','build','index.html'))
-//     })
-// }else{
-    const path = require('path')
-
-    app.get('/',(req,res)=>{
-        app.use(express.static(path.resolve(__dirname,'client','build')))
-        res.sendFile(path.resolve(__dirname,'client','build','index.html'))
-    })
-// }
 
 
 app.listen(port, () => {
