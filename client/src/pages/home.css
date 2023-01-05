@@ -14,16 +14,16 @@
     height: 120px;
     display: flex;
     overflow: hidden;
-    border-radius: 10px;
-    background: #dbe1e6;
-    box-shadow: 0 0 5px #fff,
+    border-radius: 8px;
+    /* background: #dbe1e6; */
+    /* box-shadow: 0 0 5px #fff,
       5px 5px 10px #a7aaaf,
-      -5px -5px 10px #fff;
+      -5px -5px 10px #fff; */
 }
-.home .card:hover{
+/* .home .card:hover{
     box-shadow: inset 2px 2px 5px #a7aaaf,
       inset -5px -5px 5px #fff;
-}
+} */
 .home .card .data{
     position: relative;
     width: 60%;
@@ -35,7 +35,7 @@
     width: 100%;
     /* border: 1px solid red; */
     height: 50%;
-    font-size: 1.3em;
+    font-size: 1.8em;
     font-weight: 700;
     padding-left: 10px;
     line-height:60px;
@@ -57,8 +57,8 @@ align-items: center;
 position: relative;
 }
 .home .card .icon i{
-    font-size: 4.2em;
-    color: rgb(83, 80, 80);
+    font-size: 3.7em;
+    /* color: rgb(83, 80, 80); */
 }
 @media only screen and (max-width:1200px) {
     .home {

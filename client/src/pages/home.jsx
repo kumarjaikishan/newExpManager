@@ -83,27 +83,33 @@ const Home = ({ setloader, login, setheade, expenselist }) => {
   const card = [{
     amt: arr.todaysum,
     day: "Today",
-    icon: <i className="fa fa-inr" aria-hidden="true"></i>
+    icon: <i className="fa fa-inr" aria-hidden="true"></i>,
+    back: 'radial-gradient( circle 759px at -6.7% 50%, rgba(80,131,73,1) 0%, rgba(140,209,131,1) 26.2%, rgba(178,231,170,1) 50.6%, rgba(144,213,135,1) 74.1%, rgba(75,118,69,1) 100.3% )'
   }, {
     amt:arr.yestersum,
     day: "Yesterday",
-    icon: <i className="fa fa-bolt" aria-hidden="true"></i>
+    icon: <i className="fa fa-bolt" aria-hidden="true"></i>,
+    back:'radial-gradient( circle 597px at 93% 9.8%, rgba(255,61,89,1) 1.7%, rgba(252,251,44,1) 97% )'
   }, {
     amt:arr.weeksum,
     day: "Last Week",
-    icon: <i className="fa fa-shopping-bag" aria-hidden="true"></i>
+    icon: <i className="fa fa-shopping-bag" aria-hidden="true"></i>,
+    back:'linear-gradient( 179.4deg, rgba(33,150,243,1) 1.8%, rgba(22,255,245,0.60) 97.1% )'
   }, {
     amt: arr.monthsum,
     day: "Last Month",
-    icon: <i className="fa fa-google-wallet" aria-hidden="true"></i>
+    icon: <i className="fa fa-google-wallet" aria-hidden="true"></i>,
+    back:'linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%)'
   }, {
     amt: arr.yearsum,
     day: "Last Year",
-    icon: <i className="fa fa-balance-scale" aria-hidden="true"></i>
+    icon: <i className="fa fa-balance-scale" aria-hidden="true"></i>,
+    back:'linear-gradient(90deg, #1CB5E0 0%, #000851 100%)'
   }, {
     amt: arr.totalsum,
     day: "Total",
-    icon: <i className="fa fa-university" aria-hidden="true"></i>
+    icon: <i className="fa fa-university" aria-hidden="true"></i>,
+    back:'linear-gradient( 109.6deg, rgba(39,142,255,1) 11.2%, rgba(98,113,255,0.78) 100.2% )'
   }]
   return (
     <>
@@ -111,12 +117,12 @@ const Home = ({ setloader, login, setheade, expenselist }) => {
 
         {card.map((val, ind) => {
           return (
-            <div className="card" key={ind}>
+            <div className="card" key={ind} style={{background:val.back, color:"white"}}>
               <div className="data">
                 <div className="amt">{val.amt}</div>
                 <div className="day">{val.day}</div>
               </div>
-              <div className="icon">{val.icon}</div>
+              <div className="icon" style={{ color:"white"}}>{val.icon}</div>
             </div>
           )
         })}

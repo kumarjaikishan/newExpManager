@@ -76,7 +76,10 @@ display: flex;
     padding: 0.5em;
     border-radius: 10px;
 }
-
+.datanalysis .card:hover{
+    box-shadow: inset 2px 2px 5px #a7aaaf,
+      inset -5px -5px 5px #fff;
+}
 .datanalysis .card .data {
     position: relative;
     width: 130px;
