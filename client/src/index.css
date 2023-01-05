@@ -1,13 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Moon+Dance&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  /* font-family: "Times New Roman", Times, serif; */
 }
 
 :root {
   --navheight: 90px;
-  --sidebarwide: 220px;
+  --sidebarwide: 230px;
   --sidebarnarrow: 90px;
 }
 
@@ -21,6 +23,7 @@ body {
   background: #f0f0f0;
   position: relative;
   width: 100%;
+  /* font-size: 18px; */
   height: 100vh;
   overflow: hidden;
   user-select: none;

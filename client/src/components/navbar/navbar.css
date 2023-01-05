@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Moon+Dance&display=swap');
 .nav{
     position: absolute;
     top: 0;
@@ -8,31 +9,39 @@
     overflow: hidden;
     display: flex;
     justify-content: space-between;
-  align-items: flex-end;
-    padding: 10px 20px;
+    align-items:center;
+    padding: 0px 20px;
+    /* font-family:Arial */
+  
 }
 .nav .cont{
     height: 40px;
     display: flex;
+    /* border: 1px solid red; */
+    align-items:center;
+    font-family: 'East Sea Dokdo', cursive;
+    font-size: 1.7em;
+    letter-spacing: 1px;
 }
 .nav .cont span{
     display: inline-block;
     padding: 2px;
-    height: 40px;
+    /* height: 40px; */
     margin-right: 10px;
     cursor: pointer;
 }
 .nav .cont span:nth-child(1){
-    transform: scale(1.2);
+    transform: scale(1.4);
+    font-size: 2em;
 }
 .nav .cont span:nth-child(1):hover{
     color: rgb(13, 181, 248);
-    transform: scale(1.3);
+    transform: scale(1.5);
 }
 .nav .cont span:nth-child(2){
-    font-weight: 700;
+    font-weight: 600;
     font-size: 1.2em;
-    line-height: 20px;
+    /* line-height: 20px; */
 }
 .nav .info{
     /* border: 1px solid red; */

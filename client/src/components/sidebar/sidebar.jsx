@@ -16,7 +16,7 @@ const Sidebar = ({ narrow,setheade,login }) => {
         link:'/',
         logo:"fa fa-tachometer"
     },{
-        name:"Add Expense",
+        name:"Expenses",
         link:'/addexpense',
         logo:"fa fa-university"
     },{
