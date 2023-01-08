@@ -7,7 +7,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
-const Signin = ({warn, notify,setlogin, setleddetail, setexpenselist }) => {
+const Signin = ({setlogin, setleddetail, setexpenselist,notification }) => {
     let navigate = useNavigate();
     const init = {
         email: "",
@@ -29,7 +29,7 @@ const Signin = ({warn, notify,setlogin, setleddetail, setexpenselist }) => {
         const { email, password } = signinp;
 
         if (!email || !password) {
-            warn("All fields are Required",1300)
+            notification.warn("All fields are Required",1300);
             return;
         }
         try {
@@ -50,10 +50,10 @@ const Signin = ({warn, notify,setlogin, setleddetail, setexpenselist }) => {
             const mail = datae.data[0].email;
             const id = datae.data[0]._id;
             if (datae.msg=="Login Successfully") {
-                notify(datae.msg, 1500)
+                notification.success(datae.msg, 1300);
             }
             if (datae.msg=="NO USER FOUND") {
-                warn(datae.msg, 1200)
+                notification.warn(datae.msg, 1200);
             }
             setlogin(true);
             setleddetail(datae.data[0].ledger);
@@ -63,7 +63,7 @@ const Signin = ({warn, notify,setlogin, setleddetail, setexpenselist }) => {
             localStorage.setItem("id", id);
             navigate('/');
         } catch (error) {
-            warn(error,2000);
+            notification.warn(error,2000);
         }
        
 

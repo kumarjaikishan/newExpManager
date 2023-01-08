@@ -6,11 +6,9 @@ import Pagination from './pagination';
 import Modalbox from './modalbox';
 import Ledpage from './ledpage';
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 
-const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expenselist }) => {
+const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expenselist,notification }) => {
   let navigate = useNavigate();
   useEffect(() => {
     if (!login) {
@@ -22,16 +20,7 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
   }, [])
 
  
-  const notify = (msg, dur) => {
-    toast.success(msg, {
-      autoClose: dur,
-    });
-  }
-  const warn = (msg, dur) => {
-    toast.warning(msg, {
-      autoClose: dur,
-    });
-  }
+  
   const date = new Date;
   const [serinp,setserinp]= useState("");
   const [isupdate, setisupdate] = useState(false);
@@ -101,7 +90,7 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
     const { ledger, date, amount, narration } = inp;
     const userid = localStorage.getItem("id");
     if (!userid || !ledger || !date || !amount || !narration) {
-      return warn("Kindly Fill all Fields", 2500)
+      return notification.warn("Kindly Fill all Fields", 2500)
     } else {
       const result = await fetch('/addexpense', {
         method: "POST",
@@ -114,7 +103,7 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
       })
       const data = await result.json();
       fetching();
-      notify("Expense Added", 3000);
+      notification.success("Expense Added", 3000);
       setmodal(false);
       setinp(init);
       // console.log(data.msg);
@@ -166,7 +155,7 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
           // console.log(data);
           fetching();
 
-          notify("Deleted Successfully", 2000);
+          notification.success("Deleted Successfully", 2000);
         } else {
           swal("Your data is safe!");
         }
@@ -185,7 +174,7 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
     }
 
     if (arr.length < 1) {
-      warn("Kindly Select data", 2000);
+      notification.warn("Kindly Select data", 2000);
     } else {
       const result = await fetch('/delmany', {
         method: "DELETE",
@@ -197,7 +186,7 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
         })
       })
       const data = await result.json();
-      notify("Deleted Successfully", 2000);
+      notification.sucess("Deleted Successfully", 2000);
       fetching();
       console.log(data);
     }
@@ -242,7 +231,6 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
   let sum = 0;
   return (
     <>
-      <ToastContainer />
       <div className="exp">
         <div className="add"> <i title='Add Expense' className="fa fa-plus" onClick={() => setmodal(true)} aria-hidden="true" id='addexp'></i> </div>
         <div className="head">
@@ -322,8 +310,8 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
             <Pagination currentpage={currentpage} changepageno={changepageno} totalpost={expdata.length} postperpage={postperpage} />
           </span>
         </div>
-        <Modalbox notify={notify} setisledupdate={setisledupdate} leddetail={leddetail} fetching={fetching} init={init} setinp={setinp} setisupdate={setisupdate} setmodal={setmodal} sub={sub} modal={modal} handler={handler} inp={inp} isupdate={isupdate} />
-        <Ledpage warn={warn} notify={notify} setmodal={setmodal} setisledupdate={setisledupdate} fetching={fetching} isledupdate={isledupdate} setleddetail={setleddetail} leddetail={leddetail} />
+        <Modalbox notification={notification} setisledupdate={setisledupdate} leddetail={leddetail} fetching={fetching} init={init} setinp={setinp} setisupdate={setisupdate} setmodal={setmodal} sub={sub} modal={modal} handler={handler} inp={inp} isupdate={isupdate} />
+        <Ledpage notification={notification}  setmodal={setmodal} setisledupdate={setisledupdate} fetching={fetching} isledupdate={isledupdate} setleddetail={setleddetail} leddetail={leddetail} />
       </div>
 
     </>

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './ledpage.css';
 import { useEffect } from 'react';
 
-const Ledpage = ({warn,notify, fetching, setmodal, leddetail, setleddetail, isledupdate, setisledupdate }) => {
+const Ledpage = ({notification, fetching, setmodal, leddetail, setleddetail, isledupdate, setisledupdate }) => {
   const [isupda, setinsupdat] = useState(false)
   const [ledinp, setledinp] = useState({
     ind: "",
@@ -16,7 +16,7 @@ const Ledpage = ({warn,notify, fetching, setmodal, leddetail, setleddetail, isle
     const _id = localStorage.getItem("id");
     // console.log(leddetail)
     if (leddetail.length < 1) {
-      return warn("Ledger Can't be blank",2000)
+      return notification.warn("Ledger Can't be blank",2000)
       
     } else {
       const res = await fetch('/leg', {
@@ -67,14 +67,14 @@ const Ledpage = ({warn,notify, fetching, setmodal, leddetail, setleddetail, isle
         //   updateexpledger(arr, "delete", "just");
         // }
         if (leddetail.length == 1) {
-          warn("Ledger Can't be blank",2000);
+          notification.warn("Ledger Can't be blank",2000);
           return arr;
         } else {
           if (val !== inde) {
             return arr;
           } else {
             updateexpledger(arr, "delete", "just");
-            notify("Ledger has been deleted",2700)
+            notification.success("Ledger has been deleted",2700)
           }
         }
       })
@@ -95,7 +95,7 @@ const Ledpage = ({warn,notify, fetching, setmodal, leddetail, setleddetail, isle
       ind: "",
       val: ""
     })
-    notify("Ledger has been Updated",2500)
+    notification.success("Ledger has been Updated",2500)
     setinsupdat(false)
   }
 

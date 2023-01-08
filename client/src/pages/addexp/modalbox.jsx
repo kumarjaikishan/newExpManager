@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import swal from 'sweetalert'
 import './modalbox.css';
 
-const Modalbox = ({notify,setisledupdate,leddetail, modal, fetching, init, handler, inp, isupdate, sub, setmodal, setisupdate, setinp }) => {
+const Modalbox = ({notification,setisledupdate,leddetail, modal, fetching, init, handler, inp, isupdate, sub, setmodal, setisupdate, setinp }) => {
    
     const [ledarr,setledarr]= useState([]);
      // for updating data fetched above 
@@ -19,7 +19,7 @@ const Modalbox = ({notify,setisledupdate,leddetail, modal, fetching, init, handl
         })
         const data = await result.json();
         if (data) {
-            notify("Data updated Successfully",2500)
+            notification.success("Data updated Successfully",2500)
         }
         // console.log(data);
         fetching();

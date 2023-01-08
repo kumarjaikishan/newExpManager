@@ -8,7 +8,7 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
-const Signup = ({notify, setlog,warn }) => {
+const Signup = ({ setlog,notification }) => {
     const init = {
         name: "",
         email: "",
@@ -32,11 +32,11 @@ const Signup = ({notify, setlog,warn }) => {
         const date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getUTCDate();
         const { name, email, phone, password,cpassword, ledger } = signinp;
         if (!name || !email || !phone || !password || !ledger) {
-            warn("All Fields are Required",1800)
+            notification. warn("All Fields are Required",1800)
             return;
         }
         if (password != cpassword ) {
-            warn("Password does not match",1200)
+            notification.warn("Password does not match",1200)
             return;
         }
         const res = await fetch('/signup', {
@@ -52,7 +52,7 @@ const Signup = ({notify, setlog,warn }) => {
         console.log(datae);
         if (datae.data) {
             setsigninp(init);
-            notify("Signup Successful", 1400)
+            notification.success("Signup Successful", 1400)
             setlog(true);
         }
     }
