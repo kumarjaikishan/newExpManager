@@ -1,0 +1,64 @@
+.photo{
+    /* border: 2px solid red; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.photo .box{
+    border: 2px solid rgb(15, 157, 196);
+    width: 300px;
+    /* height: 400px; */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 0 5px #fff,
+      5px 5px 10px #a7aaaf,
+      -5px -5px 10px #fff;
+}
+.photo #wrapper{
+    /* border: 1px solid red; */
+    margin: 10px 0px;
+}
+.photo img{
+    border: 1px solid rgb(15, 157, 196);
+    border-radius: 15px;
+}
+.photo .box input{
+    /* border: 2px solid black; */
+    width: 300px;
+    height: 50px;
+    text-align: center;
+    height: 50px;
+    /* margin-top: 10px; */
+    margin: 10px auto;
+    padding: 10px 20px;
+}
+.photo .box button{
+    border: none;
+    /* border: 2px solid black; */
+    outline: none;
+    border-radius: 5px;
+    /* background: rgb(0, 204, 255);
+    color: white; */
+    font-size: 1em;
+    padding: 0 5px;
+    margin: 10px ;
+    padding: 10px 15px;
+}
+.photo .box button i{
+    margin-right: 10px;
+}
+.photo .box #btn {
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-around;
+    /* border: 1px solid red; */
+}

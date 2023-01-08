@@ -12,6 +12,7 @@ import Logout from './pages/logout';
 import Report from './pages/Report';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Photo from './pages/photo';
 
 function App() {
   const [leddetail, setleddetail] = useState([]);
@@ -42,10 +43,12 @@ function App() {
         <Navbar login={login} narrow={narrow} heade={heade} setnarrow={setnarrow} />
         <div className={narrow ? "main narrow" : "main"}>
           <Routes>
+            
             <Route path="/" element={<Home login={login} expenselist={expenselist} setheade={setheade} setloader={setloader} />} />
             <Route path="/addexpense" element={<Addexp notification={notification} setexpenselist={setexpenselist} expenselist={expenselist} login={login} setleddetail={setleddetail} leddetail={leddetail} setloader={setloader} />} />
             <Route path="/datanalysis" element={<Datanalysis leddetail={leddetail} expenselist={expenselist} login={login} setloader={setloader} />} />
             <Route path="/report" element={<Report expenselist={expenselist} leddetail={leddetail} login={login} setloader={setloader} />} />
+            <Route path="/photo" element={<Photo setleddetail={setleddetail} setlogin={setlogin} />} />
             <Route path="/login" element={<Login setexpenselist={setexpenselist} setleddetail={setleddetail} setlogin={setlogin} setloader={setloader} notification={notification} />} />
             <Route path="/logout" element={<Logout setleddetail={setleddetail} setlogin={setlogin} />} />
           </Routes>

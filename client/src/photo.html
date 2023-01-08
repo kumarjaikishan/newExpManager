@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file" name="" id="">
+    <div id="wrapper">
+    </div>
+</body>
+<script>
+    const WIDTH = 200;
+
+    let input = document.querySelector("input");
+    input.addEventListener("change", (event) => {
+        let image_file = event.target.files[0];
+
+        let reader = new FileReader
+        reader.readAsDataURL(image_file)
+        reader.onload = (event) => {
+            let image_url = event.target.result
+            let image = document.createElement('img');
+            image.src = image_url;
+            // document.querySelector("#wrapper").appendChild(image)
+            image.onload = (e) => {
+                let canvas = document.createElement("canvas")
+                let ratio = WIDTH / e.target.width
+                canvas.width = WIDTH
+                canvas.height = e.target.height * ratio
+                //    console.log(canvas.height)
+                const context = canvas.getContext("2d")
+                context.drawImage(image, 0, 0, canvas.width, canvas.height)
+
+                let new_image_url = context.canvas.toDataURL("image/jpeg", 100)
+
+                let new_image = document.createElement("img");
+                new_image.src = new_image_url
+                document.querySelector("#wrapper").appendChild(new_image)
+            }
+        }
+    })
+</script>
+
+</html>
