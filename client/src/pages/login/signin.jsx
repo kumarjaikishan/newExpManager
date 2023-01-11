@@ -46,6 +46,7 @@ const Signin = ({setlogin, setleddetail, setexpenselist,notification }) => {
             console.log(datae);
             // console.log(datae.data[0].ledger);
             const username = datae.data[0].name;
+           
             document.title = "AccuSoft - " + datae.data[0].name;
             const mail = datae.data[0].email;
             const id = datae.data[0]._id;
@@ -59,6 +60,7 @@ const Signin = ({setlogin, setleddetail, setexpenselist,notification }) => {
             setleddetail(datae.data[0].ledger);
             setexpenselist(datae.explist);
             localStorage.setItem("name", username);
+            localStorage.setItem("image", datae.data[0].imgsrc);
             localStorage.setItem("email", mail);
             localStorage.setItem("id", id);
             navigate('/');

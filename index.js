@@ -3,6 +3,7 @@ const app = express();
 const model = require('./conn/expschema')
 const user = require('./conn/loginschema')
 const port = process.env.PORT || 5000;
+const fileupload = require('express-fileupload')
 
 app.use(express.json());
 require('./conn/conn')
@@ -16,6 +17,37 @@ require('./conn/conn')
 //     })
 // }else{
 const path = require('path')
+
+app.use(fileupload({
+    useTempFiles: true
+}))
+app.post('/photo', async (req, res) => {
+   
+    let file = req.files.file
+    let filename = file.name
+    console.log(file);
+    console.log(filename);
+    file.mv('./profilepic/' + filename, async function  (err)  {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("success uploaded")
+            const result = await user.findByIdAndUpdate({ _id: req.body.user }, { imgsrc: filename });
+            // console.log(result);
+            if (result) {
+                res.status(201).json({
+                    msg: "photo uploaded",
+                    data: result
+                })
+            } else {
+                res.status(201).json({
+                    msg: "something wrong",
+                    data: result
+                })
+            }
+        }
+    })
+})
 
 app.get('/', (req, res) => {
     app.use(express.static(path.resolve(__dirname, 'client', 'build')))
@@ -246,7 +278,7 @@ app.post('/login', async (req, res) => {
             msg: "NO USER FOUND",
         })
     }
-   
+
 })
 //    for login user data from database end here
 
@@ -276,7 +308,7 @@ app.post('/leg', async (req, res) => {
 
 //    for signup user data into database
 app.post('/signup', async (req, res) => {
-    const { name, email, phone, password, date, ledger } = req.body;
+    const { name, email, phone, password, date, ledger,imgsrc } = req.body;
     // console.log(email + " " + password)
     if (!name || !email || !phone || !password || !date || !ledger) {
         res.json({
@@ -284,7 +316,7 @@ app.post('/signup', async (req, res) => {
         })
     }
     try {
-        const query = new user({ name, email, phone, password, date, ledger });
+        const query = new user({ name, email, phone, password, date, ledger,imgsrc });
         const result = await query.save();
         if (result) {
             res.status(201).json({

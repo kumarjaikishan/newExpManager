@@ -21,6 +21,9 @@ const log = new mongo.Schema({
         type:String,
         required:true
     },
+    imgsrc:{
+        type:String,
+    },
     ledger:{
         type:Array
     }

@@ -29,6 +29,7 @@ const Signup = ({ setlog,notification }) => {
 
     const submit = async () => {
         const today = new Date;
+        const imgsrc = "";
         const date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getUTCDate();
         const { name, email, phone, password,cpassword, ledger } = signinp;
         if (!name || !email || !phone || !password || !ledger) {
@@ -45,7 +46,7 @@ const Signup = ({ setlog,notification }) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                name, email, phone, password, date, ledger
+                name, email, phone, password, date, ledger,imgsrc
             })
         })
         const datae = await res.json();
