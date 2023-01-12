@@ -20,7 +20,8 @@ function App() {
   const [login, setlogin] = useState(false);
   const [loader, setloader] = useState(false);
   const [narrow, setnarrow] = useState(false);
-  const [heade, setheade] = useState("LogIn")
+  const [heade, setheade] = useState("LogIn");
+  const [imgine,setimgine]= useState("just.png")
 
   const notification = {
     success: (msg, dur) => {
@@ -40,7 +41,7 @@ function App() {
       <ToastContainer />
 
       <div className="App">
-        <Navbar login={login} narrow={narrow} heade={heade} setnarrow={setnarrow} />
+        <Navbar login={login} imgine={imgine} narrow={narrow} heade={heade} setnarrow={setnarrow} />
         <div className={narrow ? "main narrow" : "main"}>
           <Routes>
             
@@ -48,8 +49,8 @@ function App() {
             <Route path="/addexpense" element={<Addexp notification={notification} setexpenselist={setexpenselist} expenselist={expenselist} login={login} setleddetail={setleddetail} leddetail={leddetail} setloader={setloader} />} />
             <Route path="/datanalysis" element={<Datanalysis leddetail={leddetail} expenselist={expenselist} login={login} setloader={setloader} />} />
             <Route path="/report" element={<Report expenselist={expenselist} leddetail={leddetail} login={login} setloader={setloader} />} />
-            <Route path="/photo" element={<Photo setleddetail={setleddetail} setlogin={setlogin} />} />
-            <Route path="/login" element={<Login setexpenselist={setexpenselist} setleddetail={setleddetail} setlogin={setlogin} setloader={setloader} notification={notification} />} />
+            <Route path="/photo" element={<Photo setimgine={setimgine}  setheade={setheade} login={login} notification={notification} />} />
+            <Route path="/login" element={<Login setimgine={setimgine} setexpenselist={setexpenselist} setleddetail={setleddetail} setlogin={setlogin} setloader={setloader} notification={notification} />} />
             <Route path="/logout" element={<Logout setleddetail={setleddetail} setlogin={setlogin} />} />
           </Routes>
           <div style={{ display: loader ? "flex" : "none" }} className="loader"><img src={loadere} alt="" /></div>

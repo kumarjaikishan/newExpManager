@@ -5,7 +5,7 @@ import GrassIcon from '@mui/icons-material/Grass';
 import Signin from './signin';
 import Signup from './signup';
 
-const Login = ({setlogin,setleddetail,setloader,setexpenselist,notification}) => {
+const Login = ({setlogin,setleddetail,setloader,setexpenselist,notification,setimgine}) => {
     const [log, setlog] = useState(true);
     const fun = (val) => {
         setlog(val);
@@ -25,7 +25,7 @@ const Login = ({setlogin,setleddetail,setloader,setexpenselist,notification}) =>
                         <span className={log ? null : "active"} onClick={() => fun(false)}>Register</span>
                     </div>
                     <div className="both" style={{ transform: log ? "translateX(0%)" : "translateX(-50%)" }}>
-                        <Signin notification={notification}  setexpenselist={setexpenselist} setleddetail={setleddetail} setlogin={setlogin}/>
+                        <Signin setimgine={setimgine} notification={notification}  setexpenselist={setexpenselist} setleddetail={setleddetail} setlogin={setlogin}/>
                         <Signup notification={notification} setlog={setlog}/>
                     </div>
                 </div>

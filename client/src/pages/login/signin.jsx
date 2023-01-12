@@ -7,7 +7,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
-const Signin = ({setlogin, setleddetail, setexpenselist,notification }) => {
+const Signin = ({setlogin, setleddetail, setexpenselist,notification,setimgine }) => {
     let navigate = useNavigate();
     const init = {
         email: "",
@@ -58,6 +58,7 @@ const Signin = ({setlogin, setleddetail, setexpenselist,notification }) => {
             }
             setlogin(true);
             setleddetail(datae.data[0].ledger);
+            setimgine(datae.data[0].imgsrc);
             setexpenselist(datae.explist);
             localStorage.setItem("name", username);
             localStorage.setItem("image", datae.data[0].imgsrc);

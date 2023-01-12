@@ -4,6 +4,7 @@ const model = require('./conn/expschema')
 const user = require('./conn/loginschema')
 const port = process.env.PORT || 5000;
 const fileupload = require('express-fileupload')
+const fs = require('fs');
 
 app.use(express.json());
 require('./conn/conn')
@@ -25,12 +26,18 @@ app.post('/photo', async (req, res) => {
    
     let file = req.files.file
     let filename = file.name
-    console.log(file);
-    console.log(filename);
-    file.mv('./profilepic/' + filename, async function  (err)  {
+    // console.log(req.body);
+    console.log("file added" + filename);
+    file.mv('./client/public/img/' + filename, async function  (err)  {
         if (err) {
             console.log(err);
         } else {
+            const toremove = await user.findById({ _id: req.body.user });
+            var filePath = './client/public/img/' + toremove.imgsrc; 
+            console.log("file moved : "+toremove.imgsrc);
+            if(filePath){
+                fs.unlinkSync(filePath);
+            }
             console.log("success uploaded")
             const result = await user.findByIdAndUpdate({ _id: req.body.user }, { imgsrc: filename });
             // console.log(result);
