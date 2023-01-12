@@ -54,7 +54,7 @@ const Photo = ({notification,login,setheade,setimgine}) => {
     }
 
     const sub = async (event) => {
-        console.log("submit button called")
+        // console.log("submit button called")
         let image_file = document.getElementById('dfe').files[0];
         let name = image_file.name
         // console.log(name);

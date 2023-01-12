@@ -28,15 +28,19 @@ app.post('/photo', async (req, res) => {
     let filename = file.name
     // console.log(req.body);
     console.log("file added" + filename);
-    file.mv('./client/public/img/' + filename, async function  (err)  {
+    file.mv('./client/build/img/' + filename, async function  (err)  {
         if (err) {
             console.log(err);
         } else {
             const toremove = await user.findById({ _id: req.body.user });
-            var filePath = './client/public/img/' + toremove.imgsrc; 
+            var filePath = './client/build/img/' + toremove.imgsrc; 
             console.log("file moved : "+toremove.imgsrc);
             if(filePath){
-                fs.unlinkSync(filePath);
+                try {
+                    fs.unlinkSync(filePath);
+                } catch (error) {
+                    
+                }
             }
             console.log("success uploaded")
             const result = await user.findByIdAndUpdate({ _id: req.body.user }, { imgsrc: filename });
