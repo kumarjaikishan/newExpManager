@@ -17,6 +17,7 @@ const Signup = ({ setlog,notification }) => {
         cpassword: "",
         ledger: ["general","other"]
     }
+    const [btnclick,setbtnclick]= useState(false);
     const [signinp, setsigninp] = useState(init);
     const [signuppass, setsignuppass] = useState(true);
     const signhandle = (e) => {
@@ -27,7 +28,8 @@ const Signup = ({ setlog,notification }) => {
         })
     }
 
-    const submit = async () => {
+    const submit = async (event) => {
+      setbtnclick(true);
         const today = new Date;
         const imgsrc = "angrybird.png";
         const date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getUTCDate();
@@ -54,6 +56,7 @@ const Signup = ({ setlog,notification }) => {
         if (datae.data) {
             setsigninp(init);
             notification.success("Signup Successful", 1400)
+            setbtnclick(false);
             setlog(true);
         }
     }
@@ -133,7 +136,7 @@ const Signup = ({ setlog,notification }) => {
                         </InputAdornment>,
                     }}
                 />
-                <button onClick={() => submit()}>Signup</button>
+                <button disabled={btnclick} style={btnclick ?{background: "#cccccc", color: "#666666"}:{background: "#0984e3", color: "white"}}  onClick={() => submit()}>Signup</button>
             </div>
         </>
     )
