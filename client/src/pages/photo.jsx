@@ -18,7 +18,7 @@ const Photo = ({notification,login,setheade,setimgine}) => {
     const common = (event) => {
         let image_file = event.target.files[0] || event;
 
-        let name = image_file.name
+        let name = Date.now()+image_file.name  ;
         // console.log(name);
         let reader = new FileReader
         reader.readAsDataURL(image_file)
@@ -56,7 +56,7 @@ const Photo = ({notification,login,setheade,setimgine}) => {
     const sub = async (event) => {
         // console.log("submit button called")
         let image_file = document.getElementById('dfe').files[0];
-        let name = image_file.name
+        let name = Date.now()+image_file.name  ;
         // console.log(name);
         let reader = new FileReader
         reader.readAsDataURL(image_file)
@@ -97,7 +97,6 @@ const Photo = ({notification,login,setheade,setimgine}) => {
                 navigate('/');
             }
         }
-       
     }
 
     const urlToFile = (url, naam) => {
