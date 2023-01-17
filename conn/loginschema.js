@@ -4,14 +4,17 @@ const log = new mongo.Schema({
     name:{
         type:String,
         required:true
+        
     },
     email:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     phone:{
         type:Number,
-        required:true
+        required:true,
+        unique:true
     },
     password:{
         type:String,

@@ -29,7 +29,7 @@ const Signup = ({ setlog,notification }) => {
 
     const submit = async () => {
         const today = new Date;
-        const imgsrc = "";
+        const imgsrc = "angrybird.png";
         const date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getUTCDate();
         const { name, email, phone, password,cpassword, ledger } = signinp;
         if (!name || !email || !phone || !password || !ledger) {
