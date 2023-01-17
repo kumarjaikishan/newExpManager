@@ -58,7 +58,12 @@ const Signin = ({setlogin, setleddetail, setexpenselist,notification,setimgine }
             }
             setlogin(true);
             setleddetail(datae.data[0].ledger);
-            setimgine(datae.data[0].imgsrc);
+            if(datae.data[0].imgsrc=="" || !datae.data[0].imgsrc){
+                setimgine("just.png");
+            }else{
+                setimgine(datae.data[0].imgsrc);
+            }
+           
             setexpenselist(datae.explist);
             localStorage.setItem("name", username);
             localStorage.setItem("image", datae.data[0].imgsrc);

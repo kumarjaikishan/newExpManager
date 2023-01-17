@@ -5,9 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 const Navbar = ({ login, narrow, setnarrow, heade ,imgine}) => {
   const username = localStorage.getItem("name");
-  const [fvfd,dfvfev]= useState();
-  const imagesrc = localStorage.getItem("image") || "just.png";
- 
+
   const fun = () => {
     if (narrow) {
       setnarrow(false)
