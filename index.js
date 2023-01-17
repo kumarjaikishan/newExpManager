@@ -34,14 +34,7 @@ app.post('/photo', async (req, res) => {
         } else {
             const toremove = await user.findById({ _id: req.body.user });
             var filePath = './client/build/img/' + toremove.imgsrc; 
-            console.log("file moved : "+toremove.imgsrc);
-            if(filePath){
-                try {
-                    fs.unlinkSync(filePath);
-                } catch (error) {
-                    
-                }
-            }
+           
             console.log("success uploaded")
             const result = await user.findByIdAndUpdate({ _id: req.body.user }, { imgsrc: filename });
             // console.log(result);
@@ -55,6 +48,14 @@ app.post('/photo', async (req, res) => {
                     msg: "something wrong",
                     data: result
                 })
+            }
+            console.log("file moved : "+toremove.imgsrc);
+            if(filePath){
+                try {
+                    fs.unlinkSync(filePath);
+                } catch (error) {
+                    
+                }
             }
         }
     })
