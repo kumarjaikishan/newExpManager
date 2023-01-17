@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import swal from 'sweetalert'
 import './modalbox.css';
 
-const Modalbox = ({notification,setisledupdate,leddetail, modal, fetching, init, handler, inp, isupdate, sub, setmodal, setisupdate, setinp }) => {
-   
-    const [ledarr,setledarr]= useState([]);
-     // for updating data fetched above 
+const Modalbox = ({ notification, setisledupdate, leddetail, modal, fetching, init, handler, inp, isupdate, sub, setmodal, setisupdate, setinp }) => {
+
+    const [ledarr, setledarr] = useState([]);
+    // for updating data fetched above 
     const updatee = async (_id) => {
         const { ledger, date, amount, narration } = inp;
         const result = await fetch('/addexpense', {
@@ -19,7 +19,7 @@ const Modalbox = ({notification,setisledupdate,leddetail, modal, fetching, init,
         })
         const data = await result.json();
         if (data) {
-            notification.success("Data updated Successfully",2500)
+            notification.success("Data updated Successfully", 2500)
         }
         // console.log(data);
         fetching();
@@ -28,12 +28,18 @@ const Modalbox = ({notification,setisledupdate,leddetail, modal, fetching, init,
         setmodal(false);
     }
     // for updating data fetched above ends here
-   const jkh=()=>{
-    setisledupdate(true);
-    setmodal(false)
-   }
+    const jkh = () => {
+        setisledupdate(true);
+        setmodal(false)
+    }
+    var modale = document.querySelector(".modal");
+    const sdef = function (event) {
+        if (event.target == modale) {
+            setmodal(false);
+        }
+    }
     return (
-        <div className="modal" style={{ display: modal ? "block" : "none" }}>
+        <div className="modal" onClick={sdef} style={{ display: modal ? "block" : "none" }}>
             <div className="box">
                 <h1>Add Voucher</h1>
                 <div className="ledgeredit"><i onClick={jkh} className="fa fa-pencil" aria-hidden="true"></i></div>
@@ -41,7 +47,7 @@ const Modalbox = ({notification,setisledupdate,leddetail, modal, fetching, init,
                     <span>Ledger :</span>
                     <span>
                         <select className='caps' name="ledger" id="" onChange={handler} value={inp.ledger} >
-                            {leddetail.map((val,ind)=>{
+                            {leddetail.map((val, ind) => {
                                 return <option className='erffeg' key={ind} value={val}>{val}</option>
                             })}
                         </select>

@@ -123,9 +123,15 @@ const Ledpage = ({notification, fetching, setmodal, leddetail, setleddetail, isl
     setmodal(true)
     setisledupdate(false)
   }
+  var ledpage = document.querySelector(".ledpage");
+  const sdef = function (event) {
+      if (event.target == ledpage) {
+        setisledupdate(false)
+      }
+  }
 
   return (
-    <div className="ledpage" style={{ display: isledupdate ? "block" : "none" }}>
+    <div className="ledpage" onClick={sdef} style={{ display: isledupdate ? "block" : "none" }}>
       <div className="box">
         <h2>Hi jai kishan</h2>  <span onClick={back}>Back</span>
         <div className="cont">
