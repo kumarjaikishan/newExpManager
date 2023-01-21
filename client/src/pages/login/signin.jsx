@@ -16,6 +16,7 @@ const Signin = ({ setlogin, setleddetail, setexpenselist, notification, setimgin
 
     const [signinp, setsigninp] = useState(init);
     const [loginpass, setloginpass] = useState(true);
+    const [btnclick, setbtnclick] = useState(false);
 
     const signhandle = (e) => {
         const name = e.target.name;
@@ -26,6 +27,7 @@ const Signin = ({ setlogin, setleddetail, setexpenselist, notification, setimgin
     }
 
     const submit = async () => {
+        setbtnclick(true);
         const { email, password } = signinp;
 
         if (!email || !password) {
@@ -68,6 +70,7 @@ const Signin = ({ setlogin, setleddetail, setexpenselist, notification, setimgin
             navigate('/');
         } catch (error) {
             notification.warn("No user found", 1900);
+            setbtnclick(false);
         }
     }
     return (
@@ -106,7 +109,7 @@ const Signin = ({ setlogin, setleddetail, setexpenselist, notification, setimgin
                     }}
 
                 />
-                <button onClick={() => submit()}>Login</button>
+                <button disabled={btnclick} style={btnclick ? { background: "#cccccc", color: "#666666" } : { background: "#0984e3", color: "white" }} onClick={submit}>Login</button>
             </div>
         </>
     )
