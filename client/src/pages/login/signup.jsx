@@ -8,16 +8,16 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 
-const Signup = ({ setlog,notification }) => {
+const Signup = ({ setlog, notification }) => {
     const init = {
         name: "",
         email: "",
         phone: "",
         password: "",
         cpassword: "",
-        ledger: ["general","other"]
+        ledger: ["general", "other"]
     }
-    const [btnclick,setbtnclick]= useState(false);
+    const [btnclick, setbtnclick] = useState(false);
     const [signinp, setsigninp] = useState(init);
     const [signuppass, setsignuppass] = useState(true);
     const signhandle = (e) => {
@@ -29,36 +29,48 @@ const Signup = ({ setlog,notification }) => {
     }
 
     const submit = async (event) => {
-      setbtnclick(true);
+        setbtnclick(true);
         const today = new Date;
         const imgsrc = "";
         const date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getUTCDate();
-        const { name, email, phone, password,cpassword, ledger } = signinp;
+        const { name, email, phone, password, cpassword, ledger } = signinp;
         if (!name || !email || !phone || !password || !ledger) {
-            notification. warn("All Fields are Required",1800)
+            notification.warn("All Fields are Required", 1800)
+            setbtnclick(false);
             return;
         }
-        if (password != cpassword ) {
-            notification.warn("Password does not match",1200)
+        if (password != cpassword) {
+            notification.warn("Password does not match", 1200)
+            setbtnclick(false);
             return;
         }
-        const res = await fetch('/signup', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name, email, phone, password, date, ledger,imgsrc
+        if (phone.length < 10) {
+            notification.warn("Mobile Should be 10 Digits", 1200)
+            setbtnclick(false);
+            return;
+        }
+        try {
+            const res = await fetch('/signup', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name, email, phone, password, date, ledger, imgsrc
+                })
             })
-        })
-        const datae = await res.json();
-        console.log(datae);
-        if (datae.data) {
+            const datae = await res.json();
+            console.log(datae);
+
             setsigninp(init);
             notification.success("Signup Successful", 1400)
             setbtnclick(false);
             setlog(true);
+
+        } catch (error) {
+            notification.warn("Something went wrong", 1400)
         }
+
     }
 
     return (
@@ -111,14 +123,14 @@ const Signup = ({ setlog,notification }) => {
                     size="small"
                     onChange={signhandle}
                     name="password"
-                    type={signuppass?"password":null}
+                    type={signuppass ? "password" : null}
                     value={signinp.password}
                     InputProps={{
                         startAdornment: <InputAdornment position="start">
                             <VpnKeyIcon />
                         </InputAdornment>,
-                        endAdornment: <InputAdornment position="end" style={{cursor:"pointer"}} onClick={()=> signuppass ? setsignuppass(false):setsignuppass(true)}>
-                           {signuppass ?<RemoveRedEyeIcon  /> : <VisibilityOffIcon  /> } 
+                        endAdornment: <InputAdornment position="end" style={{ cursor: "pointer" }} onClick={() => signuppass ? setsignuppass(false) : setsignuppass(true)}>
+                            {signuppass ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
                         </InputAdornment>
                     }}
                 />
@@ -136,7 +148,7 @@ const Signup = ({ setlog,notification }) => {
                         </InputAdornment>,
                     }}
                 />
-                <button disabled={btnclick} style={btnclick ?{background: "#cccccc", color: "#666666"}:{background: "#0984e3", color: "white"}}  onClick={() => submit()}>Signup</button>
+                <button disabled={btnclick} style={btnclick ? { background: "#cccccc", color: "#666666" } : { background: "#0984e3", color: "white" }} onClick={() => submit()}>Signup</button>
             </div>
         </>
     )

@@ -27,7 +27,7 @@ app.post('/photo', async (req, res) => {
     let file = req.files.file
     let filename = file.name
     // console.log(req.body);
-    console.log("file added" + filename);
+    // console.log("file added" + filename);
     file.mv('./client/build/img/' + filename, async function  (err)  {
         if (err) {
             console.log(err);
@@ -35,7 +35,7 @@ app.post('/photo', async (req, res) => {
             const toremove = await user.findById({ _id: req.body.user });
             var filePath = './client/build/img/' + toremove.imgsrc; 
            
-            console.log("success uploaded")
+            // console.log("success uploaded")
             const result = await user.findByIdAndUpdate({ _id: req.body.user }, { imgsrc: filename });
             // console.log(result);
             if (result) {
@@ -275,14 +275,14 @@ app.post('/login', async (req, res) => {
             const query = await model.find({ userid }).sort({ date: -1 });
             if (query) {
                 res.status(200).json({
-                    msg: "Login Successfully",
+                    login: true,
                     data: result,
                     explist: query
                 })
             }
         } else {
             res.status(200).json({
-                msg: "NO USER FOUND",
+                login: false,
             })
         }
     } catch (error) {
@@ -294,28 +294,7 @@ app.post('/login', async (req, res) => {
 })
 //    for login user data from database end here
 
-//    for login user data from database
-app.post('/leg', async (req, res) => {
-    const { _id, leddetail } = req.body;
-    //    console.log(leddetail.length)
-    if (leddetail.length < 1) {
-        res.json({
-            msg: "ledger can't be empty",
-        })
-    }
-    const result = await user.findByIdAndUpdate({ _id }, { ledger: leddetail });
-    if (result) {
-        res.json({
-            msg: "ledger sync",
-            data: result
-        })
-    } else {
-        res.json({
-            msg: "something went wrong in db"
-        })
-    }
-})
-//    for login user data from database end here
+
 
 
 //    for signup user data into database
@@ -348,7 +327,28 @@ app.post('/signup', async (req, res) => {
 })
 //    for signup user data into database ends here
 
-
+//    for ledger detail from database
+app.post('/leg', async (req, res) => {
+    const { _id, leddetail } = req.body;
+    //    console.log(leddetail.length)
+    if (leddetail.length < 1) {
+        res.json({
+            msg: "ledger can't be empty",
+        })
+    }
+    const result = await user.findByIdAndUpdate({ _id }, { ledger: leddetail });
+    if (result) {
+        res.json({
+            msg: "ledger sync",
+            data: result
+        })
+    } else {
+        res.json({
+            msg: "something went wrong in db"
+        })
+    }
+})
+//     for ledger detail from database end here
 
 
 app.listen(port, () => {
