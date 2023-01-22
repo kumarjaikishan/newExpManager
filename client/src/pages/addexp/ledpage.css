@@ -13,7 +13,7 @@
     top: 50%;
     left: 50%;
     width: 600px;
-    height: 500px;
+    height: 520px;
     border-radius: 20px;
     transform: translate(-50%,-50%);
     background: #dbe1e6;
@@ -89,11 +89,10 @@
 .exp .ledpage .box .mater{
    width: 100%;
    /* border: 1px solid red; */
-   height: 330px;
+   height: 350px;
    overflow: auto;
 }
 .exp .ledpage .box .mater table{
-    height: 100px;
     width: 100%;
     padding: 5px 2px;
     text-align: center;
@@ -106,10 +105,7 @@
      
       -5px -5px 10px #fff;
 }
-.exp .ledpage .box .mater table tr
-{
-   height: 30px;
-}
+
 .exp .ledpage .box .mater table th:nth-child(1)
 {
     width: 50%; 

@@ -338,7 +338,7 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
           </table>
         </div>
         <div className="foot">
-          <span>showing result from {firstpostindex + 1} to {lastpostindex >= expdata.length ? lastpostindex = expdata.length : lastpostindex} of  {expdata.length} Results</span>
+          <span>Showing Result From {firstpostindex + 1} To {lastpostindex >= expdata.length ? lastpostindex = expdata.length : lastpostindex} of  {expdata.length} Results</span>
           <span>Pages :
             <Pagination currentpage={currentpage} changepageno={changepageno} totalpost={expdata.length} postperpage={postperpage} />
           </span>

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './ledpage.css';
 import { useEffect } from 'react';
 
-const Ledpage = ({notification, fetching, setmodal, leddetail, setleddetail, isledupdate, setisledupdate }) => {
+const Ledpage = ({ notification, fetching, setmodal, leddetail, setleddetail, isledupdate, setisledupdate }) => {
   const [isupda, setinsupdat] = useState(false)
   const [ledinp, setledinp] = useState({
     ind: "",
@@ -16,8 +16,7 @@ const Ledpage = ({notification, fetching, setmodal, leddetail, setleddetail, isl
     const _id = localStorage.getItem("id");
     // console.log(leddetail)
     if (leddetail.length < 1) {
-      return notification.warn("Ledger Can't be blank",2000)
-      
+      return notification.warn("Ledger Can't be blank", 2000)
     } else {
       const res = await fetch('/leg', {
         method: "POST",
@@ -30,16 +29,16 @@ const Ledpage = ({notification, fetching, setmodal, leddetail, setleddetail, isl
       })
       const result = await res.json();
       console.log(result)
+      // notification.success("Ledger Updated", 1100)
     }
-
   }
-
 
   const handle = (e) => {
     setledinp({
       ...ledinp, val: e.target.value.toLowerCase()
     })
   }
+
   const add = () => {
     setleddetail([
       ...leddetail, ledinp.val
@@ -49,6 +48,7 @@ const Ledpage = ({notification, fetching, setmodal, leddetail, setleddetail, isl
       val: ""
     })
   }
+
   const edite = (ind, val) => {
     setledinp({
       ind: ind,
@@ -56,7 +56,6 @@ const Ledpage = ({notification, fetching, setmodal, leddetail, setleddetail, isl
     })
     setinsupdat(true);
   }
-
 
   const deletee = (val) => {
     setleddetail((oldvale) => {
@@ -67,14 +66,14 @@ const Ledpage = ({notification, fetching, setmodal, leddetail, setleddetail, isl
         //   updateexpledger(arr, "delete", "just");
         // }
         if (leddetail.length == 1) {
-          notification.warn("Ledger Can't be blank",2000);
+          notification.warn("Ledger Can't be blank", 2000);
           return arr;
         } else {
           if (val !== inde) {
             return arr;
           } else {
             updateexpledger(arr, "delete", "just");
-            notification.success("Ledger has been deleted",2700)
+            notification.success("Ledger has been deleted", 2700)
           }
         }
       })
@@ -95,7 +94,7 @@ const Ledpage = ({notification, fetching, setmodal, leddetail, setleddetail, isl
       ind: "",
       val: ""
     })
-    notification.success("Ledger has been Updated",2500)
+    notification.success("Ledger has been Updated", 2500)
     setinsupdat(false)
   }
 
@@ -125,9 +124,9 @@ const Ledpage = ({notification, fetching, setmodal, leddetail, setleddetail, isl
   }
   var ledpage = document.querySelector(".ledpage");
   const sdef = function (event) {
-      if (event.target == ledpage) {
-        setisledupdate(false)
-      }
+    if (event.target == ledpage) {
+      setisledupdate(false)
+    }
   }
 
   return (
