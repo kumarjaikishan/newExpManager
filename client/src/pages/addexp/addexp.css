@@ -161,7 +161,7 @@
 .exp .foot .pages{
     display: inline-block;
     margin: 0 5px;
-    width: 23px;
+    width: 35px;
     cursor: pointer;
     transition: 0.2s;
     height: 28px;
@@ -177,6 +177,27 @@
 .exp .foot .pages.active{
     background: grey;
     color: white;
+}
+.exp .foot i{
+    background: none;
+    border: none;
+    outline: none;
+    background:  #1886bd;
+    color: white;
+    /* font-weight: 600; */
+    font-size: 1.1em;
+    height: 28px;
+    text-align: center;
+    line-height: 25px;
+    padding: 0 10px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.1s;
+}
+.exp .foot i:hover{
+    transform: scale(1.1);
+    background:  #13adfa;
 }
 .exp tr td:nth-child(2){
     text-transform: capitalize;

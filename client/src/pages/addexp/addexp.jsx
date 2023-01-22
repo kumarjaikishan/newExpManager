@@ -8,7 +8,7 @@ import Ledpage from './ledpage';
 import { useNavigate } from "react-router-dom";
 
 
-const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expenselist,notification }) => {
+const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, expenselist, notification }) => {
   let navigate = useNavigate();
   useEffect(() => {
     if (!login) {
@@ -19,21 +19,21 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
     // setloader(true)
   }, [])
 
- 
-  
+
+
   const date = new Date;
-  const [serinp,setserinp]= useState("");
+  const [serinp, setserinp] = useState("");
   const [isupdate, setisupdate] = useState(false);
-  let dfbdf= (date.getMonth() + 1);
-    let dfbfvfddf= date.getUTCDate();
-    if(dfbdf < 10){
-        dfbdf = "0"+dfbdf;
-    }
-    if(dfbfvfddf < 10){
-        dfbfvfddf = "0"+dfbfvfddf;
-    }
-    
-    const today = date.getFullYear() + "-" + dfbdf + "-" + dfbfvfddf;
+  let dfbdf = (date.getMonth() + 1);
+  let dfbfvfddf = date.getUTCDate();
+  if (dfbdf < 10) {
+    dfbdf = "0" + dfbdf;
+  }
+  if (dfbfvfddf < 10) {
+    dfbfvfddf = "0" + dfbfvfddf;
+  }
+
+  const today = date.getFullYear() + "-" + dfbdf + "-" + dfbfvfddf;
 
   const init = {
     userid: "",
@@ -84,10 +84,25 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
     setinp({ ...inp, [name]: value })
   }
 
+  const cap = (val) => {
+    let cop = val.split(' ');
+    let final = "";
+    for (let i = 0; i < cop.length; i++) {
+      let hi = cop[i].toLowerCase().charAt(0).toUpperCase();
+      let ho = cop[i].toLowerCase().slice(1);
+      final += hi + ho;
+
+      if (((cop.length) - 1) !== i) {
+        final += " ";
+      }
+    }
+    return final;
+  }
 
   // for creating/inserting data
   const sub = async () => {
-    const { ledger, date, amount, narration } = inp;
+    let { ledger, date, amount, narration } = inp;
+    narration = cap(narration);
     const userid = localStorage.getItem("id");
     if (!userid || !ledger || !date || !amount || !narration) {
       return notification.warn("Kindly Fill all Fields", 2500)
@@ -166,30 +181,48 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
   // for sending multiple delete request
   const senddelete = async () => {
     const item = document.querySelectorAll("#tablecontent input");
-    const arr = [];
-    for (let i = 0; i < item.length; i++) {
-      if (item[i].checked == true) {
-        arr.push(item[i].id)
-      }
-    }
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this Data!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then(async (willDelete) => {
+        if (willDelete) {
+          const arr = [];
+          for (let i = 0; i < item.length; i++) {
+            if (item[i].checked == true) {
+              arr.push(item[i].id)
+            }
+          }
 
-    if (arr.length < 1) {
-      notification.warn("Kindly Select data", 2000);
-    } else {
-      const result = await fetch('/delmany', {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          id: arr
-        })
+          if (arr.length < 1) {
+            notification.warn("Kindly Select data", 2000);
+          } else {
+            const result = await fetch('/delmany', {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                id: arr
+              })
+            })
+            const data = await result.json();
+            notification.success("Deleted Successfully", 2000);
+            fetching();
+
+            const item = document.querySelectorAll("#tablecontent input");
+            for (let i = 0; i < item.length; i++) {
+              item[i].checked = false;
+            }
+          }
+        } else {
+          swal("Your data is safe!");
+        }
+
       })
-      const data = await result.json();
-      notification.sucess("Deleted Successfully", 2000);
-      fetching();
-      console.log(data);
-    }
   }
   // for sending multiple delete request ends here
 
@@ -218,16 +251,16 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
   const changepageno = (hi) => {
     setcurrentpage(hi);
   }
-  const sear=(e)=>{
+  const sear = (e) => {
     setserinp(e.target.value);
   }
- 
+
   let lastpostindex = currentpage * postperpage;
   const firstpostindex = lastpostindex - postperpage;
 
   const currentpost = expdata.slice(firstpostindex, lastpostindex);
 
-  
+
   let sum = 0;
   return (
     <>
@@ -254,7 +287,7 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
                 <th>Amount</th>
                 <th>Narration</th>
                 <th>Date</th>
-                <th>View</th>
+                <th style={{ display: "none" }}>View</th>
                 <th>Edit</th>
                 <th>Delete</th>
                 <th>All  : <input type="checkbox" onClick={allselect} id="allcheck" /></th>
@@ -264,9 +297,9 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
 
               {currentpost.map((val, ind) => {
                 let daten = new Date(val.date);
-                let vf= daten.getUTCDate();
-                if(vf<10){
-                  vf = "0"+daten.getUTCDate();
+                let vf = daten.getUTCDate();
+                if (vf < 10) {
+                  vf = "0" + daten.getUTCDate();
                 }
                 // console.log(vf);
                 let fde = vf + " " + daten.toLocaleString('default', { month: 'short' }) + ", " + daten.getFullYear().toString().substr(-2);
@@ -277,7 +310,7 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
                     <td>{val.amount}</td>
                     <td>{val.narration}</td>
                     <td>{fde}</td>
-                    <td title='view'><i className="fa fa-eye" aria-hidden="true"></i></td>
+                    <td style={{ display: "none" }} title='view'><i className="fa fa-eye" aria-hidden="true"></i></td>
                     <td title='edit'><i onClick={() => edit(val._id)} className="fa fa-pencil" aria-hidden="true"></i></td>
                     <td title='delete' ><i onClick={() => delet(val._id)} className="fa fa-trash-o" aria-hidden="true"></i></td>
                     <td><input type="checkbox" name="" id={val._id} /></td>
@@ -297,7 +330,7 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
                   }
 
                 </th>
-                <th colSpan="5" ></th>
+                <th colSpan="4" ></th>
                 <th colSpan="1" id="alldelete" title="Delete"><i onClick={senddelete} className="fa fa-trash" aria-hidden="true"></i></th>
 
               </tr>
@@ -311,7 +344,7 @@ const Addexp = ({setexpenselist, login, setloader, leddetail, setleddetail, expe
           </span>
         </div>
         <Modalbox notification={notification} setisledupdate={setisledupdate} leddetail={leddetail} fetching={fetching} init={init} setinp={setinp} setisupdate={setisupdate} setmodal={setmodal} sub={sub} modal={modal} handler={handler} inp={inp} isupdate={isupdate} />
-        <Ledpage notification={notification}  setmodal={setmodal} setisledupdate={setisledupdate} fetching={fetching} isledupdate={isledupdate} setleddetail={setleddetail} leddetail={leddetail} />
+        <Ledpage notification={notification} setmodal={setmodal} setisledupdate={setisledupdate} fetching={fetching} isledupdate={isledupdate} setleddetail={setleddetail} leddetail={leddetail} />
       </div>
 
     </>
