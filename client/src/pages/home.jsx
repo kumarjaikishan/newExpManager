@@ -10,9 +10,9 @@ const Home = ({ setloader, login, setheade, expenselist }) => {
       navigate('/login');
       return;
     }
+    setloader(true);
     load();
     setheade("Dashboard");
-    // setloader(true);
   }, [])
 
 
@@ -78,7 +78,7 @@ const Home = ({ setloader, login, setheade, expenselist }) => {
       totalsum:totalsum
     })
     // console.log(yearsum);
-    // setloader(false);
+    setloader(false);
   }
   const card = [{
     amt: arr.todaysum,

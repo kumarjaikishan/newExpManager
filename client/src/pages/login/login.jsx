@@ -25,7 +25,7 @@ const Login = ({setlogin,setleddetail,setloader,setexpenselist,notification,seti
                         <span className={log ? null : "active"} onClick={() => fun(false)}>Register</span>
                     </div>
                     <div className="both" style={{ transform: log ? "translateX(0%)" : "translateX(-50%)" }}>
-                        <Signin setimgine={setimgine} notification={notification}  setexpenselist={setexpenselist} setleddetail={setleddetail} setlogin={setlogin}/>
+                        <Signin setloader={setloader} setimgine={setimgine} notification={notification}  setexpenselist={setexpenselist} setleddetail={setleddetail} setlogin={setlogin}/>
                         <Signup notification={notification} setlog={setlog}/>
                     </div>
                 </div>

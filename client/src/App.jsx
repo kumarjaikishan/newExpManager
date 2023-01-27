@@ -55,7 +55,7 @@ function App() {
           </Routes>
           <div style={{ display: loader ? "flex" : "none" }} className="loader"><img src={loadere} alt="" /></div>
         </div>
-        <Sidebar login={login} narrow={narrow} setheade={setheade} />
+        <Sidebar login={login}  narrow={narrow} setheade={setheade} />
       </div>
     </>
   );

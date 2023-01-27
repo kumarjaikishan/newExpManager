@@ -7,7 +7,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
-const Signin = ({ setlogin, setleddetail, setexpenselist, notification, setimgine }) => {
+const Signin = ({ setlogin, setleddetail,setloader, setexpenselist, notification, setimgine }) => {
     let navigate = useNavigate();
     const init = {
         email: "",
@@ -32,9 +32,11 @@ const Signin = ({ setlogin, setleddetail, setexpenselist, notification, setimgin
 
         if (!email || !password) {
             notification.warn("All fields are Required", 1300);
+            setbtnclick(false);
             return;
         }
         try {
+            setloader(true);
             const res = await fetch('/login', {
                 method: "POST",
                 headers: {
@@ -71,6 +73,7 @@ const Signin = ({ setlogin, setleddetail, setexpenselist, notification, setimgin
         } catch (error) {
             notification.warn("No user found", 1900);
             setbtnclick(false);
+            setloader(false);
         }
     }
     return (
