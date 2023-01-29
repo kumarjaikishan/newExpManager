@@ -15,8 +15,7 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
       navigate('/login');
       return;
     }
-    setloader(true)
-    fetching();
+    // setloader(true)
   }, [])
 
 
@@ -66,12 +65,8 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
       })
       const datae = await result.json();
       setexpdata(datae.data)
-      setloader(false);
       setexpenselist(datae.data);
-      // setleddetail(datae.data[0].ledger)
-      // console.log(datae.data);
     }
-
   }
   // for LOading data ends here
 
@@ -101,6 +96,7 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
 
   // for creating/inserting data
   const sub = async () => {
+    setloader(true)
     let { ledger, date, amount, narration } = inp;
     narration = cap(narration);
     const userid = localStorage.getItem("id");
@@ -119,6 +115,7 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
       const data = await result.json();
       fetching();
       notification.success("Expense Added", 3000);
+      setloader(false);
       setmodal(false);
       setinp(init);
       // console.log(data.msg);
@@ -171,7 +168,6 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
           const data = await result.json();
           // console.log(data);
           fetching();
-
           notification.success("Deleted Successfully", 2000);
         } else {
           swal("Your data is safe!");
@@ -216,9 +212,12 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
             fetching();
 
             const item = document.querySelectorAll("#tablecontent input");
+            const tr = document.querySelectorAll("#tablecontent tr");
             for (let i = 0; i < item.length; i++) {
               item[i].checked = false;
             }
+
+            highlight();
           }
         } else {
           swal("Your data is safe!");
@@ -241,6 +240,7 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
         item[i].checked = false;
       }
     }
+    highlight();
   }
 
   // for selecting all checkbox ends here
@@ -253,8 +253,26 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
   const changepageno = (hi) => {
     setcurrentpage(hi);
   }
+
   const sear = (e) => {
     setserinp(e.target.value);
+  }
+
+
+  const highlight = () => {
+    const item = document.querySelectorAll("#tablecontent input");
+    const tr = document.querySelectorAll("#tablecontent tr");
+
+    for (let i = 0; i < item.length; i++) {
+      var parent = item[i].parentNode.parentNode;
+      if (item[i].checked) {
+        parent.style.background = "rgb(16 135 129)";
+        parent.style.color = "white";
+      } else {
+        parent.style.background = "transparent";
+        parent.style.color = "black";
+      }
+    }
   }
 
   let lastpostindex = currentpage * postperpage;
@@ -315,7 +333,7 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
                     <td style={{ display: "none" }} title='view'><i className="fa fa-eye" aria-hidden="true"></i></td>
                     <td title='edit'><i onClick={() => edit(val._id)} className="fa fa-pencil" aria-hidden="true"></i></td>
                     <td title='delete' ><i onClick={() => delet(val._id)} className="fa fa-trash-o" aria-hidden="true"></i></td>
-                    <td><input type="checkbox" name="" id={val._id} /></td>
+                    <td><input type="checkbox" onClick={highlight} id={val._id} /></td>
                   </tr>
                 )
               })}
