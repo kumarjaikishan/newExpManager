@@ -15,8 +15,8 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
       navigate('/login');
       return;
     }
+    setloader(true)
     fetching();
-    // setloader(true)
   }, [])
 
 
@@ -128,6 +128,7 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
 
   //  fecthing data for edit
   const edit = async (val) => {
+    setloader(true);
     const result = await fetch('/data', {
       method: "POST",
       headers: {
@@ -142,6 +143,7 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
     setinp(datae.data[0]);
     setisupdate(true);
     setmodal(true);
+    setloader(false);
   }
   //  fecthing data for edit ends here
 
