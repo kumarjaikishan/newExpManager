@@ -78,7 +78,7 @@ const Home = ({ setloader, login, setheade, expenselist }) => {
       totalsum:totalsum
     })
     // console.log(yearsum);
-    setloader(false);
+    // setloader(false);
   }
   const card = [{
     amt: arr.todaysum,
