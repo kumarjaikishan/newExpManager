@@ -132,7 +132,7 @@ const Ledpage = ({ notification, fetching, setmodal, leddetail, setleddetail, is
   return (
     <div className="ledpage" onClick={sdef} style={{ display: isledupdate ? "block" : "none" }}>
       <div className="box">
-        <h2>Hi jai kishan</h2>  <span onClick={back}>Back</span>
+        <h2>Hi jai kishan</h2>  <span onClick={back}> <i class="fa fa-undo" aria-hidden="true"></i> Back</span>
         <div className="cont">
 
           <input type="text" className='caps' value={ledinp.val} onChange={handle} />
@@ -161,7 +161,7 @@ const Ledpage = ({ notification, fetching, setmodal, leddetail, setleddetail, is
             </tbody>
           </table>
         </div>
-
+      
       </div>
     </div>
   )

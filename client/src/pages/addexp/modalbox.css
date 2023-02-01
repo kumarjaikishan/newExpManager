@@ -4,9 +4,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgb(0, 0, 0, 0.3);
-    /* border: 1px solid red; */
+    background: rgba(255,255,255,0.1);
     backdrop-filter: blur(5px);
+    
 }
 .exp .modal .box{
     position: relative;
@@ -17,7 +17,9 @@
     border-radius: 20px;
     transform: translate(-50%,-50%);
     background: #f0f0f0;
-    /* border: 1px solid red; */
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.4);
+    border: 3px solid rgb(7, 224, 252);
+    overflow: hidden;
 }
 /* .exp .modal .box .leger option{
    text-transform: capitalize;
@@ -49,10 +51,14 @@
 
 .exp .box h1{
     width: 100%;
-    background: skyblue;
+    /* background: skyblue; */
+    background: linear-gradient(45deg , #3498db,#1abc9c);
     text-align: center;
     padding: 2px;
-    color: #6c5ce7;
+    color: white;
+    /* color: transparent; */
+    /* border: 1px solid red; */
+    text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
 }
 .exp .box div{
     width: 100%;
