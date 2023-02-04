@@ -7,7 +7,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
-const Signin = ({ setlogin, setleddetail,setloader, setexpenselist, notification, setimgine }) => {
+const Signin = ({ setlogin, setleddetail, setloader, setexpenselist, notification, setimgine }) => {
     let navigate = useNavigate();
     const init = {
         email: "",
@@ -76,6 +76,14 @@ const Signin = ({ setlogin, setleddetail,setloader, setexpenselist, notification
             setloader(false);
         }
     }
+    const testing = async () => {
+        const res = await fetch('https://kishanblogg.000webhostapp.com/auto/index.php')
+        const datae = await res.json();
+        console.log(datae);
+        // fetch('https://kishanblogg.000webhostapp.com/auto/index.php')
+        //     .then((response) => response.json())
+        //     .then((data) => console.log(data));
+    }
     return (
         <>
 
@@ -113,6 +121,7 @@ const Signin = ({ setlogin, setleddetail,setloader, setexpenselist, notification
 
                 />
                 <button disabled={btnclick} style={btnclick ? { background: "#cccccc", color: "#666666" } : { background: "#0984e3", color: "white" }} onClick={submit}>Login</button>
+                {/* <button style={btnclick ? { background: "#cccccc", color: "#666666" } : { background: "#0984e3", color: "white" }} onClick={testing}>test</button> */}
             </div>
         </>
     )

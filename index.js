@@ -8,6 +8,7 @@ const fs = require('fs');
 
 app.use(express.json());
 require('./conn/conn')
+require('./test');
 
 // if(process.env.NODE_ENV=='production'){
 //     const path = require('path')
