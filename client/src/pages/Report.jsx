@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import './report.css';
 import { useNavigate } from "react-router-dom";
 
-const Report = ({ leddetail, login, setloader,expenselist }) => {
+const Report = ({ leddetail, login, setloader, expenselist }) => {
     let navigate = useNavigate();
     useEffect(() => {
         if (!login) {
@@ -14,16 +14,24 @@ const Report = ({ leddetail, login, setloader,expenselist }) => {
         setexplist(expenselist);
         fetching();
     }, [])
+
     const [explist, setexplist] = useState([]);
     const [issearch, setissearch] = useState(false);
     const [pious, setpious] = useState(explist);
     const date = new Date;
+
+    const lastday = () => {
+        const date = new Date();
+        return new Date(date.setDate(date.getDate() - 1));
+    }
+
     var monthIn2Digit = String(date.getMonth() + 1).padStart(2, '0');
     var dateIn2Digit = String(date.getDate()).padStart(2, '0');
 
     const today = date.getFullYear() + "-" + monthIn2Digit + "-" + dateIn2Digit;
+    const yesterday = (lastday().getFullYear() + "-" + String(lastday().getMonth() + 1).padStart(2, '0') + "-" + String(lastday().getDate()).padStart(2, '0'));
     const [inp, setinp] = useState({
-        from: today,
+        from: yesterday,
         to: today,
         ledger: "all"
     });
@@ -39,8 +47,8 @@ const Report = ({ leddetail, login, setloader,expenselist }) => {
     }
     // for LOading data
     const fetching = async () => {
-            setpious(expenselist)
-            setloader(false);
+        setpious(expenselist)
+        setloader(false);
     }
     // for LOading data ends here
 
@@ -63,7 +71,7 @@ const Report = ({ leddetail, login, setloader,expenselist }) => {
         }
         setpious(searchitem);
     }
-    const hello = ()=>{
+    const hello = () => {
         setissearch(false);
         setpious(explist);
     }
@@ -102,7 +110,7 @@ const Report = ({ leddetail, login, setloader,expenselist }) => {
                     </span>
                 </div>
                 <div className="table" >
-              
+
                     <table id='tavlecontent'>
                         <thead id='table'>
                             <tr>
@@ -116,9 +124,9 @@ const Report = ({ leddetail, login, setloader,expenselist }) => {
                         <tbody>
                             {pious.map((val, ind) => {
                                 let daten = new Date(val.date);
-                               
+
                                 var dateIn2Digit2 = String(daten.getDate()).padStart(2, '0');
-                                let fde =  dateIn2Digit2 + " " + daten.toLocaleString('default', { month: 'short' }) + ", " + daten.getFullYear().toString().substr(-2);
+                                let fde = dateIn2Digit2 + " " + daten.toLocaleString('default', { month: 'short' }) + ", " + daten.getFullYear().toString().substr(-2);
                                 return (
                                     <tr key={ind}>
                                         <td>{ind + 1}</td>
