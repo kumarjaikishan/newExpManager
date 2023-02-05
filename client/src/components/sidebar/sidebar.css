@@ -33,11 +33,13 @@
     height: 55px;
     /* border: 1px solid red; */
     margin: 2px 0px;
+    cursor: pointer;
     color: aliceblue;
 }
 .sidebar .clogo .li{
     height: 110px;
     overflow: hidden;
+   
 }
 .sidebar .link .active .li{
     background: #f0f0f0; 

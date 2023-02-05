@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import './report.css';
 import { useNavigate } from "react-router-dom";
+import { CSVLink } from 'react-csv';
 
 const Report = ({ leddetail, login, setloader, expenselist }) => {
     let navigate = useNavigate();
@@ -14,7 +15,12 @@ const Report = ({ leddetail, login, setloader, expenselist }) => {
         setexplist(expenselist);
         fetching();
     }, [])
-
+    const header = [
+        { label: "ledger", key: "ledger" },
+        { label: "amount", key: "amount" },
+        { label: "date", key: "date" },
+        { label: "narration", key: "narration" }
+    ]
     const [explist, setexplist] = useState([]);
     const [issearch, setissearch] = useState(false);
     const [pious, setpious] = useState(explist);
@@ -105,7 +111,9 @@ const Report = ({ leddetail, login, setloader, expenselist }) => {
                         {issearch ? <button onClick={hello}>Clear</button> : null}
                     </span>
                     <span>
-                        <button title='Download'>Download csv</button>
+                        <CSVLink data={pious} headers={header} filename="Expense-Manager Data">
+                            <button title='Download'>Download csv</button>
+                        </CSVLink>
                         <button title='Print' onClick={() => window.print()}>Print</button>
                     </span>
                 </div>
