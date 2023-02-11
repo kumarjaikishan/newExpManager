@@ -1,0 +1,206 @@
+.admin{
+    /* border: 1px solid red; */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    position: relative;
+    padding: 0 2rem;
+    /* background: #13adfa; */
+}
+.admin .add{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.admin .add i{
+    display: inline-block;
+    /* border: 1px solid red; */
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 2.6em;
+    transition: 0.1s;
+    text-align: center;
+    line-height: 50px;
+    background: #0984e3;
+    border-radius: 11px;
+    color: white;
+}
+.admin .add i:hover{
+    transform: scale(1.03);
+}
+.admin .head{
+    border-top-left-radius: 11px;
+    border-top-right-radius: 11px;
+    position: relative;
+    /* border: 1px solid red; */
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-image: linear-gradient(179.4deg, rgba(33, 150, 243, 1) 1.8%, rgba(22, 255, 245, 0.60) 97.1%);
+}
+.admin .head span{
+ /* border: 1px solid red; */
+ color :rgb(39, 34, 34);
+ display: inline-block;
+ padding: 5px;
+ font-weight: 700;
+}
+.admin .head span:nth-child(2) select,
+.admin .head span:nth-child(3) input{
+    width: 110px;
+    outline: none;
+    border: none;
+    height: 30px;
+    border-radius: 7px;
+    text-align: center;
+}
+.admin .head span:nth-child(3) input{
+    width: 210px;
+}
+.admin .mater td{
+    text-transform: capitalize;
+}
+.admin .table{
+ width: 100%;
+ position: relative;
+ /* border: 1px solid red; */
+}
+.admin .table table{
+    width: 100%;
+    border-collapse: collapse;
+    
+}
+.admin .table table th,
+.admin .table table td{
+    border: 1px solid rgb(190, 185, 185);
+    text-align: center;
+}
+.admin .table table thead th,
+.admin .table table #foot th{
+    height: 30px;
+    color: #0984e3;
+}
+.admin .table table th:nth-child(1),
+.admin .table table th:nth-child(4),
+.admin .table table th:nth-child(6),
+.admin .table table th:nth-child(8),
+.admin .table table th:nth-child(9),
+.admin .table table th:nth-child(10){
+    width: 50px;
+}
+.admin .table table th:nth-child(2){
+    width: 150px;
+}
+.admin .table table th:nth-child(3){
+    width: 90px;
+}
+.admin .table table td{
+    font-size: 0.9em;
+    height: 25px;
+    line-height: 25px;
+}
+.fa-eye,
+.fa-pencil,
+.fa-trash-o{
+    font-size: 1.3em;
+    transition: 0.1s;
+    width: 100%;
+}
+
+.admin .fa-eye{
+    color: #95afc0;
+}
+.admin .fa-pencil{
+    color: #22a6b3;
+}
+.admin table .fa-trash-o,
+.admin table .fa-trash{
+    color: #eb4d4b;
+   
+}
+.admin table .fa-trash{
+    font-size: 1.5em;
+    transform: rotate(20deg);
+    transition: 0.1s;
+}
+.admin table .fa-trash:hover{
+    font-size: 1.6em;
+   color: #13adfa;
+}
+.admin .fa-pencil:hover,
+.admin .fa-eye:hover,
+.admin .fa-trash-o:hover
+{
+    transform: scale(1.2);
+}
+.admin .foot{
+    margin-top: 10px;
+    border-radius: 5px;
+    width: 100%;
+    position: relative;
+    /* border: 1px solid red; */
+    height: 40px;
+    padding: 0px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #dbe1e6;
+    box-shadow: 0 0 5px #fff, 5px 5px 10px #a7aaaf, -5px -5px 10px #fff;
+}
+.admin .foot .pages{
+    display: inline-block;
+    margin: 0 5px;
+    width: 35px;
+    cursor: pointer;
+    transition: 0.2s;
+    height: 28px;
+    line-height: 25px;
+    text-align: center;
+    background: white;
+    border: 1px solid grey;
+    color: grey;
+    border-radius: 5px;
+    box-shadow: 3px 3px 8px rgb(0 0 0 / 40%);
+}
+.admin .foot .pages:hover,
+.admin .foot .pages.active{
+    background: grey;
+    color: white;
+}
+.admin .foot i{
+    background: none;
+    border: none;
+    outline: none;
+    background:  #1886bd;
+    color: white;
+    /* font-weight: 600; */
+    font-size: 1.1em;
+    height: 28px;
+    text-align: center;
+    line-height: 25px;
+    padding: 0 10px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.1s;
+}
+.admin .foot i:hover{
+    transform: scale(1.1);
+    background:  #13adfa;
+}
+.admin tr td:nth-child(2){
+    text-transform: capitalize;
+}
+

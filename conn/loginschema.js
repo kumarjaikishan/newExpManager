@@ -29,6 +29,9 @@ const log = new mongo.Schema({
     },
     ledger:{
         type:Array
+    },
+    usertype:{
+        type:String,
     }
 })
 const user = new mongo.model("user",log);

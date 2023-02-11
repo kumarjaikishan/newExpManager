@@ -7,7 +7,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
-const Signin = ({ setlogin, setleddetail, setloader, setexpenselist, notification, setimgine }) => {
+const Signin = ({ setlogin, setleddetail, setloader, setexpenselist, notification, setimgine ,setisadmin}) => {
     let navigate = useNavigate();
     const init = {
         email: "",
@@ -49,7 +49,15 @@ const Signin = ({ setlogin, setleddetail, setloader, setexpenselist, notificatio
             const datae = await res.json();
             console.log(datae);
             const username = datae.data[0].name;
-
+            
+            if(datae.data[0].usertype==="admin"){
+                console.log("ha admin hai");
+                setisadmin(true);
+            }
+            if(datae.data[0].usertype==="user"){
+                console.log("ha user hai")
+                setisadmin(false);
+            }
             document.title = "AccuSoft - " + datae.data[0].name;
             const mail = datae.data[0].email;
             const id = datae.data[0]._id;

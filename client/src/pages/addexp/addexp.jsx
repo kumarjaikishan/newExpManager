@@ -296,6 +296,7 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
               <option value="20">20</option>
               <option value="50">50</option>
               <option value="100">100</option>
+              <option value="500">500</option>
             </select>
           </span>
           <span><input type="text" onChange={sear} value={serinp} placeholder='Type to search...' /></span>

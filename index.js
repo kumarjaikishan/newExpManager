@@ -296,11 +296,21 @@ app.post('/login', async (req, res) => {
 //    for login user data from database end here
 
 
-
+//    for admin data from database
+app.get('/admin', async (req, res) => {
+    // const { email, password } = req.body;
+     const query = await model.find().sort({ userid: -1 });
+            if (query) {
+                res.status(200).json({
+                    explist: query
+                })
+            }
+})
+//    for admin data from database end here
 
 //    for signup user data into database
 app.post('/signup', async (req, res) => {
-    const { name, email, phone, password, date, ledger,imgsrc } = req.body;
+    const { name, email, phone, password, date, ledger,usertype,imgsrc } = req.body;
     // console.log(email + " " + password)
     if (!name || !email || !phone || !password || !date || !ledger) {
         res.json({
@@ -308,7 +318,7 @@ app.post('/signup', async (req, res) => {
         })
     }
     try {
-        const query = new user({ name, email, phone, password, date, ledger,imgsrc });
+        const query = new user({ name, email, phone, password, date, ledger,usertypeimgsrc });
         const result = await query.save();
         if (result) {
             res.status(201).json({

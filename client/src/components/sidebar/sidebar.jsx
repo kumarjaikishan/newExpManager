@@ -7,7 +7,7 @@ import GrassIcon from '@mui/icons-material/Grass';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Sidebar = ({ narrow, setheade, login }) => {
+const Sidebar = ({ narrow, setheade, login, isadmin }) => {
     let navigate = useNavigate();
     const notify = (msg, dur) => {
         toast.success(msg, {
@@ -40,14 +40,14 @@ const Sidebar = ({ narrow, setheade, login }) => {
             buttons: true,
             dangerMode: true,
         }).then(async (willDelete) => {
-                if (willDelete) {
-                    setheade("LogIn");
-                    notify("Logout successfull", 2000)
-                    navigate('/logout');
-                } else {
-                    // swal("Your data is safe!");
-                }
-            });
+            if (willDelete) {
+                setheade("LogIn");
+                notify("Logout successfull", 2000)
+                navigate('/logout');
+            } else {
+                // swal("Your data is safe!");
+            }
+        });
     }
     return (
         <>
@@ -59,9 +59,27 @@ const Sidebar = ({ narrow, setheade, login }) => {
                 <div className="link">
                     {login ? linke.map((val, ind) => {
                         return (
-                            <NavLink key={ind} className={(navData) => (navData.isActive ? 'active' : '')} style={{ textDecoration: 'none' }} to={val.link} > <span className="li" onClick={() => setheade(val.name)}><span className="logo"><i title={val.name} className={val.logo} aria-hidden="true"></i></span><span className="name">{val.name}</span></span></NavLink>
+                            <>
+                                <NavLink key={ind} className={(navData) => (navData.isActive ? 'active' : '')} style={{ textDecoration: 'none' }} to={val.link} >
+                                    <span className="li" onClick={() => setheade(val.name)}>
+                                        <span className="logo">
+                                            <i title={val.name} className={val.logo} aria-hidden="true"></i>
+                                        </span>
+                                        <span className="name">{val.name}</span>
+                                    </span>
+                                </NavLink>
+                            </>
                         )
                     }) : null}
+                    {login ? isadmin ?
+                        <NavLink  className={(navData) => (navData.isActive ? 'active' : '')} style={{ textDecoration: 'none' }} to="/admin" >
+                            <span className="li" onClick={() => setheade("Admin")}>
+                                <span className="logo">
+                                    <i title={"Admin"} className="fa fa-lock" aria-hidden="true"></i>
+                                </span>
+                                <span className="name">Admin</span>
+                            </span>
+                        </NavLink> : null : null}
 
                     {login ? <span className="li" onClick={fr}><span className="logo"><i title='Sign Out' className="fa fa-sign-out" aria-hidden="true"></i></span><span className="name">Logout</span></span> : <NavLink className={(navData) => (navData.isActive ? 'active' : '')} style={{ textDecoration: 'none' }} to="/login" > <span className="li" onClick={() => setheade("Login")}><span className="logo"><i title='Sign In' className="fa fa-user" aria-hidden="true"></i></span><span className="name">Login</span></span></NavLink>}
 
