@@ -21,6 +21,7 @@ const Report = ({ leddetail, login, setloader, expenselist }) => {
         { label: "date", key: "date" },
         { label: "narration", key: "narration" }
     ]
+    const username = localStorage.getItem("name");
     const [explist, setexplist] = useState([]);
     const [issearch, setissearch] = useState(false);
     const [pious, setpious] = useState(explist);
@@ -111,7 +112,7 @@ const Report = ({ leddetail, login, setloader, expenselist }) => {
                         {issearch ? <button onClick={hello}>Clear</button> : null}
                     </span>
                     <span>
-                        <CSVLink data={pious} headers={header} filename="Expense-Manager Data">
+                        <CSVLink data={pious} headers={header} filename={`${username}-Expense Record`}>
                             <button title='Download'>Download csv</button>
                         </CSVLink>
                         <button title='Print' onClick={() => window.print()}>Print</button>

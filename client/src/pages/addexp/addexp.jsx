@@ -64,6 +64,7 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
         })
       })
       const datae = await result.json();
+      setloader(false);
       setexpdata(datae.data)
       setexpenselist(datae.data);
     }
@@ -115,7 +116,6 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
       const data = await result.json();
       fetching();
       notification.success("Expense Added", 3000);
-      setloader(false);
       setmodal(false);
       setinp(init);
       // console.log(data.msg);
@@ -146,7 +146,6 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
 
   // for deleteing data
   const delet = async (val) => {
-
     swal({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this Data!",
@@ -156,6 +155,7 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
     })
       .then(async (willDelete) => {
         if (willDelete) {
+          setloader(true);
           const result = await fetch('/addexpense', {
             method: "DELETE",
             headers: {
@@ -166,11 +166,12 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
             })
           })
           const data = await result.json();
+          
           // console.log(data);
           fetching();
           notification.success("Deleted Successfully", 2000);
         } else {
-          swal("Your data is safe!");
+          // swal("Your data is safe!");
         }
       });
   }
@@ -188,6 +189,7 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
     })
       .then(async (willDelete) => {
         if (willDelete) {
+          setloader(true);
           const arr = [];
           for (let i = 0; i < item.length; i++) {
             if (item[i].checked == true) {
