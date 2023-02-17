@@ -166,7 +166,7 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
             })
           })
           const data = await result.json();
-          
+
           // console.log(data);
           fetching();
           notification.success("Deleted Successfully", 2000);
@@ -318,7 +318,9 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
             </thead>
             <tbody id="tablecontent">
 
-              {currentpost.map((val, ind) => {
+              {currentpost.filter((item) => {
+                return serinp.toLowerCase() === "" ? item : item.narration.toLowerCase().includes(serinp) ||item.ledger.toLowerCase().includes(serinp);
+              }).map((val, ind) => {
                 let daten = new Date(val.date);
                 let vf = daten.getUTCDate();
                 if (vf < 10) {

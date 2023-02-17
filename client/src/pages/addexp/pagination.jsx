@@ -42,11 +42,11 @@ const Pagination = ({ totalpost, postperpage, changepageno, currentpage }) => {
   // console.log(currentpage);
   return (
     <>
-      <span><i title='Previous 5 Pages' onClick={minus} class="fa fa-angle-double-left" aria-hidden="true"></i></span>
+      <span><i title='Previous 5 Pages' onClick={minus} className="fa fa-angle-double-left" aria-hidden="true"></i></span>
       {
         renderpagination
       }
-      <span><i title='Next 5 Pages' onClick={plus} class="fa fa-angle-double-right" aria-hidden="true"></i></span>
+      <span><i title='Next 5 Pages' onClick={plus} className="fa fa-angle-double-right" aria-hidden="true"></i></span>
     </>
   )
 }
