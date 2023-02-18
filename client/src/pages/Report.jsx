@@ -11,7 +11,7 @@ const Report = ({ leddetail, login, setloader, expenselist }) => {
             navigate('/login');
             return;
         }
-        // setloader(true)
+        setloader(true)
         setexplist(expenselist);
         fetching();
     }, [])
@@ -55,7 +55,7 @@ const Report = ({ leddetail, login, setloader, expenselist }) => {
     // for LOading data
     const fetching = async () => {
         setpious(expenselist)
-        // setloader(false);
+        setloader(false);
     }
     // for LOading data ends here
 

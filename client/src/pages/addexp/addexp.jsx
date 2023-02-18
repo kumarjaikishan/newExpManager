@@ -97,14 +97,21 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
 
   // for creating/inserting data
   const sub = async () => {
-    setloader(true)
+   
     let { ledger, date, amount, narration } = inp;
     narration = cap(narration);
     const userid = localStorage.getItem("id");
     if (!userid || !ledger || !date || !amount || !narration) {
+      let dvd = document.querySelector('.box');
+      dvd.classList.add("shake");
+      setTimeout(() => {
+        dvd.classList.remove("shake");
+      }, 420);
+       console.log(dvd)
       setloader(false);
-      return notification.warn("Kindly Fill all Fields", 2500)
+      return notification.warn("Kindly Fill all Fields", 2100)
     } else {
+      setloader(true)
       const result = await fetch('/addexpense', {
         method: "POST",
         headers: {
@@ -320,7 +327,7 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
             <tbody id="tablecontent">
 
               {currentpost.filter((item) => {
-                return serinp.toLowerCase() === "" ? item : item.narration.toLowerCase().includes(serinp) ||item.ledger.toLowerCase().includes(serinp);
+                return serinp.toLowerCase() === "" ? item : item.narration.toLowerCase().includes(serinp) || item.ledger.toLowerCase().includes(serinp);
               }).map((val, ind) => {
                 let daten = new Date(val.date);
                 let vf = daten.getUTCDate();

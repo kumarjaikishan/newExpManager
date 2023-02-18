@@ -21,9 +21,29 @@
     border: 3px solid rgb(7, 224, 252);
     overflow: hidden;
 }
-/* .exp .modal .box .leger option{
-   text-transform: capitalize;
-} */
+.exp .modal .box.shake{
+    animation: aniok 0.4s linear forwards;
+}
+@keyframes aniok{
+    0%{
+        transform: translate(-48%,-50%);
+    }
+    20%{
+        transform: translate(-52%,-50%);
+    }
+    40%{
+        transform: translate(-47%,-50%);
+    }
+    60%{
+        transform: translate(-53%,-50%);
+    }
+    80%{
+        transform: translate(-49%,-50%);
+    }
+    100%{
+        transform: translate(-50%,-50%);
+    }
+}
 .caps{
     text-transform: capitalize;
 }
