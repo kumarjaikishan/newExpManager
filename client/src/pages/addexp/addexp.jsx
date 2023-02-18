@@ -102,6 +102,7 @@ const Addexp = ({ setexpenselist, login, setloader, leddetail, setleddetail, exp
     narration = cap(narration);
     const userid = localStorage.getItem("id");
     if (!userid || !ledger || !date || !amount || !narration) {
+      setloader(false);
       return notification.warn("Kindly Fill all Fields", 2500)
     } else {
       const result = await fetch('/addexpense', {
